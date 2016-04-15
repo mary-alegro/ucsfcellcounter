@@ -1,0 +1,1162 @@
+// =======================================================
+var idOpn = charIDToTypeID( "Opn " );
+    var desc1 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+    desc1.putPath( idnull, new File( "C:\\Users\\malegro\\Documents\\MATLAB\\test_cell.jpg" ) );
+executeAction( idOpn, desc1, DialogModes.NO );
+
+// =======================================================
+var idcountColor = stringIDToTypeID( "countColor" );
+    var desc2 = new ActionDescriptor();
+    var idRd = charIDToTypeID( "Rd  " );
+    desc2.putInteger( idRd, 253 );
+    var idGrn = charIDToTypeID( "Grn " );
+    desc2.putInteger( idGrn, 1 );
+    var idBl = charIDToTypeID( "Bl  " );
+    desc2.putInteger( idBl, 19 );
+executeAction( idcountColor, desc2, DialogModes.NO );
+
+// =======================================================
+var idcountColor = stringIDToTypeID( "countColor" );
+    var desc3 = new ActionDescriptor();
+    var idRd = charIDToTypeID( "Rd  " );
+    desc3.putInteger( idRd, 253 );
+    var idGrn = charIDToTypeID( "Grn " );
+    desc3.putInteger( idGrn, 1 );
+    var idBl = charIDToTypeID( "Bl  " );
+    desc3.putInteger( idBl, 19 );
+executeAction( idcountColor, desc3, DialogModes.NO );
+
+// =======================================================
+var idcountGroupMarkerSize = stringIDToTypeID( "countGroupMarkerSize" );
+    var desc4 = new ActionDescriptor();
+    var idSz = charIDToTypeID( "Sz  " );
+    desc4.putInteger( idSz, 10 );
+executeAction( idcountGroupMarkerSize, desc4, DialogModes.NO );
+
+// =======================================================
+var idcountAdd = stringIDToTypeID( "countAdd" );
+    var desc5 = new ActionDescriptor();
+    var idX = charIDToTypeID( "X   " );
+    desc5.putDouble( idX, 618.500000 );
+    var idY = charIDToTypeID( "Y   " );
+    desc5.putDouble( idY, 162.500000 );
+executeAction( idcountAdd, desc5, DialogModes.NO );
+
+// =======================================================
+var idcountAdd = stringIDToTypeID( "countAdd" );
+    var desc6 = new ActionDescriptor();
+    var idX = charIDToTypeID( "X   " );
+    desc6.putDouble( idX, 474.500000 );
+    var idY = charIDToTypeID( "Y   " );
+    desc6.putDouble( idY, 124.500000 );
+executeAction( idcountAdd, desc6, DialogModes.NO );
+
+// =======================================================
+var idcountAdd = stringIDToTypeID( "countAdd" );
+    var desc7 = new ActionDescriptor();
+    var idX = charIDToTypeID( "X   " );
+    desc7.putDouble( idX, 460.500000 );
+    var idY = charIDToTypeID( "Y   " );
+    desc7.putDouble( idY, 174.500000 );
+executeAction( idcountAdd, desc7, DialogModes.NO );
+
+// =======================================================
+var idcountAddGroup = stringIDToTypeID( "countAddGroup" );
+    var desc8 = new ActionDescriptor();
+    var idNm = charIDToTypeID( "Nm  " );
+    desc8.putString( idNm, "Count Group 2" );
+executeAction( idcountAddGroup, desc8, DialogModes.NO );
+
+// =======================================================
+var idcountColor = stringIDToTypeID( "countColor" );
+    var desc9 = new ActionDescriptor();
+    var idRd = charIDToTypeID( "Rd  " );
+    desc9.putInteger( idRd, 48 );
+    var idGrn = charIDToTypeID( "Grn " );
+    desc9.putInteger( idGrn, 1 );
+    var idBl = charIDToTypeID( "Bl  " );
+    desc9.putInteger( idBl, 253 );
+executeAction( idcountColor, desc9, DialogModes.NO );
+
+// =======================================================
+var idcountColor = stringIDToTypeID( "countColor" );
+    var desc10 = new ActionDescriptor();
+    var idRd = charIDToTypeID( "Rd  " );
+    desc10.putInteger( idRd, 48 );
+    var idGrn = charIDToTypeID( "Grn " );
+    desc10.putInteger( idGrn, 1 );
+    var idBl = charIDToTypeID( "Bl  " );
+    desc10.putInteger( idBl, 253 );
+executeAction( idcountColor, desc10, DialogModes.NO );
+
+// =======================================================
+var idcountAdd = stringIDToTypeID( "countAdd" );
+    var desc11 = new ActionDescriptor();
+    var idX = charIDToTypeID( "X   " );
+    desc11.putDouble( idX, 418.500000 );
+    var idY = charIDToTypeID( "Y   " );
+    desc11.putDouble( idY, 374.500000 );
+executeAction( idcountAdd, desc11, DialogModes.NO );
+
+// =======================================================
+var idcountAdd = stringIDToTypeID( "countAdd" );
+    var desc12 = new ActionDescriptor();
+    var idX = charIDToTypeID( "X   " );
+    desc12.putDouble( idX, 332.500000 );
+    var idY = charIDToTypeID( "Y   " );
+    desc12.putDouble( idY, 416.500000 );
+executeAction( idcountAdd, desc12, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+    var desc13 = new ActionDescriptor();
+    var idSvng = charIDToTypeID( "Svng" );
+    var idYsN = charIDToTypeID( "YsN " );
+    var idN = charIDToTypeID( "N   " );
+    desc13.putEnumerated( idSvng, idYsN, idN );
+executeAction( idCls, desc13, DialogModes.NO );
+
+// =======================================================
+var idcountDelete = stringIDToTypeID( "countDelete" );
+    var desc1 = new ActionDescriptor();
+    var idItmI = charIDToTypeID( "ItmI" );
+    desc1.putInteger( idItmI, 2 );
+    var idGrup = charIDToTypeID( "Grup" );
+    desc1.putInteger( idGrup, 1 );
+executeAction( idcountDelete, desc1, DialogModes.NO );
+
+// =======================================================
+var idcountAdd = stringIDToTypeID( "countAdd" );
+    var desc2 = new ActionDescriptor();
+    var idX = charIDToTypeID( "X   " );
+    desc2.putDouble( idX, 316.500000 );
+    var idY = charIDToTypeID( "Y   " );
+    desc2.putDouble( idY, 416.500000 );
+executeAction( idcountAdd, desc2, DialogModes.NO );
+
+// =======================================================
+var idcountAdd = stringIDToTypeID( "countAdd" );
+    var desc3 = new ActionDescriptor();
+    var idX = charIDToTypeID( "X   " );
+    desc3.putDouble( idX, 262.500000 );
+    var idY = charIDToTypeID( "Y   " );
+    desc3.putDouble( idY, 390.500000 );
+executeAction( idcountAdd, desc3, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+    var desc4 = new ActionDescriptor();
+    var idSvng = charIDToTypeID( "Svng" );
+    var idYsN = charIDToTypeID( "YsN " );
+    var idN = charIDToTypeID( "N   " );
+    desc4.putEnumerated( idSvng, idYsN, idN );
+executeAction( idCls, desc4, DialogModes.NO );
+
+// =======================================================
+var idcountDelete = stringIDToTypeID( "countDelete" );
+    var desc1 = new ActionDescriptor();
+    var idItmI = charIDToTypeID( "ItmI" );
+    desc1.putInteger( idItmI, 2 );
+    var idGrup = charIDToTypeID( "Grup" );
+    desc1.putInteger( idGrup, 0 );
+executeAction( idcountDelete, desc1, DialogModes.NO );
+
+// =======================================================
+var idcountAdd = stringIDToTypeID( "countAdd" );
+    var desc2 = new ActionDescriptor();
+    var idX = charIDToTypeID( "X   " );
+    desc2.putDouble( idX, 470.500000 );
+    var idY = charIDToTypeID( "Y   " );
+    desc2.putDouble( idY, 126.500000 );
+executeAction( idcountAdd, desc2, DialogModes.NO );
+
+// =======================================================
+var idcountAdd = stringIDToTypeID( "countAdd" );
+    var desc3 = new ActionDescriptor();
+    var idX = charIDToTypeID( "X   " );
+    desc3.putDouble( idX, 456.500000 );
+    var idY = charIDToTypeID( "Y   " );
+    desc3.putDouble( idY, 224.500000 );
+executeAction( idcountAdd, desc3, DialogModes.NO );
+
+// =======================================================
+var idcountAdd = stringIDToTypeID( "countAdd" );
+    var desc4 = new ActionDescriptor();
+    var idX = charIDToTypeID( "X   " );
+    desc4.putDouble( idX, 482.500000 );
+    var idY = charIDToTypeID( "Y   " );
+    desc4.putDouble( idY, 382.500000 );
+executeAction( idcountAdd, desc4, DialogModes.NO );
+
+// =======================================================
+var idcountAdd = stringIDToTypeID( "countAdd" );
+    var desc5 = new ActionDescriptor();
+    var idX = charIDToTypeID( "X   " );
+    desc5.putDouble( idX, 420.500000 );
+    var idY = charIDToTypeID( "Y   " );
+    desc5.putDouble( idY, 524.500000 );
+executeAction( idcountAdd, desc5, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+    var desc6 = new ActionDescriptor();
+    var idSvng = charIDToTypeID( "Svng" );
+    var idYsN = charIDToTypeID( "YsN " );
+    var idN = charIDToTypeID( "N   " );
+    desc6.putEnumerated( idSvng, idYsN, idN );
+executeAction( idCls, desc6, DialogModes.NO );
+
+// =======================================================
+var idOpn = charIDToTypeID( "Opn " );
+    var desc1 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+    desc1.putPath( idnull, new File( "C:\\Users\\malegro\\Documents\\MATLAB\\test_cell.jpg" ) );
+executeAction( idOpn, desc1, DialogModes.NO );
+
+// =======================================================
+var idcountColor = stringIDToTypeID( "countColor" );
+    var desc2 = new ActionDescriptor();
+    var idRd = charIDToTypeID( "Rd  " );
+    desc2.putInteger( idRd, 253 );
+    var idGrn = charIDToTypeID( "Grn " );
+    desc2.putInteger( idGrn, 1 );
+    var idBl = charIDToTypeID( "Bl  " );
+    desc2.putInteger( idBl, 19 );
+executeAction( idcountColor, desc2, DialogModes.NO );
+
+// =======================================================
+var idcountColor = stringIDToTypeID( "countColor" );
+    var desc3 = new ActionDescriptor();
+    var idRd = charIDToTypeID( "Rd  " );
+    desc3.putInteger( idRd, 253 );
+    var idGrn = charIDToTypeID( "Grn " );
+    desc3.putInteger( idGrn, 1 );
+    var idBl = charIDToTypeID( "Bl  " );
+    desc3.putInteger( idBl, 19 );
+executeAction( idcountColor, desc3, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+    var desc4 = new ActionDescriptor();
+    var idSvng = charIDToTypeID( "Svng" );
+    var idYsN = charIDToTypeID( "YsN " );
+    var idN = charIDToTypeID( "N   " );
+    desc4.putEnumerated( idSvng, idYsN, idN );
+executeAction( idCls, desc4, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+    var desc5 = new ActionDescriptor();
+    var idSvng = charIDToTypeID( "Svng" );
+    var idYsN = charIDToTypeID( "YsN " );
+    var idN = charIDToTypeID( "N   " );
+    desc5.putEnumerated( idSvng, idYsN, idN );
+executeAction( idCls, desc5, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+    var desc6 = new ActionDescriptor();
+    var idSvng = charIDToTypeID( "Svng" );
+    var idYsN = charIDToTypeID( "YsN " );
+    var idN = charIDToTypeID( "N   " );
+    desc6.putEnumerated( idSvng, idYsN, idN );
+executeAction( idCls, desc6, DialogModes.NO );
+
+// =======================================================
+var idcountGroupMarkerSize = stringIDToTypeID( "countGroupMarkerSize" );
+    var desc7 = new ActionDescriptor();
+    var idSz = charIDToTypeID( "Sz  " );
+    desc7.putInteger( idSz, 5 );
+executeAction( idcountGroupMarkerSize, desc7, DialogModes.NO );
+
+// =======================================================
+var idcountSetCurrentGroup = stringIDToTypeID( "countSetCurrentGroup" );
+    var desc8 = new ActionDescriptor();
+    var idItmI = charIDToTypeID( "ItmI" );
+    desc8.putInteger( idItmI, 1 );
+executeAction( idcountSetCurrentGroup, desc8, DialogModes.NO );
+
+// =======================================================
+var idcountGroupMarkerSize = stringIDToTypeID( "countGroupMarkerSize" );
+    var desc9 = new ActionDescriptor();
+    var idSz = charIDToTypeID( "Sz  " );
+    desc9.putInteger( idSz, 5 );
+executeAction( idcountGroupMarkerSize, desc9, DialogModes.NO );
+
+// =======================================================
+var idslct = charIDToTypeID( "slct" );
+    var desc10 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+        var ref1 = new ActionReference();
+        var idDdTl = charIDToTypeID( "DdTl" );
+        ref1.putClass( idDdTl );
+    desc10.putReference( idnull, ref1 );
+executeAction( idslct, desc10, DialogModes.NO );
+
+// =======================================================
+var idslct = charIDToTypeID( "slct" );
+    var desc11 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+        var ref2 = new ActionReference();
+        var idzoomTool = stringIDToTypeID( "zoomTool" );
+        ref2.putClass( idzoomTool );
+    desc11.putReference( idnull, ref2 );
+    var iddontRecord = stringIDToTypeID( "dontRecord" );
+    desc11.putBoolean( iddontRecord, true );
+    var idforceNotify = stringIDToTypeID( "forceNotify" );
+    desc11.putBoolean( idforceNotify, true );
+executeAction( idslct, desc11, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+    var desc12 = new ActionDescriptor();
+    var idSvng = charIDToTypeID( "Svng" );
+    var idYsN = charIDToTypeID( "YsN " );
+    var idN = charIDToTypeID( "N   " );
+    desc12.putEnumerated( idSvng, idYsN, idN );
+executeAction( idCls, desc12, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+    var desc13 = new ActionDescriptor();
+    var idSvng = charIDToTypeID( "Svng" );
+    var idYsN = charIDToTypeID( "YsN " );
+    var idN = charIDToTypeID( "N   " );
+    desc13.putEnumerated( idSvng, idYsN, idN );
+executeAction( idCls, desc13, DialogModes.NO );
+
+// =======================================================
+var idslct = charIDToTypeID( "slct" );
+    var desc14 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+        var ref3 = new ActionReference();
+        var idmoveTool = stringIDToTypeID( "moveTool" );
+        ref3.putClass( idmoveTool );
+    desc14.putReference( idnull, ref3 );
+    var iddontRecord = stringIDToTypeID( "dontRecord" );
+    desc14.putBoolean( iddontRecord, true );
+    var idforceNotify = stringIDToTypeID( "forceNotify" );
+    desc14.putBoolean( idforceNotify, true );
+executeAction( idslct, desc14, DialogModes.NO );
+
+// =======================================================
+var idslct = charIDToTypeID( "slct" );
+    var desc15 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+        var ref4 = new ActionReference();
+        var idcountTool = stringIDToTypeID( "countTool" );
+        ref4.putClass( idcountTool );
+    desc15.putReference( idnull, ref4 );
+    var iddontRecord = stringIDToTypeID( "dontRecord" );
+    desc15.putBoolean( iddontRecord, true );
+    var idforceNotify = stringIDToTypeID( "forceNotify" );
+    desc15.putBoolean( idforceNotify, true );
+executeAction( idslct, desc15, DialogModes.NO );
+
+// =======================================================
+var idcountGroupMarkerSize = stringIDToTypeID( "countGroupMarkerSize" );
+    var desc16 = new ActionDescriptor();
+    var idSz = charIDToTypeID( "Sz  " );
+    desc16.putInteger( idSz, 5 );
+executeAction( idcountGroupMarkerSize, desc16, DialogModes.NO );
+
+// =======================================================
+var idcountSetCurrentGroup = stringIDToTypeID( "countSetCurrentGroup" );
+    var desc17 = new ActionDescriptor();
+    var idItmI = charIDToTypeID( "ItmI" );
+    desc17.putInteger( idItmI, 0 );
+executeAction( idcountSetCurrentGroup, desc17, DialogModes.NO );
+
+// =======================================================
+var idcountGroupMarkerSize = stringIDToTypeID( "countGroupMarkerSize" );
+    var desc18 = new ActionDescriptor();
+    var idSz = charIDToTypeID( "Sz  " );
+    desc18.putInteger( idSz, 5 );
+executeAction( idcountGroupMarkerSize, desc18, DialogModes.NO );
+
+// =======================================================
+var idcountSetCurrentGroup = stringIDToTypeID( "countSetCurrentGroup" );
+    var desc19 = new ActionDescriptor();
+    var idItmI = charIDToTypeID( "ItmI" );
+    desc19.putInteger( idItmI, 1 );
+executeAction( idcountSetCurrentGroup, desc19, DialogModes.NO );
+
+// =======================================================
+var idcountGroupMarkerSize = stringIDToTypeID( "countGroupMarkerSize" );
+    var desc20 = new ActionDescriptor();
+    var idSz = charIDToTypeID( "Sz  " );
+    desc20.putInteger( idSz, 5 );
+executeAction( idcountGroupMarkerSize, desc20, DialogModes.NO );
+
+// =======================================================
+var idslct = charIDToTypeID( "slct" );
+    var desc21 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+        var ref5 = new ActionReference();
+        var idhandTool = stringIDToTypeID( "handTool" );
+        ref5.putClass( idhandTool );
+    desc21.putReference( idnull, ref5 );
+    var iddontRecord = stringIDToTypeID( "dontRecord" );
+    desc21.putBoolean( iddontRecord, true );
+    var idforceNotify = stringIDToTypeID( "forceNotify" );
+    desc21.putBoolean( idforceNotify, true );
+executeAction( idslct, desc21, DialogModes.NO );
+
+// =======================================================
+var idslct = charIDToTypeID( "slct" );
+    var desc22 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+        var ref6 = new ActionReference();
+        var idcountTool = stringIDToTypeID( "countTool" );
+        ref6.putClass( idcountTool );
+    desc22.putReference( idnull, ref6 );
+    var iddontRecord = stringIDToTypeID( "dontRecord" );
+    desc22.putBoolean( iddontRecord, true );
+    var idforceNotify = stringIDToTypeID( "forceNotify" );
+    desc22.putBoolean( idforceNotify, true );
+executeAction( idslct, desc22, DialogModes.NO );
+
+// =======================================================
+var idcountClear = stringIDToTypeID( "countClear" );
+    var desc23 = new ActionDescriptor();
+executeAction( idcountClear, desc23, DialogModes.NO );
+
+// =======================================================
+var idcountSetCurrentGroup = stringIDToTypeID( "countSetCurrentGroup" );
+    var desc24 = new ActionDescriptor();
+    var idItmI = charIDToTypeID( "ItmI" );
+    desc24.putInteger( idItmI, 0 );
+executeAction( idcountSetCurrentGroup, desc24, DialogModes.NO );
+
+// =======================================================
+var idcountGroupMarkerSize = stringIDToTypeID( "countGroupMarkerSize" );
+    var desc25 = new ActionDescriptor();
+    var idSz = charIDToTypeID( "Sz  " );
+    desc25.putInteger( idSz, 8 );
+executeAction( idcountGroupMarkerSize, desc25, DialogModes.NO );
+
+// =======================================================
+var idcountSetCurrentGroup = stringIDToTypeID( "countSetCurrentGroup" );
+    var desc26 = new ActionDescriptor();
+    var idItmI = charIDToTypeID( "ItmI" );
+    desc26.putInteger( idItmI, 2 );
+executeAction( idcountSetCurrentGroup, desc26, DialogModes.NO );
+
+// =======================================================
+var idcountGroupMarkerSize = stringIDToTypeID( "countGroupMarkerSize" );
+    var desc27 = new ActionDescriptor();
+    var idSz = charIDToTypeID( "Sz  " );
+    desc27.putInteger( idSz, 8 );
+executeAction( idcountGroupMarkerSize, desc27, DialogModes.NO );
+
+// =======================================================
+var idslct = charIDToTypeID( "slct" );
+    var desc28 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+        var ref7 = new ActionReference();
+        var idhandTool = stringIDToTypeID( "handTool" );
+        ref7.putClass( idhandTool );
+    desc28.putReference( idnull, ref7 );
+    var iddontRecord = stringIDToTypeID( "dontRecord" );
+    desc28.putBoolean( iddontRecord, true );
+    var idforceNotify = stringIDToTypeID( "forceNotify" );
+    desc28.putBoolean( idforceNotify, true );
+executeAction( idslct, desc28, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+    var desc29 = new ActionDescriptor();
+    var idSvng = charIDToTypeID( "Svng" );
+    var idYsN = charIDToTypeID( "YsN " );
+    var idN = charIDToTypeID( "N   " );
+    desc29.putEnumerated( idSvng, idYsN, idN );
+executeAction( idCls, desc29, DialogModes.NO );
+
+// =======================================================
+var idOpn = charIDToTypeID( "Opn " );
+    var desc1 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+    desc1.putPath( idnull, new File( "R:\\groups\\grinberg\\Experiments\\R01 to keep\\Cases from Brazil_isodendritic nucleus project\\4310.12 BLACK_ Cut in thin and thick sections\\Celloidin RAW We cut 60um and 300um section for this\\4310.12_009.CR2" ) );
+    var idAs = charIDToTypeID( "As  " );
+        var desc2 = new ActionDescriptor();
+        var idCMod = charIDToTypeID( "CMod" );
+        desc2.putString( idCMod, "Canon EOS 5D Mark II" );
+        var idSett = charIDToTypeID( "Sett" );
+        var idSett = charIDToTypeID( "Sett" );
+        var idDefa = charIDToTypeID( "Defa" );
+        desc2.putEnumerated( idSett, idSett, idDefa );
+        var idCrpT = charIDToTypeID( "CrpT" );
+        desc2.putDouble( idCrpT, 0.000000 );
+        var idCrpL = charIDToTypeID( "CrpL" );
+        desc2.putDouble( idCrpL, 0.000000 );
+        var idCrpB = charIDToTypeID( "CrpB" );
+        desc2.putDouble( idCrpB, 0.000000 );
+        var idCrpR = charIDToTypeID( "CrpR" );
+        desc2.putDouble( idCrpR, 0.000000 );
+        var idCrpA = charIDToTypeID( "CrpA" );
+        desc2.putDouble( idCrpA, 0.000000 );
+        var idClrS = charIDToTypeID( "ClrS" );
+        var idClrS = charIDToTypeID( "ClrS" );
+        var idSMPT = charIDToTypeID( "SMPT" );
+        desc2.putEnumerated( idClrS, idClrS, idSMPT );
+        var idBtDp = charIDToTypeID( "BtDp" );
+        var idBtDp = charIDToTypeID( "BtDp" );
+        var idBDeight = charIDToTypeID( "BD8 " );
+        desc2.putEnumerated( idBtDp, idBtDp, idBDeight );
+        var idScl = charIDToTypeID( "Scl " );
+        desc2.putDouble( idScl, 1.000000 );
+        var idRslt = charIDToTypeID( "Rslt" );
+        desc2.putDouble( idRslt, 240.000000 );
+        var idReUn = charIDToTypeID( "ReUn" );
+        var idReUn = charIDToTypeID( "ReUn" );
+        var idPpIn = charIDToTypeID( "PpIn" );
+        desc2.putEnumerated( idReUn, idReUn, idPpIn );
+        var idOSM = charIDToTypeID( "OSM " );
+        var idOSM = charIDToTypeID( "OSM " );
+        var idOSMN = charIDToTypeID( "OSMN" );
+        desc2.putEnumerated( idOSM, idOSM, idOSMN );
+    var idAdobeCameraRaw = stringIDToTypeID( "Adobe Camera Raw" );
+    desc1.putObject( idAs, idAdobeCameraRaw, desc2 );
+executeAction( idOpn, desc1, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+    var desc3 = new ActionDescriptor();
+    var idSvng = charIDToTypeID( "Svng" );
+    var idYsN = charIDToTypeID( "YsN " );
+    var idN = charIDToTypeID( "N   " );
+    desc3.putEnumerated( idSvng, idYsN, idN );
+executeAction( idCls, desc3, DialogModes.NO );
+
+// =======================================================
+var idOpn = charIDToTypeID( "Opn " );
+    var desc1 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+    desc1.putPath( idnull, new File( "R:\\groups\\grinberg\\Experiments\\SUPPLEMENT CELL DEATH\\CASP6_CP13\\807.13-Austin\\807.13_photoshop\\72_lc-final.psd" ) );
+executeAction( idOpn, desc1, DialogModes.NO );
+
+// =======================================================
+var idslct = charIDToTypeID( "slct" );
+    var desc2 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+        var ref1 = new ActionReference();
+        var idcountTool = stringIDToTypeID( "countTool" );
+        ref1.putClass( idcountTool );
+    desc2.putReference( idnull, ref1 );
+    var iddontRecord = stringIDToTypeID( "dontRecord" );
+    desc2.putBoolean( iddontRecord, true );
+    var idforceNotify = stringIDToTypeID( "forceNotify" );
+    desc2.putBoolean( idforceNotify, true );
+executeAction( idslct, desc2, DialogModes.NO );
+
+// =======================================================
+var idcountGroupVisible = stringIDToTypeID( "countGroupVisible" );
+    var desc3 = new ActionDescriptor();
+    var idVsbl = charIDToTypeID( "Vsbl" );
+    desc3.putBoolean( idVsbl, false );
+executeAction( idcountGroupVisible, desc3, DialogModes.NO );
+
+// =======================================================
+var idcountGroupVisible = stringIDToTypeID( "countGroupVisible" );
+    var desc4 = new ActionDescriptor();
+    var idVsbl = charIDToTypeID( "Vsbl" );
+    desc4.putBoolean( idVsbl, true );
+executeAction( idcountGroupVisible, desc4, DialogModes.NO );
+
+// =======================================================
+var idcountSetCurrentGroup = stringIDToTypeID( "countSetCurrentGroup" );
+    var desc5 = new ActionDescriptor();
+    var idItmI = charIDToTypeID( "ItmI" );
+    desc5.putInteger( idItmI, 1 );
+executeAction( idcountSetCurrentGroup, desc5, DialogModes.NO );
+
+// =======================================================
+var idcountGroupVisible = stringIDToTypeID( "countGroupVisible" );
+    var desc6 = new ActionDescriptor();
+    var idVsbl = charIDToTypeID( "Vsbl" );
+    desc6.putBoolean( idVsbl, false );
+executeAction( idcountGroupVisible, desc6, DialogModes.NO );
+
+// =======================================================
+var idcountGroupVisible = stringIDToTypeID( "countGroupVisible" );
+    var desc7 = new ActionDescriptor();
+    var idVsbl = charIDToTypeID( "Vsbl" );
+    desc7.putBoolean( idVsbl, true );
+executeAction( idcountGroupVisible, desc7, DialogModes.NO );
+
+// =======================================================
+var idcountSetCurrentGroup = stringIDToTypeID( "countSetCurrentGroup" );
+    var desc8 = new ActionDescriptor();
+    var idItmI = charIDToTypeID( "ItmI" );
+    desc8.putInteger( idItmI, 0 );
+executeAction( idcountSetCurrentGroup, desc8, DialogModes.NO );
+
+// =======================================================
+var idcountGroupVisible = stringIDToTypeID( "countGroupVisible" );
+    var desc9 = new ActionDescriptor();
+    var idVsbl = charIDToTypeID( "Vsbl" );
+    desc9.putBoolean( idVsbl, false );
+executeAction( idcountGroupVisible, desc9, DialogModes.NO );
+
+// =======================================================
+var idcountGroupVisible = stringIDToTypeID( "countGroupVisible" );
+    var desc10 = new ActionDescriptor();
+    var idVsbl = charIDToTypeID( "Vsbl" );
+    desc10.putBoolean( idVsbl, true );
+executeAction( idcountGroupVisible, desc10, DialogModes.NO );
+
+// =======================================================
+var idcountGroupVisible = stringIDToTypeID( "countGroupVisible" );
+    var desc11 = new ActionDescriptor();
+    var idVsbl = charIDToTypeID( "Vsbl" );
+    desc11.putBoolean( idVsbl, false );
+executeAction( idcountGroupVisible, desc11, DialogModes.NO );
+
+// =======================================================
+var idcountGroupVisible = stringIDToTypeID( "countGroupVisible" );
+    var desc12 = new ActionDescriptor();
+    var idVsbl = charIDToTypeID( "Vsbl" );
+    desc12.putBoolean( idVsbl, true );
+executeAction( idcountGroupVisible, desc12, DialogModes.NO );
+
+// =======================================================
+var idcountGroupVisible = stringIDToTypeID( "countGroupVisible" );
+    var desc13 = new ActionDescriptor();
+    var idVsbl = charIDToTypeID( "Vsbl" );
+    desc13.putBoolean( idVsbl, false );
+executeAction( idcountGroupVisible, desc13, DialogModes.NO );
+
+// =======================================================
+var idcountGroupVisible = stringIDToTypeID( "countGroupVisible" );
+    var desc14 = new ActionDescriptor();
+    var idVsbl = charIDToTypeID( "Vsbl" );
+    desc14.putBoolean( idVsbl, true );
+executeAction( idcountGroupVisible, desc14, DialogModes.NO );
+
+// =======================================================
+var idcountGroupMarkerSize = stringIDToTypeID( "countGroupMarkerSize" );
+    var desc15 = new ActionDescriptor();
+    var idSz = charIDToTypeID( "Sz  " );
+    desc15.putInteger( idSz, 5 );
+executeAction( idcountGroupMarkerSize, desc15, DialogModes.NO );
+
+// =======================================================
+var idcountGroupMarkerSize = stringIDToTypeID( "countGroupMarkerSize" );
+    var desc16 = new ActionDescriptor();
+    var idSz = charIDToTypeID( "Sz  " );
+    desc16.putInteger( idSz, 1 );
+executeAction( idcountGroupMarkerSize, desc16, DialogModes.NO );
+
+// =======================================================
+var idcountSetCurrentGroup = stringIDToTypeID( "countSetCurrentGroup" );
+    var desc17 = new ActionDescriptor();
+    var idItmI = charIDToTypeID( "ItmI" );
+    desc17.putInteger( idItmI, 1 );
+executeAction( idcountSetCurrentGroup, desc17, DialogModes.NO );
+
+// =======================================================
+var idcountGroupMarkerSize = stringIDToTypeID( "countGroupMarkerSize" );
+    var desc18 = new ActionDescriptor();
+    var idSz = charIDToTypeID( "Sz  " );
+    desc18.putInteger( idSz, 7 );
+executeAction( idcountGroupMarkerSize, desc18, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+    var desc19 = new ActionDescriptor();
+    var idSvng = charIDToTypeID( "Svng" );
+    var idYsN = charIDToTypeID( "YsN " );
+    var idN = charIDToTypeID( "N   " );
+    desc19.putEnumerated( idSvng, idYsN, idN );
+executeAction( idCls, desc19, DialogModes.NO );
+
+// =======================================================
+var idOpn = charIDToTypeID( "Opn " );
+    var desc1 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+    desc1.putPath( idnull, new File( "R:\\groups\\grinberg\\Experiments\\SUPPLEMENT CELL DEATH\\CASP6_CP13\\807.13-Austin\\807.13_photoshop\\80_drn_final.psd" ) );
+executeAction( idOpn, desc1, DialogModes.NO );
+
+// =======================================================
+var idcountGroupFontSize = stringIDToTypeID( "countGroupFontSize" );
+    var desc2 = new ActionDescriptor();
+    var idSz = charIDToTypeID( "Sz  " );
+    desc2.putInteger( idSz, 8 );
+executeAction( idcountGroupFontSize, desc2, DialogModes.NO );
+
+// =======================================================
+var idcountSetCurrentGroup = stringIDToTypeID( "countSetCurrentGroup" );
+    var desc3 = new ActionDescriptor();
+    var idItmI = charIDToTypeID( "ItmI" );
+    desc3.putInteger( idItmI, 2 );
+executeAction( idcountSetCurrentGroup, desc3, DialogModes.NO );
+
+// =======================================================
+var idcountGroupFontSize = stringIDToTypeID( "countGroupFontSize" );
+    var desc4 = new ActionDescriptor();
+    var idSz = charIDToTypeID( "Sz  " );
+    desc4.putInteger( idSz, 8 );
+executeAction( idcountGroupFontSize, desc4, DialogModes.NO );
+
+// =======================================================
+var idcountGroupMarkerSize = stringIDToTypeID( "countGroupMarkerSize" );
+    var desc5 = new ActionDescriptor();
+    var idSz = charIDToTypeID( "Sz  " );
+    desc5.putInteger( idSz, 1 );
+executeAction( idcountGroupMarkerSize, desc5, DialogModes.NO );
+
+// =======================================================
+var idcountSetCurrentGroup = stringIDToTypeID( "countSetCurrentGroup" );
+    var desc6 = new ActionDescriptor();
+    var idItmI = charIDToTypeID( "ItmI" );
+    desc6.putInteger( idItmI, 2 );
+executeAction( idcountSetCurrentGroup, desc6, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+    var desc7 = new ActionDescriptor();
+    var idSvng = charIDToTypeID( "Svng" );
+    var idYsN = charIDToTypeID( "YsN " );
+    var idN = charIDToTypeID( "N   " );
+    desc7.putEnumerated( idSvng, idYsN, idN );
+executeAction( idCls, desc7, DialogModes.NO );
+
+// =======================================================
+var idOpn = charIDToTypeID( "Opn " );
+    var desc1 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+    desc1.putPath( idnull, new File( "R:\\groups\\grinberg\\Experiments\\SUPPLEMENT CELL DEATH\\CASP6_CP13\\807.13-Austin\\807.13_photoshop\\80_lc_final.psd" ) );
+executeAction( idOpn, desc1, DialogModes.NO );
+
+// =======================================================
+var idOpn = charIDToTypeID( "Opn " );
+    var desc2 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+    desc2.putPath( idnull, new File( "R:\\groups\\grinberg\\Experiments\\SUPPLEMENT CELL DEATH\\CASP6_CP13\\807.13-Austin\\807.13_photoshop\\80_lc_final.psd" ) );
+executeAction( idOpn, desc2, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+executeAction( idCls, undefined, DialogModes.NO );
+
+// =======================================================
+var idOpn = charIDToTypeID( "Opn " );
+    var desc1 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+    desc1.putPath( idnull, new File( "R:\\groups\\grinberg\\Experiments\\SUPPLEMENT CELL DEATH\\CASP6_CP13\\807.13-Austin\\807.13_photoshop\\88_drn.psd" ) );
+executeAction( idOpn, desc1, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+executeAction( idCls, undefined, DialogModes.NO );
+
+// =======================================================
+var idOpn = charIDToTypeID( "Opn " );
+    var desc1 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+    desc1.putPath( idnull, new File( "R:\\groups\\grinberg\\Experiments\\SUPPLEMENT CELL DEATH\\CASP6_CP13\\4069.13 Julia\\julia recounts\\110_4069.psd" ) );
+executeAction( idOpn, desc1, DialogModes.NO );
+
+// =======================================================
+var idcountSetCurrentGroup = stringIDToTypeID( "countSetCurrentGroup" );
+    var desc2 = new ActionDescriptor();
+    var idItmI = charIDToTypeID( "ItmI" );
+    desc2.putInteger( idItmI, 1 );
+executeAction( idcountSetCurrentGroup, desc2, DialogModes.NO );
+
+// =======================================================
+var idcountGroupVisible = stringIDToTypeID( "countGroupVisible" );
+    var desc3 = new ActionDescriptor();
+    var idVsbl = charIDToTypeID( "Vsbl" );
+    desc3.putBoolean( idVsbl, false );
+executeAction( idcountGroupVisible, desc3, DialogModes.NO );
+
+// =======================================================
+var idcountGroupVisible = stringIDToTypeID( "countGroupVisible" );
+    var desc4 = new ActionDescriptor();
+    var idVsbl = charIDToTypeID( "Vsbl" );
+    desc4.putBoolean( idVsbl, true );
+executeAction( idcountGroupVisible, desc4, DialogModes.NO );
+
+// =======================================================
+var idcountSetCurrentGroup = stringIDToTypeID( "countSetCurrentGroup" );
+    var desc5 = new ActionDescriptor();
+    var idItmI = charIDToTypeID( "ItmI" );
+    desc5.putInteger( idItmI, 0 );
+executeAction( idcountSetCurrentGroup, desc5, DialogModes.NO );
+
+// =======================================================
+var idcountGroupVisible = stringIDToTypeID( "countGroupVisible" );
+    var desc6 = new ActionDescriptor();
+    var idVsbl = charIDToTypeID( "Vsbl" );
+    desc6.putBoolean( idVsbl, false );
+executeAction( idcountGroupVisible, desc6, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+    var desc7 = new ActionDescriptor();
+    var idSvng = charIDToTypeID( "Svng" );
+    var idYsN = charIDToTypeID( "YsN " );
+    var idN = charIDToTypeID( "N   " );
+    desc7.putEnumerated( idSvng, idYsN, idN );
+executeAction( idCls, desc7, DialogModes.NO );
+
+// =======================================================
+var idOpn = charIDToTypeID( "Opn " );
+    var desc1 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+    desc1.putPath( idnull, new File( "R:\\groups\\grinberg\\Experiments\\SUPPLEMENT CELL DEATH\\Miscellaneous\\Thackrey\\caspase6\\4069.13\\counts\\78\\78_DRN1_2_ ov_2.psd" ) );
+executeAction( idOpn, desc1, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+executeAction( idCls, undefined, DialogModes.NO );
+
+// =======================================================
+var idOpn = charIDToTypeID( "Opn " );
+    var desc1 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+    desc1.putPath( idnull, new File( "R:\\groups\\grinberg\\Experiments\\SUPPLEMENT CELL DEATH\\Miscellaneous\\Thackrey\\caspase6\\4069.13\\counts\\78\\78_DRN2_2 ov.psd" ) );
+executeAction( idOpn, desc1, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+executeAction( idCls, undefined, DialogModes.NO );
+
+// =======================================================
+var idOpn = charIDToTypeID( "Opn " );
+    var desc1 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+    desc1.putPath( idnull, new File( "R:\\groups\\grinberg\\Experiments\\SUPPLEMENT CELL DEATH\\Miscellaneous\\Thackrey\\caspase6\\4069.13\\counts\\78\\LC4069_78.psd" ) );
+executeAction( idOpn, desc1, DialogModes.NO );
+
+// =======================================================
+var idcountGroupVisible = stringIDToTypeID( "countGroupVisible" );
+    var desc2 = new ActionDescriptor();
+    var idVsbl = charIDToTypeID( "Vsbl" );
+    desc2.putBoolean( idVsbl, false );
+executeAction( idcountGroupVisible, desc2, DialogModes.NO );
+
+// =======================================================
+var idcountGroupVisible = stringIDToTypeID( "countGroupVisible" );
+    var desc3 = new ActionDescriptor();
+    var idVsbl = charIDToTypeID( "Vsbl" );
+    desc3.putBoolean( idVsbl, true );
+executeAction( idcountGroupVisible, desc3, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+    var desc4 = new ActionDescriptor();
+    var idSvng = charIDToTypeID( "Svng" );
+    var idYsN = charIDToTypeID( "YsN " );
+    var idN = charIDToTypeID( "N   " );
+    desc4.putEnumerated( idSvng, idYsN, idN );
+executeAction( idCls, desc4, DialogModes.NO );
+
+// =======================================================
+var idOpn = charIDToTypeID( "Opn " );
+    var desc1 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+    desc1.putPath( idnull, new File( "R:\\groups\\grinberg\\Experiments\\SUPPLEMENT CELL DEATH\\Miscellaneous\\Thackrey\\caspase6\\4069.13\\counts\\86\\4069_86_DRN.psd" ) );
+executeAction( idOpn, desc1, DialogModes.NO );
+
+// =======================================================
+var idcountSetCurrentGroup = stringIDToTypeID( "countSetCurrentGroup" );
+    var desc2 = new ActionDescriptor();
+    var idItmI = charIDToTypeID( "ItmI" );
+    desc2.putInteger( idItmI, 0 );
+executeAction( idcountSetCurrentGroup, desc2, DialogModes.NO );
+
+// =======================================================
+var idcountGroupVisible = stringIDToTypeID( "countGroupVisible" );
+    var desc3 = new ActionDescriptor();
+    var idVsbl = charIDToTypeID( "Vsbl" );
+    desc3.putBoolean( idVsbl, false );
+executeAction( idcountGroupVisible, desc3, DialogModes.NO );
+
+// =======================================================
+var idcountGroupVisible = stringIDToTypeID( "countGroupVisible" );
+    var desc4 = new ActionDescriptor();
+    var idVsbl = charIDToTypeID( "Vsbl" );
+    desc4.putBoolean( idVsbl, true );
+executeAction( idcountGroupVisible, desc4, DialogModes.NO );
+
+// =======================================================
+var idcountGroupVisible = stringIDToTypeID( "countGroupVisible" );
+    var desc5 = new ActionDescriptor();
+    var idVsbl = charIDToTypeID( "Vsbl" );
+    desc5.putBoolean( idVsbl, false );
+executeAction( idcountGroupVisible, desc5, DialogModes.NO );
+
+// =======================================================
+var idcountSetCurrentGroup = stringIDToTypeID( "countSetCurrentGroup" );
+    var desc6 = new ActionDescriptor();
+    var idItmI = charIDToTypeID( "ItmI" );
+    desc6.putInteger( idItmI, 1 );
+executeAction( idcountSetCurrentGroup, desc6, DialogModes.NO );
+
+// =======================================================
+var idcountGroupVisible = stringIDToTypeID( "countGroupVisible" );
+    var desc7 = new ActionDescriptor();
+    var idVsbl = charIDToTypeID( "Vsbl" );
+    desc7.putBoolean( idVsbl, false );
+executeAction( idcountGroupVisible, desc7, DialogModes.NO );
+
+// =======================================================
+var idcountGroupVisible = stringIDToTypeID( "countGroupVisible" );
+    var desc8 = new ActionDescriptor();
+    var idVsbl = charIDToTypeID( "Vsbl" );
+    desc8.putBoolean( idVsbl, true );
+executeAction( idcountGroupVisible, desc8, DialogModes.NO );
+
+// =======================================================
+var idcountGroupVisible = stringIDToTypeID( "countGroupVisible" );
+    var desc9 = new ActionDescriptor();
+    var idVsbl = charIDToTypeID( "Vsbl" );
+    desc9.putBoolean( idVsbl, false );
+executeAction( idcountGroupVisible, desc9, DialogModes.NO );
+
+// =======================================================
+var idcountGroupVisible = stringIDToTypeID( "countGroupVisible" );
+    var desc10 = new ActionDescriptor();
+    var idVsbl = charIDToTypeID( "Vsbl" );
+    desc10.putBoolean( idVsbl, true );
+executeAction( idcountGroupVisible, desc10, DialogModes.NO );
+
+// =======================================================
+var idcountGroupVisible = stringIDToTypeID( "countGroupVisible" );
+    var desc11 = new ActionDescriptor();
+    var idVsbl = charIDToTypeID( "Vsbl" );
+    desc11.putBoolean( idVsbl, false );
+executeAction( idcountGroupVisible, desc11, DialogModes.NO );
+
+// =======================================================
+var idcountSetCurrentGroup = stringIDToTypeID( "countSetCurrentGroup" );
+    var desc12 = new ActionDescriptor();
+    var idItmI = charIDToTypeID( "ItmI" );
+    desc12.putInteger( idItmI, 1 );
+executeAction( idcountSetCurrentGroup, desc12, DialogModes.NO );
+
+// =======================================================
+var idcountGroupVisible = stringIDToTypeID( "countGroupVisible" );
+    var desc13 = new ActionDescriptor();
+    var idVsbl = charIDToTypeID( "Vsbl" );
+    desc13.putBoolean( idVsbl, true );
+executeAction( idcountGroupVisible, desc13, DialogModes.NO );
+
+// =======================================================
+var idcountSetCurrentGroup = stringIDToTypeID( "countSetCurrentGroup" );
+    var desc14 = new ActionDescriptor();
+    var idItmI = charIDToTypeID( "ItmI" );
+    desc14.putInteger( idItmI, 0 );
+executeAction( idcountSetCurrentGroup, desc14, DialogModes.NO );
+
+// =======================================================
+var idcountGroupVisible = stringIDToTypeID( "countGroupVisible" );
+    var desc15 = new ActionDescriptor();
+    var idVsbl = charIDToTypeID( "Vsbl" );
+    desc15.putBoolean( idVsbl, true );
+executeAction( idcountGroupVisible, desc15, DialogModes.NO );
+
+// =======================================================
+var idcountGroupVisible = stringIDToTypeID( "countGroupVisible" );
+    var desc16 = new ActionDescriptor();
+    var idVsbl = charIDToTypeID( "Vsbl" );
+    desc16.putBoolean( idVsbl, false );
+executeAction( idcountGroupVisible, desc16, DialogModes.NO );
+
+// =======================================================
+var idcountGroupVisible = stringIDToTypeID( "countGroupVisible" );
+    var desc17 = new ActionDescriptor();
+    var idVsbl = charIDToTypeID( "Vsbl" );
+    desc17.putBoolean( idVsbl, true );
+executeAction( idcountGroupVisible, desc17, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+    var desc18 = new ActionDescriptor();
+    var idSvng = charIDToTypeID( "Svng" );
+    var idYsN = charIDToTypeID( "YsN " );
+    var idN = charIDToTypeID( "N   " );
+    desc18.putEnumerated( idSvng, idYsN, idN );
+executeAction( idCls, desc18, DialogModes.NO );
+
+// =======================================================
+var idOpn = charIDToTypeID( "Opn " );
+    var desc1 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+    desc1.putPath( idnull, new File( "R:\\groups\\grinberg\\Experiments\\SUPPLEMENT CELL DEATH\\Miscellaneous\\Thackrey\\caspase6\\4599.14\\counts\\76.DRNpsd.psd" ) );
+executeAction( idOpn, desc1, DialogModes.NO );
+
+// =======================================================
+var idHd = charIDToTypeID( "Hd  " );
+    var desc2 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+        var list1 = new ActionList();
+            var ref1 = new ActionReference();
+            var idLyr = charIDToTypeID( "Lyr " );
+            var idOrdn = charIDToTypeID( "Ordn" );
+            var idTrgt = charIDToTypeID( "Trgt" );
+            ref1.putEnumerated( idLyr, idOrdn, idTrgt );
+        list1.putReference( ref1 );
+    desc2.putList( idnull, list1 );
+executeAction( idHd, desc2, DialogModes.NO );
+
+// =======================================================
+var idShw = charIDToTypeID( "Shw " );
+    var desc3 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+        var list2 = new ActionList();
+            var ref2 = new ActionReference();
+            var idLyr = charIDToTypeID( "Lyr " );
+            var idOrdn = charIDToTypeID( "Ordn" );
+            var idTrgt = charIDToTypeID( "Trgt" );
+            ref2.putEnumerated( idLyr, idOrdn, idTrgt );
+        list2.putReference( ref2 );
+    desc3.putList( idnull, list2 );
+executeAction( idShw, desc3, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+    var desc4 = new ActionDescriptor();
+    var idSvng = charIDToTypeID( "Svng" );
+    var idYsN = charIDToTypeID( "YsN " );
+    var idN = charIDToTypeID( "N   " );
+    desc4.putEnumerated( idSvng, idYsN, idN );
+executeAction( idCls, desc4, DialogModes.NO );
+
+// =======================================================
+var idOpn = charIDToTypeID( "Opn " );
+    var desc1 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+    desc1.putPath( idnull, new File( "R:\\groups\\grinberg\\Experiments\\SUPPLEMENT CELL DEATH\\Miscellaneous\\Thackrey\\caspase6\\4599.14\\counts\\84drn.psd" ) );
+executeAction( idOpn, desc1, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+executeAction( idCls, undefined, DialogModes.NO );
+
+// =======================================================
+var idOpn = charIDToTypeID( "Opn " );
+    var desc1 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+    desc1.putPath( idnull, new File( "R:\\groups\\grinberg\\Experiments\\SUPPLEMENT CELL DEATH\\Miscellaneous\\Thackrey\\caspase6\\4599.14\\counts\\recounts\\100drn.psd" ) );
+executeAction( idOpn, desc1, DialogModes.NO );
+
+// =======================================================
+var idslct = charIDToTypeID( "slct" );
+    var desc2 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+        var ref1 = new ActionReference();
+        var idLyr = charIDToTypeID( "Lyr " );
+        ref1.putName( idLyr, "Background" );
+    desc2.putReference( idnull, ref1 );
+    var idMkVs = charIDToTypeID( "MkVs" );
+    desc2.putBoolean( idMkVs, false );
+executeAction( idslct, desc2, DialogModes.NO );
+
+// =======================================================
+var idslct = charIDToTypeID( "slct" );
+    var desc3 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+        var ref2 = new ActionReference();
+        var idLyr = charIDToTypeID( "Lyr " );
+        ref2.putName( idLyr, "Layer 1" );
+    desc3.putReference( idnull, ref2 );
+    var idMkVs = charIDToTypeID( "MkVs" );
+    desc3.putBoolean( idMkVs, false );
+executeAction( idslct, desc3, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+executeAction( idCls, undefined, DialogModes.NO );
+
+// =======================================================
+var idOpn = charIDToTypeID( "Opn " );
+    var desc1 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+    desc1.putPath( idnull, new File( "R:\\groups\\grinberg\\Experiments\\SUPPLEMENT CELL DEATH\\Miscellaneous\\austin\\6931.12_Caspace6_ps\\6931_56_drn.psd" ) );
+executeAction( idOpn, desc1, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+executeAction( idCls, undefined, DialogModes.NO );
+
+// =======================================================
+var idOpn = charIDToTypeID( "Opn " );
+    var desc1 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+    desc1.putPath( idnull, new File( "R:\\groups\\grinberg\\Experiments\\SUPPLEMENT CELL DEATH\\Miscellaneous\\austin\\6931.12_Caspace6_ps\\6931_64_drn.psd" ) );
+executeAction( idOpn, desc1, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+executeAction( idCls, undefined, DialogModes.NO );
+
+// =======================================================
+var idOpn = charIDToTypeID( "Opn " );
+    var desc1 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+    desc1.putPath( idnull, new File( "R:\\groups\\grinberg\\Experiments\\SUPPLEMENT CELL DEATH\\Miscellaneous\\austin\\6931.12_Caspace6_ps\\6931_88_drn-f.psd" ) );
+executeAction( idOpn, desc1, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+executeAction( idCls, undefined, DialogModes.NO );
+
+// =======================================================
+var idOpn = charIDToTypeID( "Opn " );
+    var desc1 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+    desc1.putPath( idnull, new File( "R:\\groups\\grinberg\\Experiments\\SUPPLEMENT CELL DEATH\\Miscellaneous\\austin\\6931.12_Caspace6_ps\\6931_80_lc-f.psd" ) );
+executeAction( idOpn, desc1, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+executeAction( idCls, undefined, DialogModes.NO );
+
+// =======================================================
+var idOpn = charIDToTypeID( "Opn " );
+    var desc1 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+    desc1.putPath( idnull, new File( "R:\\groups\\grinberg\\Experiments\\SUPPLEMENT CELL DEATH\\Miscellaneous\\austin\\6931.12_Caspace6_ps\\6931_80_drn-f.psd" ) );
+executeAction( idOpn, desc1, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+executeAction( idCls, undefined, DialogModes.NO );
+
+// =======================================================
+var idOpn = charIDToTypeID( "Opn " );
+    var desc1 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+    desc1.putPath( idnull, new File( "R:\\groups\\grinberg\\Experiments\\SUPPLEMENT CELL DEATH\\Miscellaneous\\austin\\6931.12_Caspace6_ps\\6931_80_lc-f.psd" ) );
+executeAction( idOpn, desc1, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+executeAction( idCls, undefined, DialogModes.NO );
+
+// =======================================================
+var idOpn = charIDToTypeID( "Opn " );
+    var desc1 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+    desc1.putPath( idnull, new File( "R:\\groups\\grinberg\\Experiments\\SUPPLEMENT CELL DEATH\\Miscellaneous\\austin\\6931.12_Caspace6_ps\\6931_72_drn-f.psd" ) );
+executeAction( idOpn, desc1, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+executeAction( idCls, undefined, DialogModes.NO );
+
+// =======================================================
+var idOpn = charIDToTypeID( "Opn " );
+    var desc1 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+    desc1.putPath( idnull, new File( "R:\\groups\\grinberg\\Experiments\\SUPPLEMENT CELL DEATH\\Miscellaneous\\austin\\P2508_ps_recheck_cas6\\p2508_100_drn-f.psd" ) );
+executeAction( idOpn, desc1, DialogModes.NO );
+
+// =======================================================
+var idCls = charIDToTypeID( "Cls " );
+executeAction( idCls, undefined, DialogModes.NO );
+
