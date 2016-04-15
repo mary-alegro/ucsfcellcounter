@@ -1,0 +1,53 @@
+function  test_dictionary(list_imgs,list_masks,seg_dir)
+
+if seg_dir(end) ~= '/'
+    seg_dir = [seg_dir '/'];
+end
+
+
+nFiles = length(list_imgs);
+nMasks = length(list_masks);
+
+wsize = 11;
+
+if nFiles ~= nMasks
+    error('Test DL: number of images and masks must agree.'); 
+end
+
+%segmente each test file
+for f=1:nFiles
+
+    nameimg = char(list_imgs(f));
+    
+    idx = strcmp(nameimg,'/');
+    idx  = idx(end);
+    name = nameimg(idx+1:end);
+    
+    namemask = char(list_masks(f));
+
+    [img, R, G, B] = load_img(nameimg,1);
+    mask = load_mask(namemask,1);
+end
+
+mask = seg_dictionary(R,G,B,mask,wsize);
+seg1_name = strcat(seg_dir,'seg1_',name);
+imwrite(mask,seg1_name,'TIFF');
+
+mask2 = posproc_mask_ws(img,mask);
+seg1_name = strcat(seg_dir,'seg1_',name);
+imwrite(mask,seg1_name,'TIFF');
+mask_class = posproc_chroma(img,mask2);
+
+end
+
+
+function m = load_mask(fullpath,doresize)
+    m = imread(fullpath);
+    [r c N] = size(m);
+    if N > 1
+        m = m(:,:,1);
+    end
+    if doresize == 1
+        m = imresize(m,0.25);
+    end
+end
