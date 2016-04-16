@@ -4,17 +4,21 @@ nDiv = 7;
 nFiles = length(list_imgs);
 nMasks = length(list_masks);
 
-seg_dir = '/home/maryana/storage/Posdoc/Microscopy/images/test/seg';
+seg_dir = '/home/maryana/storage/Posdoc/Microscopy/images/toprocess/seg';
 
 if nFiles ~= nMasks
     error('Leave-v-out: Number of images and number of masks must agree.');
 end
 
+ridx = randperm(nFiles);
 nElem = nFiles/nDiv;
 nBlocks = nFiles/nElem;
 idx = 1:nFiles;
 
-for b=1:nElem:nBlocks %iterate each block
+list_imgs = list_imgs(ridx);
+list_masks = list_masks(ridx);
+
+for b=1:nElem:nFiles %iterate each block
     
     test_idx = b:b+nElem-1;
     train_idx = setdiff(idx,test_idx);
