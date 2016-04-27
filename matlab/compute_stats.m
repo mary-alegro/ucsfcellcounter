@@ -1,15 +1,18 @@
 function labels = compute_stats(img_orig,mask_seg,csv)
 
 %
-% IMG_ORIG: original image
-% MASK_SEG: segmentation mask with classes
-% CSV: photoshop CSV
+% IMG_ORIG: original image, with original size = image used for counting w/
+% photoshop
+% MASK_SEG: segmentation mask with classes (usually smaller than IMG_ORIG)
+% CSV: photoshop CSV, counted on IMG_ORIG
 %
 
 
 [r c N] = size(img_orig);
 mask2 = logical(mask_seg);
 mask2 = imresize(mask2,[r c]);
+
+csv = cleanCSV(csv);
 
 center = regionprops(mask2,'Centroid');
 nCells = length(center);
@@ -18,6 +21,8 @@ center = cat(1,center.Centroid);
 
 idx = find(csv(:,1) == 0); %all
 pts_a = round(csv(idx,2:3));
+
+[tr tc tN] = size(pts_a);
 a_set = sub2ind([r c],pts_a(:,2),pts_a(:,1));
 
 idx = find(csv(:,1) == 1); %red
@@ -111,6 +116,26 @@ fprintf('    Y: %d\n',sum(FN_y));
 
 
 
+end
+
+
+
+function csv2 = cleanCSV(csv)
+
+[r c N] = size(csv);
+rows = 1:r;
+toremove = [];
+
+    for i=1:r
+        if csv(i,2) < 0 || csv(i,3) < 0
+            toremove = [toremove i];
+        end
+    end
+
+    rows2 = setxor(rows,toremove);
+    
+    csv2 = csv(rows2,:);    
+end
 
 
 
