@@ -4,7 +4,8 @@ function clean_points = delanuay_cluster(img,GT,groups)
 % Cleans redundant points on the cell countings to avoid execisse false
 % negatives. Uses Delanuay + BFS for efficient computation.
 %
-% IMG: original microscopy image
+% IMG: original microscopy image, can also be the labels or mask as long as
+% it has the original image size
 % GT: groud truth structure
 % GROUPS: group indexes in GT to consider (0 is usually ignored)
 %
@@ -107,15 +108,15 @@ clean_points = sub2ind([r c],cleanR,cleanC);
 % C1d = C(pd1); C2d = C(pd2);
 % Rd = [R1d; R2d];
 % Cd = [C1d; C2d];
-Rd = R(removePts);
-Cd = C(removePts);
+%Rd = R(removePts);
+%Cd = C(removePts);
 
-imshow(img); hold on;
-plot(C,R,'wo','MarkerSize',10); %all points in GT
+%imshow(img); hold on;
+%plot(C,R,'wo','MarkerSize',10); %all points in GT
 % plot(Cc,Rc,'yo','MarkerSize',10);
 % plot(Cp,Rp,'m*','MarkerSize',10);
-plot(Cd,Rd,'y*','MarkerSize',10); %to remove
-plot(cleanC,cleanR,'bo','MarkerSize',10); %clean
+%plot(Cd,Rd,'y*','MarkerSize',10); %to remove
+%plot(cleanC,cleanR,'bo','MarkerSize',10); %clean
 
 end
 

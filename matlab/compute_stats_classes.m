@@ -1,8 +1,5 @@
-function compute_stats(img_orig,mask_seg,csv,rules)
+function GT = compute_stats_classes(img_orig,mask_seg,csv,rules)
 
-%
-% Computes segmentation statistic without considering classification in R,G
-% or Y
 %
 % IMG_ORIG: original image, with original size = image used for counting w/
 % photoshop
@@ -26,10 +23,10 @@ function compute_stats(img_orig,mask_seg,csv,rules)
 IG_ = 0; R_ = 1; G_ = 2; Y_ = 3; RY_ = 4; GY_ = 5;
 
 [r c N] = size(img_orig);
-
 %
 %%% Process CSV
 %
+
 csv = cleanCSV(csv); %cleans points that may be outside the image area
 groups = unique(csv(:,1));
 nGroups = length(groups);
@@ -41,51 +38,40 @@ for j = 0:nGroups-1
     GT(j+1).rule = parseRules(rules,j);
 end
 
-indGroups = []; %only includes groups that will not be ignored [R G Y]
+indGroups = zeros(1,nGroups); %[ignore R G Y] always in this order
 incY = 0; %was yellow included in R and G countings?
 
-fprintf('Ground truth (original):\n');
+
+fprintf('Ground truth:\n');
 for g = 1:nGroups
     nPts = length(GT(g).set);
     switch GT(g).rule
         case IG_ %to ignore
-            str = sprintf('Nuclei (#%d)',g);
+            indGroups(1) = g;
+            str = 'Nuclei ';
         case R_ %R only
-            indGroups(1) = g;
-            str = sprintf('R (#%d)',g);
+            indGroups(2) = g;
+            str = 'R';
         case G_ %G only
-            indGroups(2) = g;
-            str = sprintf('G (#%d)',g);
+            indGroups(3) = g;
+            str = 'G';
         case Y_ %Y only
-             indGroups(3) = g;
-            str = sprintf('Y (#%d)',g);
+             indGroups(4) = g;
+            str = 'Y';
         case RY_ %R+Y
-            indGroups(1) = g;
-            incY = 1;
-            str = sprintf('R+Y (#%d)',g);
-        case GY_ %G+Y
             indGroups(2) = g;
             incY = 1;
-            str = sprintf('G+Y (#%d)',g);
+            str = 'R(R+Y)';
+        case GY_ %G+Y
+            indGroups(3) = g;
+            incY = 1;
+            str = 'G(G+Y)';
         otherwise %unknown rule
             str = 'Unknown';
     end
     
     fprintf(' %s: %d ',str,nPts);
 end
-
-%prune data to remove redundant points
-gt_set = [];
-if incY == 1
-        gt_set = delanuay_cluster(img_orig,GT,indGroups);
-else
-    for i=2:nGroups
-            gt_set = [gt_set GT(i).set];
-    end
-end
-
-fprintf('\nGround truth (clean): ');
-fprintf(' Num. cells: %d\n',length(gt_set));
 
 
 %
@@ -101,54 +87,49 @@ idx_centers = sub2ind([r c],centroids(:,2),centroids(:,1));
 
 [labels nL] = bwlabel(mask2);
 
+
 fprintf('\nSegmentation results:\n');
-fprintf('    Total: %d  ',nL);
+fprintf(' Total: %d ',nL);
 
 %
 % Compute all true positive
 %
-TP = computeTP(gt_set,labels,idx_centers,nL);
+TP = computeTP(GT,labels, nGroups, idx_centers,nL,incY);
 
 %
 % Compute all false positive
 %
-FP = computeFP(gt_set,labels,idx_centers,nL);
+FP = computeFP(GT,labels, nGroups, idx_centers,nL,incY);
 
 %
 % Compute all false negative
 %
-FN = computeFN(gt_set,mask2);
+
+
 
 %%% show image
-SHOW_IMG = 0;
-if SHOW_IMG
-    n = length(indGroups);
-    overlay = imoverlay(img_orig,bwperim(mask2),[0 1 0]); 
-    imshow(overlay);  hold on,
-    for g=2:n
-        gg = indGroups(g);
-        [R,C] = ind2sub([r c],GT(gg).set);
-        plot(C,R,'wo', 'MarkerSize',20);
-    end
-    [R,C] = ind2sub([r c],TP);
-    plot(C,R,'w*', 'MarkerSize',12);
-    [R,C] = ind2sub([r c],FP);
-    plot(C,R,'y*', 'MarkerSize',12);
-    [R,C] = ind2sub([r c],FN);
-    plot(C,R,'m*', 'MarkerSize',12);
-
-    close all;
+n = length(indGroups);
+overlay = imoverlay(img_orig,bwperim(mask2),[0 1 0]); 
+imshow(overlay);  hold on,
+for g=2:n
+    gg = indGroups(g);
+    [R,C] = ind2sub([r c],GT(gg).set);
+    plot(C,R,'wo', 'MarkerSize',20);
 end
+[R,C] = ind2sub([r c],TP);
+plot(C,R,'w*', 'MarkerSize',12);
+[R,C] = ind2sub([r c],FP);
+plot(C,R,'y*', 'MarkerSize',12);
+
+close all;
+
+
+
 
 fprintf(' TP: %d ',length(TP));
 fprintf(' FP: %d ',length(FP));
-fprintf(' FN: %d\n',length(FN));
 
-RP = (length(TP)*100)/length(gt_set);
-fprintf('** PA: %f ',RP);
 
-TC = (length(TP) - 0.5*length(FP))/length(gt_set);
-fprintf('  TC: %f **\n',TC);
 end
 
 
@@ -162,14 +143,16 @@ function csv2 = cleanCSV(csv)
 [r c N] = size(csv);
 rows = 1:r;
 toremove = [];
+
     for i=1:r
         if csv(i,2) < 0 || csv(i,3) < 0
             toremove = [toremove i];
         end
     end
+
     rows2 = setxor(rows,toremove);
-    csv2 = csv(rows2,:);    
     
+    csv2 = csv(rows2,:);    
 end
 
 function r = parseRules(rules,group)
@@ -190,57 +173,102 @@ function r = parseRules(rules,group)
 end
 
 
-function TP = computeTP(gt_set, labels, idx_centers, nL)
+function TP = computeTP(GT, labels, nGroups, idx_centers, nL, incY)
+
+    IG_ = 0; R_ = 1; G_ = 2;
+    Y_ = 3; RY_ = 4; GY_ = 5;
 
     [r c N] = size(labels);
     se = strel('disk',15);
-    
     TP = [];
+    
     for l=1:nL
+
+        ir = []; ig = []; iy = [];
         ctr = idx_centers(l);
         m1 = logical(zeros(r,c));
         idx = find(labels == l);
         m1(idx) = 1;
         m2 = imdilate(m1,se);
         idx_set = find(m2 == 1);
-        
-        U = intersect(gt_set,idx_set);
-        if ~isempty(U)
+
+        for j=1:nGroups
+            gt_set = GT(j).set;
+            switch GT(j).rule
+                case IG_
+                    continue;
+                case {R_,RY_}
+                    ir = [ir; intersect(gt_set,idx_set)]; 
+                case {G_,GY_}
+                    ig = [ig; intersect(gt_set,idx_set)];
+                case Y_
+                    iy = [iy; intersect(gt_set,idx_set)];
+            end    
+        end
+        II = [];
+        if incY > 0 %this counting included Y in R and G groups thus no need to include Y indexes
+            II = [ir; ig];
+        else
+            II = [ir; ig; iy];
+        end
+
+        if ~isempty(II) %there is some overlapping, thus this centroid is TP
             TP = [TP ctr];
         end
     end
-
 end
 
-function FP = computeFP(gt_set, labels, idx_centers, nL)
+function FP = computeFP(GT, labels, nGroups, idx_centers, nL, incY)
+
+    IG_ = 0; R_ = 1; G_ = 2;
+    Y_ = 3; RY_ = 4; GY_ = 5;
 
     [r c N] = size(labels);
     se = strel('disk',15);
-    
     FP = [];
+    
     for l=1:nL
+
+        ir = []; ig = []; iy = [];
         ctr = idx_centers(l);
         m1 = logical(zeros(r,c));
         idx = find(labels == l);
         m1(idx) = 1;
         m2 = imdilate(m1,se);
         idx_set = find(m2 == 1);
-        
-        U = intersect(gt_set,idx_set);
-        if isempty(U)
+
+        for j=1:nGroups
+            gt_set = GT(j).set;
+            switch GT(j).rule
+                case IG_
+                    continue;
+                case {R_,RY_}
+                    ir = [ir; intersect(gt_set,idx_set)]; 
+                case {G_,GY_}
+                    ig = [ig; intersect(gt_set,idx_set)];
+                case Y_
+                    iy = [iy; intersect(gt_set,idx_set)];
+            end    
+        end
+        II = [];
+        if incY > 0 %this counting included Y in R and G groups thus no need to include Y indexes
+            II = [ir; ig];
+        else
+            II = [ir; ig; iy];
+        end
+
+        if isempty(II) %there is some overlapping, thus this centroid is TP
             FP = [FP ctr];
         end
     end
-     
 end
 
 
-function FN = computeFN(gt_set, mask)
+function FN = computeFN(GT, labels, nGroups, idx_centers, nL, incY)
 
-    se = strel('disk',15);
-    mask2 = imdilate(mask,se);
-    idx_set = find(mask2 == 1);
-    FN = setdiff(gt_set,idx_set);
+    
+
+
 
 end
 

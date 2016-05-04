@@ -40,7 +40,7 @@ for i=1:nFiles
     
     fprintf('-------**** File %s ****------\n',file_name);
     
-    GT = compute_stats(img,mask,csv,rule);
+    compute_stats(img,mask,csv,rule);
 end
 
 end
