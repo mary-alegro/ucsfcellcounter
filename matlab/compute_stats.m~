@@ -1,4 +1,4 @@
-function GT = compute_stats(img_orig,mask_seg,csv,rules)
+function labels = compute_stats(img_orig,mask_seg,csv,rules)
 
 %
 % IMG_ORIG: original image, with original size = image used for counting w/
@@ -36,11 +36,14 @@ for j = 0:nGroups-1
     pts = round(csv(idx,2:3));
     GT(j+1).set = sub2ind([r c],pts(:,2),pts(:,1));
     GT(j+1).rule = parseRules(rules,j);
+%     GT(J+1).idxY = -1;
+%     if GT(j+1).rule == Y_
+%         GT(j+1).idxY = j; %index of Y group. -1 if it does not exist
+%     end
 end
 
 indGroups = zeros(1,nGroups); %[ignore R G Y] always in this order
 incY = 0; %was yellow included in R and G countings?
-
 
 fprintf('Ground truth:\n');
 for g = 1:nGroups
@@ -266,7 +269,41 @@ end
 
 function FN = computeFN(GT, mask, nGroups, incY)
 
+    IG_ = 0; R_ = 1; G_ = 2;
+    Y_ = 3; RY_ = 4; GY_ = 5;
 
+    [r c N] = size(mask);
+    se = strel('disk',15);
+    mask2 = imdilate(mask,se);
+    FN = [];
+    mask_set = find(mask2 == 1);
+    
+    for i=1:nGroups
+        dr = []; dg = []; dy = [];
+        gt_set = GT(i).set;
+        switch GT(i).rule
+            case IG_
+                continue;
+            case {R_,RY_}
+                dr = setdiff(gt_set,mask_set);
+            case {G_,GY_}
+                dg = setdiff(gt_set,mask_set);
+            case {Y_}
+                dy = setdiff(gt_set,mask_set);     
+        end
+        
+        II = [];
+        if incY > 0 %this counting included Y in R and G groups thus no need to include Y indexes
+            II = [dr; dg];
+        else
+            II = [dr; dg; dy];
+        end
+        
+        if ~isempty(II) %there is some overlapping, thus this centroid is TP
+            FN = [FN; II];
+        end
+  
+    end
 
 
 end
