@@ -1,4 +1,4 @@
-function compute_stats(img_orig,mask_seg,csv,rules)
+function [TP, FP, FN, PA, TC] = compute_stats(img_orig,mask_seg,csv,rules)
 
 %
 % Computes segmentation statistic without considering classification in R,G
@@ -84,8 +84,8 @@ else
     end
 end
 
-fprintf('\nGround truth (clean): ');
-fprintf(' Num. cells: %d\n',length(gt_set));
+fprintf('\nGround truth (clean): \n');
+fprintf('    Num. cells: %d\n',length(gt_set));
 
 
 %
@@ -101,7 +101,7 @@ idx_centers = sub2ind([r c],centroids(:,2),centroids(:,1));
 
 [labels nL] = bwlabel(mask2);
 
-fprintf('\nSegmentation results:\n');
+fprintf('Segmentation results:\n');
 fprintf('    Total: %d  ',nL);
 
 %
@@ -144,8 +144,8 @@ fprintf(' TP: %d ',length(TP));
 fprintf(' FP: %d ',length(FP));
 fprintf(' FN: %d\n',length(FN));
 
-RP = (length(TP)*100)/length(gt_set);
-fprintf('** PA: %f ',RP);
+PA = (length(TP)*100)/length(gt_set);
+fprintf('** PA: %f ',PA);
 
 TC = (length(TP) - 0.5*length(FP))/length(gt_set);
 fprintf('  TC: %f **\n',TC);

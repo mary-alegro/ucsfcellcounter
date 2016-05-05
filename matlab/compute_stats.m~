@@ -1,4 +1,4 @@
-function GT = compute_stats(img_orig,mask_seg,csv,rules)
+function [TP, FP, FN, PA, TC] = compute_stats(img_orig,mask_seg,csv,rules)
 
 %
 % Computes segmentation statistic without considering classification in R,G
@@ -44,29 +44,29 @@ end
 indGroups = []; %only includes groups that will not be ignored [R G Y]
 incY = 0; %was yellow included in R and G countings?
 
-fprintf('Original ground truth (original):\n');
+fprintf('Ground truth (original):\n');
 for g = 1:nGroups
     nPts = length(GT(g).set);
     switch GT(g).rule
         case IG_ %to ignore
-            str = fprintf('Nuclei (#%d)',g);
+            str = sprintf('Nuclei (#%d)',g);
         case R_ %R only
             indGroups(1) = g;
-            str = fprintf('R (#%d)',g);
+            str = sprintf('R (#%d)',g);
         case G_ %G only
             indGroups(2) = g;
-            str = fprintf('G (#%d)',g);
+            str = sprintf('G (#%d)',g);
         case Y_ %Y only
              indGroups(3) = g;
-            str = fprintf('Y( group #%d)',g);
+            str = sprintf('Y (#%d)',g);
         case RY_ %R+Y
             indGroups(1) = g;
             incY = 1;
-            str = fprintf('R+Y (group #%d)',g);
+            str = sprintf('R+Y (#%d)',g);
         case GY_ %G+Y
             indGroups(2) = g;
             incY = 1;
-            str = fprintf('G+Y (group #%d)',g);
+            str = sprintf('G+Y (#%d)',g);
         otherwise %unknown rule
             str = 'Unknown';
     end
@@ -84,9 +84,8 @@ else
     end
 end
 
-fprintf('\nGround truth (clean):\n');
-fprintf('      Num. cells: %d\n',length(gt_set));
-
+fprintf('\nGround truth (clean): ');
+fprintf(' Num. cells: %d\n',length(gt_set));
 
 
 %
@@ -103,7 +102,7 @@ idx_centers = sub2ind([r c],centroids(:,2),centroids(:,1));
 [labels nL] = bwlabel(mask2);
 
 fprintf('\nSegmentation results:\n');
-fprintf(' Total: %d \n',nL);
+fprintf('    Total: %d  ',nL);
 
 %
 % Compute all true positive
@@ -145,6 +144,11 @@ fprintf(' TP: %d ',length(TP));
 fprintf(' FP: %d ',length(FP));
 fprintf(' FN: %d\n',length(FN));
 
+PA = (length(TP)*100)/length(gt_set);
+fprintf('** PA: %f ',PA);
+
+TC = (length(TP) - 0.5*length(FP))/length(gt_set);
+fprintf('  TC: %f **\n',TC);
 end
 
 

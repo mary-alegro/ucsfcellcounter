@@ -1,4 +1,4 @@
-function GT = run_stats(dir_imorig,dir_mask,dir_csv,cnt_rules)
+function stats = run_stats(dir_imorig,dir_mask,dir_csv,cnt_rules)
 
 %
 % DIR_CSV: full dir path of the counted cell csv files. CSV file names must be exactly the same for csv, mask and image files
@@ -24,6 +24,8 @@ end
 
 nFiles = length(cnt_rules);
 
+stats = zeros(nFiles,5);
+nError = 0;
 for i=1:nFiles
     
     cnt_cell = cnt_rules{i};
@@ -32,16 +34,29 @@ for i=1:nFiles
     
     csv_name = strcat(dir_csv,file_name);
     img_name = strcat(dir_imorig,changeExt(file_name,'tif')); %original image
-    mask_name = strcat(dir_mask,'seg3_',changeExt(file_name,'tif'));
+    mask_name = strcat(dir_mask,'seg2_',changeExt(file_name,'tif'));
     
     csv = csvread(csv_name);
     img = imread(img_name);
     mask = imread(mask_name);
     
-    fprintf('-------**** File %s ****------\n',file_name);
+    fprintf('------ **** File %s (%d of %d) **** -----\n',file_name,i,nFiles);
+    try
+        [TP, FP, FN, PA, TC] = compute_stats(img,mask,csv,rule);
+
+        stats(i,1) = length(TP);
+        stats(i,2) = length(FP);
+        stats(i,3) = length(FN);
+        stats(i,4) = PA;
+        stats(i,5) = TC;
+    catch
+        nError = nError + 1;
+        fprintf('### Error in file: %s\n ###',file_name);
+    end
     
-    compute_stats(img,mask,csv,rule);
 end
+
+fprintf('There were %d errors.\n',nError);
 
 end
 
