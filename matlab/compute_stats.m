@@ -1,4 +1,4 @@
-function [TP, FP, FN, PA, TC] = compute_stats(img_orig,mask_seg,csv,rules)
+function [TP, FP, FN, PA, TC, P, Rec, F1] = compute_stats(img_orig,mask_seg,csv,rules)
 
 %
 % Computes segmentation statistic without considering classification in R,G
@@ -43,7 +43,7 @@ end
 
 indGroups = []; %only includes groups that will not be ignored [R G Y]
 incY = 0; %was yellow included in R and G countings?
-
+gr = []; gg = []; gy = [];
 fprintf('Ground truth (original):\n');
 for g = 1:nGroups
     nPts = length(GT(g).set);
@@ -51,20 +51,20 @@ for g = 1:nGroups
         case IG_ %to ignore
             str = sprintf('Nuclei (#%d)',g);
         case R_ %R only
-            indGroups(1) = g;
+            gr = g;
             str = sprintf('R (#%d)',g);
         case G_ %G only
-            indGroups(2) = g;
+            gg = g;
             str = sprintf('G (#%d)',g);
         case Y_ %Y only
-             indGroups(3) = g;
+             gy = g;
             str = sprintf('Y (#%d)',g);
         case RY_ %R+Y
-            indGroups(1) = g;
+            gr = g;
             incY = 1;
             str = sprintf('R+Y (#%d)',g);
         case GY_ %G+Y
-            indGroups(2) = g;
+            gg = g;
             incY = 1;
             str = sprintf('G+Y (#%d)',g);
         otherwise %unknown rule
@@ -73,14 +73,14 @@ for g = 1:nGroups
     
     fprintf(' %s: %d ',str,nPts);
 end
-
+indGroups = [gr gg gy];
 %prune data to remove redundant points
 gt_set = [];
 if incY == 1
         gt_set = delanuay_cluster(img_orig,GT,indGroups);
 else
     for i=2:nGroups
-            gt_set = [gt_set GT(i).set];
+            gt_set = [gt_set; GT(i).set];
     end
 end
 
@@ -145,48 +145,15 @@ fprintf(' FP: %d ',length(FP));
 fprintf(' FN: %d\n',length(FN));
 
 PA = (length(TP)*100)/length(gt_set);
-fprintf('** PA: %f ',PA);
+fprintf('** PA: %f   ',PA);
 
 TC = (length(TP) - 0.5*length(FP))/length(gt_set);
-fprintf('  TC: %f **\n',TC);
-end
+fprintf('  TC: %f   ',TC);
 
-
-
-%
-% Help functions
-%
-
-function csv2 = cleanCSV(csv)
-
-[r c N] = size(csv);
-rows = 1:r;
-toremove = [];
-    for i=1:r
-        if csv(i,2) < 0 || csv(i,3) < 0
-            toremove = [toremove i];
-        end
-    end
-    rows2 = setxor(rows,toremove);
-    csv2 = csv(rows2,:);    
-    
-end
-
-function r = parseRules(rules,group)
-%
-% ex. RULES = {{'00'} {'14'} {'23'}}
-%
-    nG = length(rules);
-    for i=1:nG
-        c = rules{1,i};
-        cc = char(c);
-        g = str2num(cc(1));
-        if g == group
-            r = str2num(cc(2));
-            break;
-        end
-    end
-
+P = length(TP)/(length(TP) + length(FP));
+Rec = length(TP)/(length(TP) + length(FN));
+F1 = (2*P*Rec)/(P+Rec);
+fprintf('Precision: %f   Recal: %f   F1: %f **\n',P,Rec,F1);
 end
 
 

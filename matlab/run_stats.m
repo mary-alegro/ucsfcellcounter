@@ -42,16 +42,20 @@ for i=1:nFiles
     
     fprintf('------ **** File %s (%d of %d) **** -----\n',file_name,i,nFiles);
     try
-        [TP, FP, FN, PA, TC] = compute_stats(img,mask,csv,rule);
+        [TP, FP, FN, PA, TC, P, R, F1] = compute_stats(img,mask,csv,rule);
 
         stats(i,1) = length(TP);
         stats(i,2) = length(FP);
         stats(i,3) = length(FN);
         stats(i,4) = PA;
-        stats(i,5) = TC;
-    catch
+        stats(i,5) = P;
+        stats(i,6) = R;
+        stats(i,7) = F1;
+    catch ME
         nError = nError + 1;
-        fprintf('### Error in file: %s\n ###',file_name);
+        fprintf('\n### Error in file: %s###\n',file_name);
+        msg = getReport(ME);
+        fprintf(msg);
     end
     
 end

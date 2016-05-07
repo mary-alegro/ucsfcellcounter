@@ -1,57 +1,54 @@
-function [Df,Db] = train_dictionary(list_imgs,list_masks)
+function [Df,Db] = train_DL_GT(dir_img, dir_mask, dir_csv, csv_lst)
 
 %
-% Run Dictionary Learning training
-% LIST_IMGS: 
-% LIST_MASKS: 
+% Run Dictionary Learning training. Uses points marked on the PSD file to
+% grab traning patches.
+% DIR_ROOT: full path of the directory where the training images are stored
 % Df = dictionary learned from foreground data
 % Db = dictionary learned from background data
 %
 
-rrate = 0.25;
-wsize = 11;
+if dir_img(end) ~= '/'
+    dir_root = [dir_root '/'];
+end
+
+wsize = 40;
+
+mask_dir = strcat(dir_root,'masks/');
+img_dir = strcat(dir_root,'proc/');
+
+files = dir(strcat(mask_dir,'*_mask.tif'));
+nFiles = length(files);
 
 data = [];
 labels = [];
 
-nFiles = length(list_imgs);
-nMasks = length(list_masks);
-
-if nFiles ~= nMasks
-    error('Number of images and number of masks must agree.');
-end
-
-
-parobj = parpool('local');
+parobj = parpool('local'); 
 
 for f=1:nFiles
     
-    %name = files(f).name;
-    name = char(list_imgs(f));
+    name = files(f).name;
     
     %load mask
-    maskname = char(list_masks(f));
+    maskname = strcat(mask_dir,name);
     mask = imread(maskname);
     [rm cm Nm] = size(mask);
     if Nm > 1
         mask = mask(:,:,1);
     end
     
-    %%% resize mask
-    mask = imresize(mask,rrate);
-     
     %load image
-    img = double(imread(name));
+    idx = strfind(name,'_mask.tif');
+    newname = name(1:idx-1);
+    imgname = strcat(img_dir,newname,'.tif');
+    img = double(imread(imgname));
     
-    %%% resize image
-    img = imresize(img,rrate);
-    
-    R = img(:,:,1); G = img(:,:,2); B = img(:,:,3);
+    R = img(:,:,1); G = img(:,:,2); B = img(:,:,3);  
     R = R./255; G = G./255; B = B./255;
+
     img = cat(3,R,G,B);
     
-    %[data_tmp,labels_tmp] = get_patches(img,mask,wsize,1);
-    [data_tmp,labels_tmp] = get_patches_par_DL(img,mask,wsize,1);
+    [data_tmp,labels_tmp] = get_patches_par_DL_GT(img,mask,wsize,1);
 
     data = cat(1,data,data_tmp);
     clear data_tmp;
@@ -60,8 +57,8 @@ for f=1:nFiles
        
 end
 
-%finish par pool
-delete(parobj);
+    %finish par pool
+ delete(parobj);
 
 
 idxFore = find(labels == 1);
@@ -78,8 +75,8 @@ fprintf('Starting dictionary training.\n');
 
 %train dictionary
 param.K=256;  % learns a dictionary with 100 elements
-param.lambda=0.20;
-param.numThreads=6; % number of threads
+param.lambda=0.15;
+param.numThreads=-1; % number of threads
 param.batchsize=400;
 param.verbose=false;
 param.iter=1000;  % let us see what happens after 1000 iterations.

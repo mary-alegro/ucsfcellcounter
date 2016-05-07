@@ -1,4 +1,4 @@
-function [mask] = seg_dictionary(R,G,B,mask_orig,wsize)
+function [mask,ef,eb] = seg_dictionary(R,G,B,mask_orig,wsize)
 
 
 if isempty(wsize) || wsize == 0
@@ -11,6 +11,10 @@ Df = load(Df_name);
 Df = Df.Df;
 Db = load(Db_name);
 Db = Db.Db;
+De = abs(Db'*Df);
+
+[Ur Uc] = find(De > 0.95);
+U = unique([Ur; Uc]);
 
 if isa(R,'uint16') || isa(R,'double')
     R = gscale(R);
@@ -40,13 +44,13 @@ mask(mask_orig > 0) = 1;
 mask(idx_backB) = 0;
 
 %open parallel pool
-parobj = parpool('local'); 
+%parobj = parpool('local'); 
 
 %train dictionary parameters
 param.K=256;  % learns a dictionary with 100 elements
-param.lambda=0.15;
+param.lambda=0.20;
 %param.lambda2=0.5;
-param.numThreads=6; % number of threads
+param.numThreads=1; % number of threads
 param.batchsize=400;
 param.verbose=false;
 param.mode = 2;
@@ -63,6 +67,8 @@ param.iter=1000;  % let us see what happens after 1000 iterations.
     nFore = length(idxFore);
     mask3 = zeros(size(mask2));
     class_mask3 = zeros(nFore,1);
+    errorB = zeros(nFore,1);
+    errorF = zeros(nFore,1);
     
     fprintf('Running patch sparse coding.\n');
     
@@ -72,6 +78,7 @@ param.iter=1000;  % let us see what happens after 1000 iterations.
 %     B2 = preproc_patch(B2);
     
     parfor p=1:nFore
+    %for p=1:nFore
         
         ii = idxFore(p);
         w1 = getwindowmod(ii,R2,wsize);
@@ -85,8 +92,8 @@ param.iter=1000;  % let us see what happens after 1000 iterations.
         alphaf = mexLasso(x,Df,param);
         alphab = mexLasso(x,Db,param);
         
-        Rf = costDL(Df,x,alphaf,param);
-        Rb = costDL(Db,x,alphab,param);
+        Rf = costDL(Df,U,x,alphaf,param);
+        Rb = costDL(Db,U,x,alphab,param);
         
         %fprintf('Patch #%d. Rf = %f, Rb = %f.\n',p,Rf,Rb);
         
@@ -97,16 +104,25 @@ param.iter=1000;  % let us see what happens after 1000 iterations.
             class_mask3(p) = 100;
         end
         
+        errorB(p) = Rb;
+        errorF(p) = Rf;
+        
     end
     
     %finish par pool
-delete(parobj);
+%delete(parobj);
 
 mask3(idxFore(:)) = class_mask3(:);
 mask3(mask3 < 255) = 0;
 
 mask4 = im2bw(mask3);
 mask4(idx_backB) = 0;
+
+ef = zeros(size(mask4));
+eb = zeros(size(mask4));
+
+ef(idxFore(:)) = errorF(:);
+eb(idxFore(:)) = errorB(:);
 
 mask = mask4;
 

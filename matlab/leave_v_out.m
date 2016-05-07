@@ -18,6 +18,8 @@ idx = 1:nFiles;
 list_imgs = list_imgs(ridx);
 list_masks = list_masks(ridx);
 
+parobj = parpool('local'); 
+
 for b=1:nElem:nFiles %iterate each block
     
     test_idx = b:b+nElem-1;
@@ -37,5 +39,5 @@ for b=1:nElem:nFiles %iterate each block
     
 end
 
-
+delete(parobj);
 
