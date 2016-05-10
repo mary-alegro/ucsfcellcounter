@@ -39,7 +39,7 @@ B2 = double(B);
 
 %clean blue high values (which are holes and artifacts)
 h = imhist(B);
-P = percentile2i(h,0.87);
+P = percentile2i(h,0.80);
 Bmask = im2bw(B,P);
 
 %Bmask(mask_orig == 20) = 1; %ignorar fundo segmentado na mao

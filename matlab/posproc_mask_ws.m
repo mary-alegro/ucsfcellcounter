@@ -93,6 +93,13 @@ imshow(overlay);
 
 mask_final = mask3;
 mask_final(L==0) = 0;
+
+B = img(:,:,3);
+h = imhist(B);
+P = percentile2i(h,0.70);
+Bmask = im2bw(B,P);
+mask_final(Bmask > 0) = 0; 
+
 figure,
 overlay = imoverlay(img,bwperim(mask_final),[0.80 0 0.80]);
 imshow(overlay);
