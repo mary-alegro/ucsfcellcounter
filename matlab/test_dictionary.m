@@ -32,7 +32,7 @@ for f=1:nFiles
     mask = load_mask(namemask,1);
     
     try
-        mask = seg_dictionary(R,G,B,mask,wsize);
+        [mask, Ef, Eb] = seg_dictionary(R,G,B,mask,wsize);
         seg1_name = strcat(seg_dir,'seg1_',name);
         imwrite(mask,seg1_name,'TIFF');
         close all;

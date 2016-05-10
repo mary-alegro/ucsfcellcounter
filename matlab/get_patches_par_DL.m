@@ -8,7 +8,13 @@ function [patches,classes] = get_patches_par_DL(img,mask,ws,incBack)
 %ncores = 6;
 
 idx_fore = find(mask == 100);
-idx_back1 = find(mask == 255);
+
+maskb = zeros(size(mask));
+maskb(mask == 255) = 255;
+se = strel('disk',10);
+maskb = imerode(maskb,se);
+
+idx_back1 = find(maskb == 255);
 nFore = length(idx_fore);
 nBack1 = length(idx_back1);
 

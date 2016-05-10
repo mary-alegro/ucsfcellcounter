@@ -76,7 +76,7 @@ dataBack = dataBack';
 fprintf('Starting dictionary training.\n');
 
 %train dictionary
-param.K=525;  % learns a dictionary with 100 elements
+param.K=500+;  % learns a dictionary with 100 elements
 param.lambda=0.15;
 param.numThreads=6; % number of threads
 param.batchsize=400;

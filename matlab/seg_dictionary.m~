@@ -13,9 +13,9 @@ Db = load(Db_name);
 Db = Db.Db;
 
 %remove highly correlated vectors from our basis dictionary
- De = abs(Db'*Df);
- [Ur Uc] = find(De > 0.90);
- U = unique([Ur; Uc]);
+% De = abs(Db'*Df);
+% [Ur Uc] = find(De > 0.90);
+% U = unique([Ur; Uc]);
 % nV = size(Db,2); %number of vectors
 % vectors = 1:nV;
 % toKeep = setdiff(vectors,U);
@@ -39,7 +39,7 @@ B2 = double(B);
 
 %clean blue high values (which are holes and artifacts)
 h = imhist(B);
-P = percentile2i(h,0.87);
+P = percentile2i(h,0.97);
 Bmask = im2bw(B,P);
 
 %Bmask(mask_orig == 20) = 1; %ignorar fundo segmentado na mao
@@ -131,13 +131,13 @@ eb = zeros(size(mask4));
 ef(idxFore(:)) = errorF(:);
 eb(idxFore(:)) = errorB(:);
 
-E = abs(ef-eb);
+E = abs(Ef-Eb);
 E(mask4 == 0) = 0;
 E2 = gscale(E);
 H = imhist(E2);
 H(1) = 0;
-level = triangle_th(H,256);
-mask = im2bw(E2,level);
+
+mask = mask4;
 
 
 end
