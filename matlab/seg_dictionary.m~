@@ -13,9 +13,9 @@ Db = load(Db_name);
 Db = Db.Db;
 
 %remove highly correlated vectors from our basis dictionary
-% De = abs(Db'*Df);
-% [Ur Uc] = find(De > 0.90);
-% U = unique([Ur; Uc]);
+ De = abs(Db'*Df);
+ [Ur Uc] = find(De > 0.80);
+ U = unique([Ur; Uc]);
 % nV = size(Db,2); %number of vectors
 % vectors = 1:nV;
 % toKeep = setdiff(vectors,U);
@@ -39,7 +39,7 @@ B2 = double(B);
 
 %clean blue high values (which are holes and artifacts)
 h = imhist(B);
-P = percentile2i(h,0.97);
+P = percentile2i(h,0.80);
 Bmask = im2bw(B,P);
 
 %Bmask(mask_orig == 20) = 1; %ignorar fundo segmentado na mao
@@ -54,7 +54,7 @@ mask(idx_backB) = 0;
 %parobj = parpool('local'); 
 
 %train dictionary parameters
-param.K=525;  % learns a dictionary with 100 elements
+param.K=256;  % learns a dictionary with 100 elements
 param.lambda=0.15;
 %param.lambda2=0.5;
 param.numThreads=1; % number of threads
@@ -120,7 +120,7 @@ param.iter=1000;  % let us see what happens after 1000 iterations.
 %delete(parobj);
 
 mask3(idxFore(:)) = class_mask3(:);
-mask3(mask3 < 255) = 0;
+mask3(mask == 0) = 0;
 
 mask4 = im2bw(mask3);
 mask4(idx_backB) = 0;
@@ -131,13 +131,13 @@ eb = zeros(size(mask4));
 ef(idxFore(:)) = errorF(:);
 eb(idxFore(:)) = errorB(:);
 
-E = abs(Ef-Eb);
-E(mask4 == 0) = 0;
+E = abs(ef-eb);
+E(mask == 0) = 0;
 E2 = gscale(E);
 H = imhist(E2);
 H(1) = 0;
-
-mask = mask4;
+level = triangle_th(H,256);
+mask = im2bw(E2,level);
 
 
 end

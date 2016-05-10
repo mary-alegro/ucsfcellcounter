@@ -21,7 +21,7 @@ if nFiles ~= nMasks
     error('Number of images and number of masks must agree.');
 end
 
-parobj = parpool('local');
+%parobj = parpool('local');
 
 for f=1:nFiles
     
@@ -60,7 +60,7 @@ for f=1:nFiles
 end
 
 %finish par pool
-delete(parobj);
+%delete(parobj);
 
 
 idxFore = find(labels == 1);
@@ -76,7 +76,7 @@ dataBack = dataBack';
 fprintf('Starting dictionary training.\n');
 
 %train dictionary
-param.K=525;  % learns a dictionary with 100 elements
+param.K=256;  % learns a dictionary with 100 elements
 param.lambda=0.15;
 param.numThreads=6; % number of threads
 param.batchsize=400;

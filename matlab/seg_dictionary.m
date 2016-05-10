@@ -1,4 +1,4 @@
-function [mask,ef,eb] = seg_dictionary(R,G,B,mask_orig,wsize)
+function [mask_final,ef,eb] = seg_dictionary(R,G,B,mask_orig,wsize)
 
 
 if isempty(wsize) || wsize == 0
@@ -54,7 +54,7 @@ mask(idx_backB) = 0;
 %parobj = parpool('local'); 
 
 %train dictionary parameters
-param.K=525;  % learns a dictionary with 100 elements
+param.K=256;  % learns a dictionary with 100 elements
 param.lambda=0.15;
 %param.lambda2=0.5;
 param.numThreads=1; % number of threads
@@ -137,7 +137,8 @@ E2 = gscale(E);
 H = imhist(E2);
 H(1) = 0;
 level = triangle_th(H,256);
-mask = im2bw(E2,level);
+mask_final = im2bw(E2,level);
+mask_final(mask == 0) = 0;
 
 
 end
