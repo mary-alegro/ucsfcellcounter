@@ -1,4 +1,4 @@
-function mask_final = posproc_mask_ws(img,mask,E)
+function mask_final = posproc_mask_ws(img,mask,Eb,Ef)
 
 mask2 = imfill(mask,'holes');
 se = strel('disk',2);
@@ -6,6 +6,8 @@ mask3 = imopen(mask2,se);
 
 img_gry = rgb2gray(img);
 img_gry = adapthisteq(img_gry);
+
+E = abs(Eb-Ef);
 E = gscale(E);
 
 hy = fspecial('sobel');
@@ -16,6 +18,7 @@ gradmag = sqrt(Ix.^2 + Iy.^2);
  figure,
  imshow(gradmag,[]), title('Gradient magnitude (gradmag)');
 
+ 
 I = img_gry;
 %I(mask3 == 0) = 0;
 
@@ -40,8 +43,7 @@ Iobrcbr = imcomplement(Iobrcbr);
 
 fgm = imregionalmax(Iobrcbr);
 fgm(mask3 == 0) = 0;
-fgm = bwareaopen(fgm,10);
-
+fgm = bwareaopen(fgm,15);
  figure,
  imshow(fgm), title('Regional maxima of opening-closing by reconstruction (fgm)');
 
@@ -73,7 +75,7 @@ bgm = DL == 0;
     imshow(bgm), title('Watershed ridge lines (bgm)')
 
 gradmag2 = imimposemin(gradmag, bgm | fgm4);
-
+bw(mask3 == 0) = 0;
 mdist = bwdist(~mask3);
 
 %gradmag2 = imimposemin(mdist, bgm | fgm4);
@@ -93,13 +95,16 @@ overlay = imoverlay(img,mask_final,[0 1 0]);
 imshow(overlay);
 
 %mask_final = mask3;
-mask_final(L==0) = 0;
+%mask_final(L==0) = 0;
 
-B = img(:,:,3);
-h = imhist(B);
-P = percentile2i(h,0.70);
-Bmask = im2bw(B,P);
-mask_final(Bmask > 0) = 0; 
+% B = img(:,:,3);
+% h = imhist(B);
+% P = percentile2i(h,0.70);
+% Bmask = im2bw(B,P);
+% mask_final(Bmask > 0) = 0; 
+
+% se = strel('disk',3);
+% mask_final = imopen(mask_final,se);
 
 figure,
 overlay = imoverlay(img,bwperim(mask_final),[0.80 0 0.80]);

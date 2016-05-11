@@ -134,6 +134,10 @@ eb(idxFore(:)) = errorB(:);
 E = abs(ef-eb);
 E(mask4 == 0) = 0;
 E2 = gscale(E);
+
+h = fspecial('gaussian',5,4);
+E2 = imfilter(E2,h,'replicate');
+
 H = imhist(E2);
 H(1) = 0;
 level = triangle_th(H,256);
