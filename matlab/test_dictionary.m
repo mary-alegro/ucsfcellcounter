@@ -37,18 +37,21 @@ for f=1:nFiles
         imwrite(mask,seg1_name,'TIFF');
         close all;
 
-        mask2 = posproc_mask_ws(img,mask);
-        seg2_name = strcat(seg_dir,'seg2_',name);
-        imwrite(mask2,seg2_name,'TIFF');
-        close all;
+%         mask2 = posproc_mask_ws(img,mask,Eb,Ef);
+%         seg2_name = strcat(seg_dir,'seg2_',name);
+%         imwrite(mask2,seg2_name,'TIFF');
+%         close all;
+
+        mask2 = mask;
 
         mask3 = posproc_chroma(img,mask2);
         seg3_name = strcat(seg_dir,'seg3_',name);
         imwrite(mask3,seg3_name,'TIFF');
         close all;
-    catch
+    catch ME
         nError = nError + 1;
-        fprintf('*** Exception caught in %s\n.',nameimg);
+        msg = getReport(ME);
+        fprintf(msg);
     end
 end
 

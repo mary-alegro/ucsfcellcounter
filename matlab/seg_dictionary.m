@@ -33,6 +33,9 @@ if size(mask_orig,3) > 1
     mask_orig = mask_orig(:,:,1);
 end
 
+%R = adapthisteq(R);
+%G = adapthisteq(G);
+
 R2 = double(R);
 G2 = double(G);
 B2 = double(B);
@@ -130,18 +133,36 @@ eb = zeros(size(mask4));
 
 ef(idxFore(:)) = errorF(:);
 eb(idxFore(:)) = errorB(:);
-
 E = abs(ef-eb);
 E(mask4 == 0) = 0;
-E2 = gscale(E);
+% E2 = gscale(E);
+% 
+% h = fspecial('gaussian',5,4);
+% E2 = imfilter(E2,h,'replicate');
+% 
+% H = imhist(E2);
+% H(1) = 0;
+% level = triangle_th(H,256);
+% mask_final = im2bw(E2,level);
+% mask_final(mask == 0) = 0;
 
-h = fspecial('gaussian',5,4);
-E2 = imfilter(E2,h,'replicate');
+Req = double(adapthisteq(E));
+Geq = double(adapthisteq(G));
+R2 = Req.*E;
+G2 = Geq.*E;
+RG = R2+G2;
+RG = RG./max(RG(:));
 
-H = imhist(E2);
-H(1) = 0;
-level = triangle_th(H,256);
-mask_final = im2bw(E2,level);
+se = strel('disk',4);
+Ee = imerode(RG,se);
+M = imreconstruct(Ee,E);
+Mc = imcomplement(M);
+Mce = imerode(Mc,se);
+M2 = imcomplement(imreconstruct(Mce,Mc));
+M2 = gscale(M2);
+H = imhist(M2);
+level = percentile2i(H,0.99);
+mask_final = im2bw(M2,level);
 mask_final(mask == 0) = 0;
 
 
