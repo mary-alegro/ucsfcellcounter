@@ -40,7 +40,9 @@ for f=1:nFiles
     mask = imresize(mask,rrate);
  
     %load image
-    img = double(imread(name));
+    img = imread(name);
+    
+    img = double(img);
     
     %%% resize image
     img = imresize(img,rrate);

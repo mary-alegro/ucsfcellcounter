@@ -19,7 +19,7 @@ for g=groups
     C = [C; C1];
 end
 
-MIN_DIST = 30; %minimun edge size
+MIN_DIST = 50; %minimun edge size
 
 %
 % closest pair of points problem: can be solved in O(nlogn) in 2D using

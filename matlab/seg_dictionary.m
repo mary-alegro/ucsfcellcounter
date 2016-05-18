@@ -1,4 +1,4 @@
-function [mask_final,ef,eb] = seg_dictionary(R,G,B,mask_orig,wsize)
+function [mask_final,ef,eb] = seg_dictionary(R,G,B,mask_orig,wsize,T)
 
 
 if isempty(wsize) || wsize == 0
@@ -146,7 +146,7 @@ E(mask4 == 0) = 0;
 % mask_final = im2bw(E2,level);
 % mask_final(mask == 0) = 0;
 
-Req = double(adapthisteq(E));
+Req = double(adapthisteq(R));
 Geq = double(adapthisteq(G));
 R2 = Req.*E;
 G2 = Geq.*E;
@@ -161,7 +161,7 @@ Mce = imerode(Mc,se);
 M2 = imcomplement(imreconstruct(Mce,Mc));
 M2 = gscale(M2);
 H = imhist(M2);
-level = percentile2i(H,0.99);
+level = percentile2i(H,T);
 mask_final = im2bw(M2,level);
 mask_final(mask == 0) = 0;
 

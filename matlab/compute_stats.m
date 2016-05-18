@@ -120,25 +120,26 @@ FP = computeFP(gt_set,labels,idx_centers,nL);
 FN = computeFN(gt_set,mask2);
 
 %%% show image
-SHOW_IMG = 0;
-if SHOW_IMG
+SHOW_IMG = 1;
+if SHOW_IMG == 1
     n = length(indGroups);
     overlay = imoverlay(img_orig,bwperim(mask2),[0 1 0]); 
     imshow(overlay);  hold on,
-    for g=2:n
+    for g=1:n
         gg = indGroups(g);
         [R,C] = ind2sub([r c],GT(gg).set);
         plot(C,R,'wo', 'MarkerSize',20);
     end
+    [R,C] = ind2sub([r c],gt_set);
+    plot(C,R,'bo', 'MarkerSize',20);
     [R,C] = ind2sub([r c],TP);
     plot(C,R,'w*', 'MarkerSize',12);
     [R,C] = ind2sub([r c],FP);
     plot(C,R,'y*', 'MarkerSize',12);
     [R,C] = ind2sub([r c],FN);
     plot(C,R,'m*', 'MarkerSize',12);
-
-    close all;
 end
+%close all;
 
 fprintf(' TP: %d ',length(TP));
 fprintf(' FP: %d ',length(FP));
