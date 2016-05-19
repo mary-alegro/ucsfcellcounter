@@ -42,12 +42,12 @@ for f=1:nFiles
 %         imwrite(mask2,seg2_name,'TIFF');
 %         close all;
 
-        mask2 = mask;
-
-        mask3 = posproc_chroma(img,mask2);
-        seg3_name = strcat(seg_dir,'seg3_',name);
-        imwrite(mask3,seg3_name,'TIFF');
-        close all;
+%         mask2 = mask;
+% 
+%         mask3 = posproc_chroma(img,mask2);
+%         seg3_name = strcat(seg_dir,'seg3_',name);
+%         imwrite(mask3,seg3_name,'TIFF');
+%         close all;
     catch ME
         nError = nError + 1;
         msg = getReport(ME);

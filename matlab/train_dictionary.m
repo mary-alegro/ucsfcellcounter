@@ -41,15 +41,22 @@ for f=1:nFiles
  
     %load image
     img = imread(name);
-    
     img = double(img);
-    
+    R = img(:,:,1); G = img(:,:,2); B = img(:,:,3);
+  
     %%% resize image
     img = imresize(img,rrate);
+    lab = rgb2lab(img);
     
-    R = img(:,:,1); G = img(:,:,2); B = img(:,:,3);
     R = R./255; G = G./255; B = B./255;
-    img = cat(3,R,G,B);
+    
+    L = lab(:,:,1); A = lab(:,:,2); b = lab(:,:,3);
+    L = (L - min(L(:)))/(max(L(:)) - min(L(:)));
+    A = (A - min(A(:)))/(max(A(:)) - min(A(:)));
+    b = (b - min(b(:)))/(max(b(:)) - min(b(:)));
+       
+    %img = cat(3,R,G,B);
+    img = cat(3,L,A,b);
     
     %[data_tmp,labels_tmp] = get_patches(img,mask,wsize,1);
     [data_tmp,labels_tmp] = get_patches_par_DL(img,mask,wsize,1);
