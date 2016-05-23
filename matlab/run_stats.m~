@@ -24,12 +24,11 @@ end
 
 nFiles = length(cnt_rules);
 
-stats = zeros(nFiles,8);
+stats = zeros(nFiles,7);
 nError = 0;
 for i=1:nFiles
-    
-    cnt_tmp = cnt_rules{i};
-    cnt_cell = cnt_tmp{i};
+     
+    cnt_cell = cnt_rules{i};
     file_name = cnt_cell{1,1};
     rule = cnt_cell{1,2};
     
@@ -44,15 +43,15 @@ for i=1:nFiles
     fprintf('------ **** File %s (%d of %d) **** -----\n',file_name,i,nFiles);
     try
         [TP, FP, FN, PA, TC, P, R, F1] = compute_stats(img,mask,csv,rule);
+        close all;
 
         stats(i,1) = length(TP);
         stats(i,2) = length(FP);
         stats(i,3) = length(FN);
-        stats(i,4) = PA;
-        stats(i,5) = P;
-        stats(i,6) = R;
-        stats(i,7) = F1;
-        stats(i,8) = i;
+        stats(i,4) = P;
+        stats(i,5) = R;
+        stats(i,6) = F1;
+        stats(i,7) = i;
     catch ME
         nError = nError + 1;
         fprintf('\n### Error in file: %s###\n',file_name);

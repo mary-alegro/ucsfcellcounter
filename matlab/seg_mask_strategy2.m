@@ -27,10 +27,10 @@ se = strel('disk',3);
 mask_final = zeros(size(mask_orig));
 for i=1:nMasks
     mt = mask_stack(:,:,i);
-    Et = E;
+    Et = E2;
     Et(mt == 0) = 0;
     
-    Ee = imerode(E2,se);
+    Ee = imerode(Et,se);
     M = imreconstruct(Ee,E);
     Mc = imcomplement(M);
     Mce = imerode(Mc,se);

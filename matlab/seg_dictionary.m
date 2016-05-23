@@ -82,9 +82,7 @@ param.iter=1000;  % let us see what happens after 1000 iterations.
     mask2 = uint8(mask);
     mask2(mask2 == 1) = 255;
     mask2(idx_backB) = 0; %don't consider holes
-    
-    %mask2 = 255*ones(size(mask2));
-    
+   
     idxFore = find(mask2 == 255);
     nFore = length(idxFore);
     mask3 = zeros(size(mask2));
@@ -98,6 +96,7 @@ param.iter=1000;  % let us see what happens after 1000 iterations.
 
     lab = rgb2lab(cat(3,R2,G2,B2));
     L = lab(:,:,1); A = lab(:,:,2); b = lab(:,:,3);
+    %normalizes Lab channels to [0,1] range
     L = (L - min(L(:)))/(max(L(:)) - min(L(:)));
     A = (A - min(A(:)))/(max(A(:)) - min(A(:)));
     b = (b - min(b(:)))/(max(b(:)) - min(b(:)));
@@ -106,16 +105,10 @@ param.iter=1000;  % let us see what happens after 1000 iterations.
     %for p=1:nFore
         
         ii = idxFore(p);
-%         w1 = getwindowmod(ii,R2,wsize);
-%         w2 = getwindowmod(ii,G2,wsize);
-%         w3 = getwindowmod(ii,B2,wsize);
-         w1 = getwindowmod(ii,L,wsize);
-         w2 = getwindowmod(ii,A,wsize);
-         w3 = getwindowmod(ii,b,wsize);
+        w1 = getwindowmod(ii,L,wsize);
+        w2 = getwindowmod(ii,A,wsize);
+        w3 = getwindowmod(ii,b,wsize);
 
-        %w = [w1(:); w2(:); w3(:)]; 
-        
-        %x = [w1(:); w2(:)]; 
         x = [w1(:); w2(:); w3(:)]; 
 
         alphaf = mexLasso(x,Df,param);
@@ -123,8 +116,6 @@ param.iter=1000;  % let us see what happens after 1000 iterations.
         
         Rf = costDL(Df,[],x,alphaf,param);
         Rb = costDL(Db,[],x,alphab,param);
-        
-        %fprintf('Patch #%d. Rf = %f, Rb = %f.\n',p,Rf,Rb);
 
         if(Rf < Rb)
             class_mask3(p) = 255;
@@ -157,6 +148,35 @@ mask_final(mask == 0) = 0;
 %mask_final(idx_backB) = 0;
 mask_final = bwareaopen(mask_final,7);
 mask_final = imfill(mask_final,'holes');
+
+%checks if there is any excessively large structure 
+rprops = regionprops(mask_final,'Area');
+[labels nL] = bwlabel(mask_final);
+nR = length(rprops);
+areas = cat(1,rprops.Area);
+u = mean(areas);
+s = std(areas);
+
+%iA = find(areas > u+2*s);%large areas that need to be resegmented
+iA = find(areas > 1400);
+
+if ~isempty(iA) 
+    nA = length(iA); 
+    [r c N] = size(R);
+    mask_stack = zeros(r,c,nA);
+    for n=1:nA
+        l = iA(n);
+        tmp_m = labels;
+        tmp_m(tmp_m ~= l) = 0;
+        tmp_m = logical(tmp_m);
+        mask_final(tmp_m == 1) = 0; %removes region from final mask
+        mask_stack(:,:,n) = tmp_m(:,:);
+    end
+
+    T = 0.97;
+    mask_tmp = seg_mask_strategy2(cat(3,R,G,B),mask_orig,mask_stack,Eb,Ef,T);
+    mask_final = mask_final | mask_tmp; %puts regions back into final mask
+end
 
 end
 
