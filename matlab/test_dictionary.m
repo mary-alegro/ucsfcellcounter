@@ -32,29 +32,28 @@ for f=1:nFiles
     mask = load_mask(namemask,1);
     
     try
-        %[mask, Ef, Eb] = seg_dictionary(R,G,B,mask,wsize);
-        seg1_name = strcat(seg_dir,'seg1_',name);
-        %imwrite(mask,seg1_name,'TIFF');
-        %close all;
-
-%         mask2 = posproc_mask_ws(img,mask,Eb,Ef);
-%         seg2_name = strcat(seg_dir,'seg2_',name);
-%         imwrite(mask2,seg2_name,'TIFF');
+            %segmentation
+%         [mask, Ef, Eb] = seg_dictionary(R,G,B,mask,wsize);
+         seg1_name = strcat(seg_dir,'seg1_',name);
+%         imwrite(mask,seg1_name,'TIFF');
 %         close all;
 
-         mask_seg = imread(seg1_name);
-         mask2 = posproc_mask(img,mask_seg,mask);
+            %mask refinement
+%          mask_seg = imread(seg1_name);
+%          mask_seg = posproc_mask(img,mask_seg,mask);
+%          mask2 = posproc_mask_ws_old(img,mask_seg);
+%          seg2_name = strcat(seg_dir,'seg2_',name);
+%          imwrite(mask2,seg2_name,'TIFF');
+%          close all;
+
+
+         %classification
          seg2_name = strcat(seg_dir,'seg2_',name);
-         imwrite(mask2,seg2_name,'TIFF');
+         mask2 = imread(seg2_name);
+         mask3 = posproc_chroma(img,mask2);
+         seg3_name = strcat(seg_dir,'seg3_',name);
+         imwrite(mask3,seg3_name,'TIFF');
          close all;
-
-
-%         mask2 = mask;
-% 
-%         mask3 = posproc_chroma(img,mask2);
-%         seg3_name = strcat(seg_dir,'seg3_',name);
-%         imwrite(mask3,seg3_name,'TIFF');
-%         close all;
     catch ME
         nError = nError + 1;
         msg = getReport(ME);

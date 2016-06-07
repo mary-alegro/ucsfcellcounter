@@ -1,8 +1,11 @@
-function mask_final = posproc_mask_ws(img,mask)
+function mask_final = posproc_mask_ws_old(img,mask)
+
 
 mask2 = imfill(mask,'holes');
+
 se = strel('disk',2);
-mask3 = imopen(mask2,se);
+%mask3 = imopen(mask2,se);
+mask3 = imdilate(mask2,se);
 
 img_gry = rgb2gray(img);
 img_gry = adapthisteq(img_gry);
@@ -93,11 +96,11 @@ imshow(overlay);
 mask_final = mask3;
 mask_final(L==0) = 0;
 
-B = img(:,:,3);
-h = imhist(B);
-P = percentile2i(h,0.70);
-Bmask = im2bw(B,P);
-mask_final(Bmask > 0) = 0; 
+% B = img(:,:,3);
+% h = imhist(B);
+% P = percentile2i(h,0.70);
+% Bmask = im2bw(B,P);
+% mask_final(Bmask > 0) = 0; 
 
 figure,
 overlay = imoverlay(img,bwperim(mask_final),[0.80 0 0.80]);

@@ -34,7 +34,8 @@ for i=1:nFiles
     
     csv_name = strcat(dir_csv,file_name);
     img_name = strcat(dir_imorig,changeExt(file_name,'tif')); %original image
-    mask_name = strcat(dir_mask,'seg1_',changeExt(file_name,'tif'));
+    mask_name = strcat(dir_mask,'seg2_',changeExt(file_name,'tif'));
+    TP_name = strcat(dir_mask,'TP_',changeExt(file_name,'tif'));
     
     csv = csvread(csv_name);
     img = imread(img_name);
@@ -42,7 +43,7 @@ for i=1:nFiles
     
     fprintf('------ **** File %s (%d of %d) **** -----\n',file_name,i,nFiles);
     try
-        [TP, FP, FN, PA, TC, P, R, F1] = compute_stats(img,mask,csv,rule);
+        [TP, FP, FN, PA, TC, P, R, F1,TP_mask] = compute_stats(img,mask,csv,rule);
         close all;
 
         stats(i,1) = length(TP);
@@ -52,6 +53,9 @@ for i=1:nFiles
         stats(i,5) = R;
         stats(i,6) = F1;
         stats(i,7) = i;
+        
+        imwrite(TP_mask,TP_name,'TIFF');
+        
     catch ME
         nError = nError + 1;
         fprintf('\n### Error in file: %s###\n',file_name);

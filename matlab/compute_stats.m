@@ -1,4 +1,4 @@
-function [TP, FP, FN, PA, TC, P, Rec, F1] = compute_stats(img_orig,mask_seg,csv,rules)
+function [TP, FP, FN, PA, TC, P, Rec, F1, TP_mask] = compute_stats(img_orig,mask_seg,csv,rules)
 
 %
 % Computes segmentation statistic without considering classification in R,G
@@ -108,6 +108,12 @@ fprintf('    Total: %d  ',nL);
 % Compute all true positive
 %
 TP = computeTP(gt_set,labels,idx_centers,nL);
+TP_mask = zeros(r,c);
+nTP = length(TP);
+for tp = 1:nTP
+    label = find(idx_center == TP(tp));
+    TP_mask(labels == label) = 1;
+end
 
 %
 % Compute all false positive
