@@ -1,9 +1,12 @@
-function  test_dictionary(list_imgs,list_masks,seg_dir)
+function  test_dictionary(list_imgs,list_masks,seg_dir,orig_mask_dir)
 
 if seg_dir(end) ~= '/'
     seg_dir = [seg_dir '/'];
 end
 
+if orig_mask_dir(end) ~= '/'
+    orig_mask_dir = [orig_mask_dir '/'];
+end
 
 nFiles = length(list_imgs);
 nMasks = length(list_masks);
@@ -26,10 +29,15 @@ for f=1:nFiles
     idx  = idx(end);
     name = nameimg(idx+1:end);
     
+    namemask_orig = strcat(orig_mask_dir,name);
     namemask = char(list_masks(f));
 
     [img, R, G, B] = load_img(nameimg,1);
     mask = load_mask(namemask,1);
+    mask_orig = imread(namemask_orig);
+    if size(mask_orig,3) > 1
+        mask_orig = mask_orig(:,:,1);
+    end
     
     try
             %segmentation
@@ -50,7 +58,8 @@ for f=1:nFiles
          %classification
          seg2_name = strcat(seg_dir,'seg2_',name);
          mask2 = imread(seg2_name);
-         mask3 = posproc_chroma(img,mask2);
+         %mask3 = posproc_chroma(img,mask2);
+         mask3 = posproc_classify(img,mask2,mask_orig);
          seg3_name = strcat(seg_dir,'seg3_',name);
          imwrite(mask3,seg3_name,'TIFF');
          close all;

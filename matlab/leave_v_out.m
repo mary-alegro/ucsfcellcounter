@@ -5,6 +5,7 @@ nFiles = length(list_imgs);
 nMasks = length(list_masks);
 
 seg_dir = '/home/maryana/storage/Posdoc/Microscopy/images/toprocess/seg';
+orig_mask_dir = '/home/maryana/storage/Posdoc/Microscopy/images/toprocess/masks';
 
 if nFiles ~= nMasks
     error('Leave-v-out: Number of images and number of masks must agree.');
@@ -37,7 +38,7 @@ for b=1:nElem:nFiles %iterate each block
         %train_dictionary(train_imgs,train_masks);
 
         %segmentation by sparse coding
-        test_dictionary(test_imgs,test_masks,seg_dir);
+        test_dictionary(test_imgs,test_masks,seg_dir,orig_mask_dir);
     catch ME
         nError = nError + 1;
         msg = getReport(ME);
