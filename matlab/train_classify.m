@@ -1,54 +1,25 @@
-function [red, green, yellow] = train_cell_classify(dir_imorig,dir_csv,doBal)
-
-
-if dir_imorig(end) ~= '/'
-    dir_imorig = [dir_imorig '/'];
-end
-
-if dir_csv(end) ~= '/'
-    dir_csv = [dir_csv '/'];
-end
+function samples = train_classify(GD)
 
 wsize = 5;
 
-files = dir(strcat(dir_imorig,'*.tif'));
-nFiles = length(files);
-
-red = [];
-green = [];
-yellow = [];
+nFiles = length(GD);
 
 for i=1:nFiles
     
-    gcsv =[];
-    rcsv = [];
-    ycsv = [];
-    
-    file_name = files(i).name;
+    red = [];
+    green = [];
+    yellow = [];
+
+    file_name = GD(i).img_file;
+    dir_imorig = GD(i).img_dir;
+    img = imread(strcat(dir_imorig,file_name));
     
     fprintf('Image %d: %s.\n',i,file_name);
-    
-    img = imread(strcat(dir_imorig,file_name));
-    green_name = strcat(dir_csv,'green_',changeExt(file_name,'txt'));
-    red_name = strcat(dir_csv,'red_',changeExt(file_name,'txt'));
-    yellow_name = strcat(dir_csv,'yellow_',changeExt(file_name,'txt'));
-    
-    try
-        gcsv = csvread(green_name);
-    catch
-        fprintf('%s not found.\n',green_name);
-    end
-    try
-        rcsv = csvread(red_name);
-    catch
-        fprintf('%s not found.\n',red_name);
-    end
-    try
-        ycsv = csvread(yellow_name);
-    catch
-        fprintf('%s not found.\n',yellow_name);
-    end
-    
+
+    gcsv = GD(i).green;
+    rcsv = GD(i).red;
+    ycsv = GD(i).yellow;
+
     [R C N] = size(img);
     lab = rgb2lab(img);
     %lab = rgb2hsv(img);
@@ -112,18 +83,12 @@ for i=1:nFiles
             yellow = cat(1,yellow,w); 
         end
     end
-
-end
-
-if doBal == 1 %balance data set
-    nG = size(green,1);
-    nR = size(red,1);
-    nY = size(yellow,1);   
     
-    nSamp = min([nG nR nY]);
-    idx = randperm(nSamp);
-    green = green(idx,:);
-    red = red(idx,:);
-    yellow = yellow(idx,:);
+    samples(i).yellow = yellow;
+    samples(i).red = red;
+    samples(i).green = green;
+
 end
+
+
 

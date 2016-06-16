@@ -1,6 +1,8 @@
-function mask_class = posproc_classify(img,mask,mask_orig)
+function [mask_class mask_class1 mask_class2 mask_class3] = posproc_classify(img,mask,mask_orig,samples)
 
-[r c o] = size(mask);
+[red green yellow] = pack_samples(samples);
+
+[r c N] = size(mask);
 [labels nL] = bwlabel(mask);
 mask_orig = imresize(mask_orig,[r c]);
 
@@ -25,10 +27,10 @@ dE = sqrt(dL .^ 2 + dA .^ 2 + dB .^ 2);
 b_dE = mat2gray(dE);
 b_dE = im2double(b_dE); %background lab delta map
 
-%reference LAB points
-labR = lab_R(); %[L A B]
-labG = lab_G();
-labY = lab_Y();
+%normalizes Lab channels to [0,1] range
+L = (L - min(L(:)))/(max(L(:)) - min(L(:)));
+A = (A - min(A(:)))/(max(A(:)) - min(A(:)));
+B = (B - min(B(:)))/(max(B(:)) - min(B(:)));
 
 tmp_mask = zeros(r,c);
 mask_class1 = zeros(r,c);
@@ -52,50 +54,63 @@ for l = 1:nL
     
     tmp_mask(idx) = 1;
     
-    %ll = L(idx);
+    ll = L(idx);
     aa = A(idx);
     bb = B(idx);
     
-    %ml = mean(ll);
-    ma = mean(aa);
-    mb = mean(bb);
+    P = [mean(ll) mean(aa) mean(bb)];
+
+    D(1) = mahal(P,red);
+    D(2) = mahal(P,green);
+    D(3) = mahal(P,yellow);
+   
+    C = find(D == min(D));
     
-    D(1) = sqrt((labR(2)-ma)^2 + (labR(3)-mb)^2); %distance from RED
-    D(2) = sqrt((labG(2)-ma)^2 + (labG(3)-mb)^2); %distance from GREEN
-    D(3) = sqrt((labY(2)-ma)^2 + (labY(3)-mb)^2); %distance from YELLOW
-    
-    [mind class] = min(D);
-    
-    if class == 1 %RED
+    if C == 1 %RED
         mask_class1(m_bkp == 1) = 90;
         mask_class(m_bkp == 1) = 90;
-    elseif class == 2 %GREEN
-        mask_class2(m_bkp == 1) = 120;
-        mask_class(m_bkp == 1) = 120;
-    elseif class == 3 %YELLOW
-        mask_class3(m_bkp == 1) = 200;
-        mask_class(m_bkp == 1) = 200;
+    elseif C == 2 %GREEN
+        mask_class2(m_bkp == 1) = 190;
+        mask_class(m_bkp == 1) = 190;
+    else %BLUE
+        mask_class3(m_bkp == 1) = 250;
+        mask_class(m_bkp == 1) = 250;
     end
-    
-
+   
 end
 
 masks = cat(3,bwperim(mask_class1),bwperim(mask_class2),bwperim(mask_class3));
 colors = cat(1,[1 0 0],[0 1 0],[1 1 0]);
 overlay = imoverlaymult(img, masks, colors); imshow(overlay);
 
-
 end
 
 
-function p = lab_R()
-    p = rgb2lab([255 127 0]);
+%
+% Helper functions
+%
+function [red green yellow] = pack_samples(samples)
+
+    nFiles = length(samples);
+    red = [];
+    green = [];
+    yellow = [];
+
+    for i=1:nFiles
+        red = cat(1,red,samples(i).red);
+        green = cat(1,green,samples(i).green);
+        yellow = cat(1,yellow,samples(i).yellow);
+    end
+
+    %balance data
+    nG = size(green,1);
+    nR = size(red,1);
+    nY = size(yellow,1);   
+    nSamp = min([nG nR nY]);
+    idx = randperm(nSamp);
+    green = green(idx,:);
+    red = red(idx,:);
+    yellow = yellow(idx,:);
+    
 end
 
-function p = lab_G()
-    p = rgb2lab([127 255 0]);
-end
-
-function p = lab_Y()
-    p = rgb2lab([255 255 0]);
-end

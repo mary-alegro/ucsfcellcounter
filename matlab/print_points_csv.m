@@ -12,7 +12,7 @@ pts_y = csv(idx,2:3);
 
 imshow(img); 
 hold on
-%plot(pts_b(:,1),pts_b(:,2),'w*','MarkerSize', 10);
+plot(pts_b(:,1),pts_b(:,2),'w*','MarkerSize', 10);
 plot(pts_r(:,1),pts_r(:,2),'r*','MarkerSize', 10);
 plot(pts_g(:,1),pts_g(:,2),'g*','MarkerSize', 10);
 plot(pts_y(:,1),pts_y(:,2),'y*','MarkerSize', 10);
