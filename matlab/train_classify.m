@@ -14,7 +14,7 @@ for i=1:nFiles
     dir_imorig = GD(i).img_dir;
     img = imread(strcat(dir_imorig,file_name));
     
-    fprintf('Image %d: %s.\n',i,file_name);
+    %fprintf('Image %d: %s.\n',i,file_name);
 
     gcsv = GD(i).green;
     rcsv = GD(i).red;

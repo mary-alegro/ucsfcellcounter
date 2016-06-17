@@ -6,9 +6,7 @@ function [mask_class mask_class1 mask_class2 mask_class3] = posproc_classify(img
 [labels nL] = bwlabel(mask);
 mask_orig = imresize(mask_orig,[r c]);
 
-if size(mask_orig,3) > 1
-    mask_orig = mask_orig(:,:,1);
-end
+if size(mask_orig,3) 
 
 back_mask = ones(size(mask));
 back_mask(mask == 1) = 0; %remove cells

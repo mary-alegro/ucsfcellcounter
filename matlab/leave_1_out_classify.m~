@@ -4,14 +4,19 @@ function stats = leave_1_out_classify(GT)
 % Test cell classification
 %
 
-SHOW = 0;
+SHOW = 1;
 
 nFiles = length(GT);
+
+rnd_idx = randperm(nFiles);
+GT = GT(rnd_idx);
+
 idx_all = 1:nFiles;
+
 
 stats = [];
 for i=1:nFiles
-    
+
     %skip files that don't have ground truth data, they can't be
     %validated
     if isempty(GT(i).red) && isempty(GT(i).red) && isempty(GT(i).red) 
@@ -20,7 +25,7 @@ for i=1:nFiles
     
     file_name = GT(i).img_file;
     
-    fprintf('*** Processing (%d): %s ***\n',i,file_name);
+    fprintf('Processing (%d): %s\n',i,file_name);
     
     img_name = strcat(GT(i).img_dir,file_name);
     mask_name = strcat(GT(i).seg_dir,'seg2_',file_name);
@@ -38,9 +43,9 @@ for i=1:nFiles
 
     idx = setdiff(idx_all,i);
     GT_train = GT(idx);
-    samples = train_classify(GT_train);
-    %samples=load('samples.mat');
-    %samples = samples.samples;
+    %samples = train_classify(GT_train);
+    samples=load('samples.mat');
+    samples = samples.samples;
     
     %run classification
     [mask_class mask_class1 mask_class2 mask_class3] = posproc_classify(img,mask,mask_orig,samples);
@@ -81,6 +86,7 @@ for i=1:nFiles
             %hold on,
             plot(c_RC,r_RC,'mo','MarkerSize', 10);
             plot(c_WC,r_WC,'ro','MarkerSize', 10);
+            close all;
         end
     end
     
@@ -93,8 +99,6 @@ for i=1:nFiles
     
     stat = [total RC WC];
     stats = cat(1,stats,stat);
-    
-    
       
 end
 

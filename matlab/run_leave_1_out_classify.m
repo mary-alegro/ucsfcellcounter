@@ -1,7 +1,9 @@
-dir_img = '/Volumes/SUSHI_HD/SUSHI/CellCounter/toprocess/images/';
-dir_csv = '/Volumes/SUSHI_HD/SUSHI/CellCounter/ground_truth_psd/csv/';
-dir_mask_orig = '/Volumes/SUSHI_HD/SUSHI/CellCounter/toprocess/masks/';
-dir_seg = '/Volumes/SUSHI_HD/SUSHI/CellCounter/toprocess/seg/';
+function stats = run_leave_1_out_classify()
+
+dir_img = '/home/maryana/storage/Posdoc/Microscopy/images/toprocess/images/';
+dir_csv = '/home/maryana/storage/Posdoc/Microscopy/images/csv/';
+dir_mask_orig = '/home/maryana/storage/Posdoc/Microscopy/images/toprocess/masks/';
+dir_seg = '/home/maryana/storage/Posdoc/Microscopy/images/toprocess/seg/';
 
 count_images(1) = {'11477.13_104_drn_final.tif'};
 count_images(2) = {'11477.13_112_drn_final.tif'};
@@ -52,3 +54,8 @@ count_images(46) = {'p2540_74_drn.tif'};
 count_images(47) = {'p2540_82_drn.tif'};
 count_images(48) = {'p2540_90_drn-f.tif'};
 count_images(49) = {'p2540_98_drn-f.tif'};
+
+
+GT = load_ground_truth(dir_img,dir_csv,dir_seg,dir_mask_orig,count_images);
+
+stats = leave_1_out_classify(GT);
