@@ -25,9 +25,14 @@ nError = 0;
 for b=1:nElem:nFiles %iterate each block
     
     try
-        test_idx = b:b+nElem-1;
+        test_idx = b:b+nElem-1; 
         train_idx = setdiff(idx,test_idx);
 
+        
+        
+        
+        %test_idx = 11;
+        
         test_imgs = list_imgs(test_idx);
         test_masks = list_masks(test_idx);
 

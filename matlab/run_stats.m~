@@ -13,7 +13,9 @@ nError = 0;
 FID = fopen('counter_segstats.txt','w');
 
 for i=1:nFiles
-
+    
+    i = 11;
+     
     currGT = GT(i); % current file ground truth data
     file_name = GT(i).img_file;
     

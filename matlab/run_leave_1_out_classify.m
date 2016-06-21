@@ -59,3 +59,5 @@ count_images(49) = {'p2540_98_drn-f.tif'};
 GT = load_ground_truth(dir_img,dir_csv,dir_seg,dir_mask_orig,count_images);
 
 stats = leave_1_out_classify(GT);
+
+save('counter_classtats.mat', 'stats');

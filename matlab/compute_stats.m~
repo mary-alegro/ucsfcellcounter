@@ -7,21 +7,7 @@ SHOW_IMG = 1;
 % %%% GROUND TRUTH
 %
 fprintf('Ground truth (original):\n');
-r_set = [];
-g_set = [];
-y_set = [];
-
-if ~isempty(GT.red)
-    r_set = GT.red(:,5);
-end
-if ~isempty(GT.green)
-    g_set = GT.green(:,5);
-end
-if ~isempty(GT.yellow)
-    y_set = GT.yellow(:,5);
-end
-
-gt_set = cat(1,r_set,g_set,y_set);
+gt_set = cat(1,GT.red(:,5),GT.green(:,5),GT.yellow(:,5));
 Total = length(gt_set);
 nRed = size(GT.red,1);
 nGreen = size(GT.green,1);
@@ -90,8 +76,8 @@ P = nTP/(nTP + nFP);
 Rec = nTP/(nTP + nFN);
 F1 = (2*P*Rec)/(P+Rec);
 
-fprintf('*** Total: %d     TP rate: %f    FP rate: %f    FN rate: %f ***\n',Total, nTP/Total, nFP/Total, nFN/Total);
-fprintf('*** PRECISION: %f    RECALL: %f    F1: %f ***\n',P,Rec,F1);
+fprintf('FP rate: %f    FN')
+fprintf('PRECISION: %f   RECALL: %f   F1: %f **\n',P,Rec,F1);
 end
 
 
