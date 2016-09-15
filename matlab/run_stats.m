@@ -31,12 +31,13 @@ for i=1:nFiles
     fprintf('------ **** File %s (%d of %d) **** -----\n',file_name,i,nFiles);
     fprintf(FID,'\n**** File %s (%d of %d) ****\n',file_name,i,nFiles);
     try
-        [T,TP, FP, FN, P, R, F1,] = compute_stats(img,mask,currGT);
+        %[T,TP, FP, FN, P, R, F1,] = compute_stats(img,mask,currGT);
+        [T,nTP, nFP, nFN, P, R, F1,] = compute_stats(img,mask,currGT);
         close all;
         
-        nTP = length(TP);
-        nFP = length(FP);
-        nFN = length(FN);
+%         nTP = length(TP);
+%         nFP = length(FP);
+%         nFN = length(FN);
 
         stats(i,1) = T;
         stats(i,2) = nTP;

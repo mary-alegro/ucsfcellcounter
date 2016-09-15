@@ -4,7 +4,7 @@ function stats = leave_1_out_classify(GT)
 % Test cell classification
 %
 
-SHOW = 0;
+SHOW = 1;
 
 nFiles = length(GT);
 idx_all = 1:nFiles;
@@ -38,13 +38,13 @@ for i=1:nFiles
 
     idx = setdiff(idx_all,i);
     GT_train = GT(idx);
-    samples = train_classify(GT_train);
-    %samples=load('samples.mat');
-    %samples = samples.samples;
+    %samples = train_classify(GT_train);
+    samples=load('samples.mat');
+    samples = samples.samples;
     
     %run classification
-    [mask_class mask_class1 mask_class2 mask_class3] = posproc_classify(img,mask,mask_orig,samples);
-    imwrite(mask_class,out_name);
+    %[mask_class mask_class1 mask_class2 mask_class3] = posproc_classify(img,mask,mask_orig,samples);
+    %imwrite(mask_class,out_name);
     
     if SHOW == 1
         display = 1;

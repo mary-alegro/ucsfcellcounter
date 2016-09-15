@@ -1,4 +1,5 @@
-function [Total, TP, FP, FN, P, Rec, F1] = compute_stats(img_orig,mask_seg,GT)
+%function [Total, TP, FP, FN, P, Rec, F1] = compute_stats(img_orig,mask_seg,GT)
+function [Total, nTP, nFP, nFN, P, Rec, F1] = compute_stats(img_orig,mask_seg,GT)
 
 SHOW_IMG = 1;
 [r c N] = size(img_orig);
@@ -80,7 +81,10 @@ if SHOW_IMG == 1
 end
 %close all;
 
-nTP = length(TP); nFP = length(FP); nFN = length(FN);
+nTP = length(TP); 
+nFN = length(FN);
+%nFP = length(FP);
+nFP = nL - (nTP+nFN);
 fprintf('TP: %d ',nTP);
 fprintf('FP: %d ',nFP);
 fprintf('FN: %d\n',nFN);

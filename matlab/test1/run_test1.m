@@ -1,4 +1,6 @@
-function stats = run_leave_1_out_classify()
+
+%Compares our ground truth with masks created using the methods described
+%in "Automatic cell counting with ImageJ"
 
 root_dir = '/Volumes/SUSHI_HD/SUSHI/CellCounter/';
 %root_dir = '/home/maryana/storage/Posdoc/Microscopy/images/'
@@ -6,6 +8,9 @@ dir_img = strcat(root_dir,'toprocess/images/');
 dir_csv = strcat(root_dir,'toprocess/csv/');
 dir_mask_orig = strcat(root_dir,'toprocess/masks/');
 dir_seg = strcat(root_dir,'toprocess/seg/');
+
+test1_mask = strcat(root_dir,'/toprocess/tests/test1/processed_images/');
+drn_dir = strcat(root_dir,'/toprocess/masks/');
 
 count_images(1) = {'11477.13_104_drn_final.tif'};
 count_images(2) = {'11477.13_112_drn_final.tif'};
@@ -57,9 +62,48 @@ count_images(47) = {'p2540_82_drn.tif'};
 count_images(48) = {'p2540_90_drn-f.tif'};
 count_images(49) = {'p2540_98_drn-f.tif'};
 
-
 GT = load_ground_truth(dir_img,dir_csv,dir_seg,dir_mask_orig,count_images);
 
-stats = leave_1_out_classify(GT);
+nFiles = length(count_images);
+stats = zeros(nFiles,8);
+for i=1:nFiles
+    currGT = GT(i); % current file ground truth data
+    file_name = GT(i).img_file;
+    
+    img = imread(strcat(dir_img,file_name)); %load img
+    
+    mr = imread(strcat(test1_mask,'red_mask_',file_name)); %load red mask
+    mg = imread(strcat(test1_mask,'green_mask_',file_name)); %load green mask
+    mask = (mr | mg); %create one single mask
+    
+    drn = imread(strcat(drn_dir,file_name));
+    mask(drn <= 0) = 0; %removes everything outside the DRN region
+    
+    fprintf('------ **** File %s (%d of %d) **** -----\n',file_name,i,nFiles);
+    try
+        [T,TP, FP, FN, P, R, F1,] = compute_stats(img,mask,currGT);
+        close all;
+        
+        nTP = length(TP);
+        nFP = length(FP);
+        nFN = length(FN);
 
-save('counter_classtats.mat', 'stats');
+        stats(i,1) = T;
+        stats(i,2) = nTP;
+        stats(i,3) = nFP;
+        stats(i,4) = nFN;
+        stats(i,5) = P;
+        stats(i,6) = R;
+        stats(i,7) = F1;
+        stats(i,8) = i;
+  
+    catch ME
+        fprintf('\n### Error in file: %s###\n',file_name);
+        fprintf(FID,'\n### Error in file: %s###\n',file_name);
+    end 
+    
+end
+
+save('stats.mat','stats')
+
+

@@ -1,9 +1,11 @@
 function stats = run_run_stats
 
-dir_img = '/home/maryana/storage/Posdoc/Microscopy/images/toprocess/images/';
-dir_csv = '/home/maryana/storage/Posdoc/Microscopy/images/csv/';
-dir_mask_orig = '/home/maryana/storage/Posdoc/Microscopy/images/toprocess/masks/';
-dir_seg = '/home/maryana/storage/Posdoc/Microscopy/images/toprocess/seg/';
+root_dir = '/Volumes/SUSHI_HD/SUSHI/CellCounter/';
+%root_dir = '/home/maryana/storage/Posdoc/Microscopy/images/'
+dir_img = strcat(root_dir,'toprocess/images/');
+dir_csv = strcat(root_dir,'toprocess/csv/');
+dir_mask_orig = strcat(root_dir,'toprocess/masks/');
+dir_seg = strcat(root_dir,'toprocess/seg/');
 
 count_images(1) = {'11477.13_104_drn_final.tif'};
 count_images(2) = {'11477.13_112_drn_final.tif'};
@@ -15,7 +17,7 @@ count_images(7) = {'3598.14_82_Merged_DRN.tif'};
 count_images(8) = {'3598.14_90_DRN.tif'};
 count_images(9) = {'4453.13_102_drn.tif'};
 count_images(10) = {'4453.13_86_drn.tif'};
-count_images(11) = {'4453.13_94_drn_v2.tif'};
+count_images(11) = {'4453.13_94_drn.tif'};
 count_images(12) = {'6785.13_72_drn.tif'};
 count_images(13) = {'6785.13_80_drn.tif'};
 count_images(14) = {'6785.13_88_drn.tif'};
