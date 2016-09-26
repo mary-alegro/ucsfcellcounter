@@ -1,0 +1,15 @@
+function split_channels
+
+%root_dir = '/Volumes/SUSHI_HD/SUSHI/CellCounter/';
+root_dir = '/home/maryana/storage/Posdoc/Microscopy/images/';
+dir_img = strcat(root_dir,'toprocess/images/');
+dir_csv = strcat(root_dir,'toprocess/csv/');
+dir_mask_orig = strcat(root_dir,'toprocess/masks/');
+dir_seg = strcat(root_dir,'toprocess/seg/');
+
+test4_mask = strcat(root_dir,'toprocess/tests_paper/test4/masks/');
+test4_chan = strcat(root_dir,'toprocess/tests_paper/test4/channel/');
+drn_dir = strcat(root_dir,'toprocess/masks/');
+
+
+files = dir(strcat(test4))
