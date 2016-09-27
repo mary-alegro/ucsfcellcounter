@@ -1,5 +1,9 @@
-function [Total, nTP, nFP, nFN, P, Rec, F1] = compute_stats_delanuay(img_orig,seg_set,GT)
+function [Total, nTP, nFP, nFN, P, Rec, F1] = compute_stats_delanuay(img_orig,seg_set,GT,mask)
 
+%
+% Computer segmentation statistics using Delanuay to find the distance
+% between cell centroids
+%
 %
 % IMG_ORIG: original image
 % SEG_SET: segmented cells centroids, in INDICE form
@@ -31,22 +35,23 @@ if ~isempty(GT.yellow)
 end
 
 gt_set = cat(1,r_set,g_set,y_set);
-[sR,sC,gt_set,rmvR, rmvC] = delanuay_threshold(img_orig,gt_set,FILTER_DIST); 
+%[sR,sC,gt_set,rmvR, rmvC] = delanuay_threshold(img_orig,gt_set,FILTER_DIST,mask); 
 Total = length(gt_set);
 % nRed = size(GT.red,1);
 % nGreen = size(GT.green,1);
 % nYellow = size(GT.yellow,1);
 % fprintf('    Red: %d | Green: %d | Yellow: %d\n',nRed,nGreen,nYellow);
+fprintf('Ground truth results:\n');
 fprintf('    TOTAL: %d\n',Total);
 
 %
 %%% Process segmented set
 %
-Total_s = length(seg_set);
+%Total_s = length(seg_set);
+[seg_R,seg_C,seg_set_f,rmvR,rmvC] = delanuay_threshold(img_orig,seg_set,20,mask); 
+Total_s = length(seg_set_f);
 fprintf('Segmentation results:\n');
 fprintf('    TOTAL: %d  ',Total_s);
-[seg_R,seg_C,seg_set_f,rmvR,rmvC] = delanuay_threshold(img_orig,seg_set,FILTER_DIST); 
-
 
 %
 % Compute all true positive
@@ -64,6 +69,8 @@ nTP = length(TP);
 % Compute all false negative
 %
 %FN = computeFN(gt_set,mask2);
+FN = setdiff(gt_set,TP);
+nFN = length(FN);
 
 %%% show image
 if SHOW_IMG == 1
@@ -81,13 +88,13 @@ if SHOW_IMG == 1
 %     %false positive
 %     [R,C] = ind2sub([r c],FP);
 %     plot(C,R,'y*', 'MarkerSize',12);
-%     %false negative
-%     [R,C] = ind2sub([r c],FN);
-%     plot(C,R,'m*', 'MarkerSize',12);
+    %false negative
+    [R,C] = ind2sub([r c],FN);
+    plot(C,R,'m*', 'MarkerSize',12);
 end
 %close all;
 
-nFN = Total - nTP;
+%nFN = Total - nTP;
 %nFP = length(FP);
 nFP = Total_s - (nTP+nFN);
 fprintf('TP: %d ',nTP);
@@ -107,7 +114,7 @@ end
 function TP = computeTP(img,gt_set,seg_set)
 
 TP = [];
-MIN_DIST = 30;
+MIN_DIST = 20;
 [r c] = size(img);
 nGT = length(gt_set);
 nSeg = length(seg_set);

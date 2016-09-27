@@ -1,16 +1,16 @@
-
+% IMAGEJ
 %Compares our ground truth with masks created using the methods described
 %in "Automatic cell counting with ImageJ"
 
-root_dir = '/Volumes/SUSHI_HD/SUSHI/CellCounter/';
-%root_dir = '/home/maryana/storage/Posdoc/Microscopy/images/'
+%root_dir = '/Volumes/SUSHI_HD/SUSHI/CellCounter/';
+root_dir = '/home/maryana/storage/Posdoc/Microscopy/images/'
 dir_img = strcat(root_dir,'toprocess/images/');
 dir_csv = strcat(root_dir,'toprocess/csv/');
 dir_mask_orig = strcat(root_dir,'toprocess/masks/');
 dir_seg = strcat(root_dir,'toprocess/seg/');
 
-test1_mask = strcat(root_dir,'/toprocess/tests/test1/processed_images/');
-drn_dir = strcat(root_dir,'/toprocess/masks/');
+test1_mask = strcat(root_dir,'toprocess/tests_paper/test1/processed_images/');
+drn_dir = strcat(root_dir,'toprocess/masks/');
 
 count_images(1) = {'11477.13_104_drn_final.tif'};
 count_images(2) = {'11477.13_112_drn_final.tif'};
@@ -67,27 +67,40 @@ GT = load_ground_truth(dir_img,dir_csv,dir_seg,dir_mask_orig,count_images);
 nFiles = length(count_images);
 stats = zeros(nFiles,8);
 for i=1:nFiles
+
+    
     currGT = GT(i); % current file ground truth data
     file_name = GT(i).img_file;
+    
+    if isempty(currGT.yellow) && isempty(currGT.green) && isempty(currGT.red) %no GT available
+        continue;
+    end
     
     img = imread(strcat(dir_img,file_name)); %load img
     
     mr = imread(strcat(test1_mask,'red_mask_',file_name)); %load red mask
     mg = imread(strcat(test1_mask,'green_mask_',file_name)); %load green mask
     mask = (mr | mg); %create one single mask
+    mask = logical(mask);
     
     drn = imread(strcat(drn_dir,file_name));
+    [r c N] = size(drn);
+    if N > 1
+        drn = drn(:,:,1);
+    end
     mask(drn <= 0) = 0; %removes everything outside the DRN region
+    mask = imresize(mask,[r c]);
+    
+    center = regionprops(mask,'Centroid');
+    centroids = round(cat(1,center.Centroid));
+    cells_drn = sub2ind([r c],centroids(:,2),centroids(:,1));
     
     fprintf('------ **** File %s (%d of %d) **** -----\n',file_name,i,nFiles);
-    try
-        [T,TP, FP, FN, P, R, F1,] = compute_stats(img,mask,currGT);
+    %try
+        %[T,TP, FP, FN, P, R, F1,] = compute_stats(img,mask,currGT);
+        [T, nTP, nFP, nFN, P, R, F1] = compute_stats_delanuay(img,cells_drn,currGT,mask);
         close all;
         
-        nTP = length(TP);
-        nFP = length(FP);
-        nFN = length(FN);
-
         stats(i,1) = T;
         stats(i,2) = nTP;
         stats(i,3) = nFP;
@@ -97,10 +110,10 @@ for i=1:nFiles
         stats(i,7) = F1;
         stats(i,8) = i;
   
-    catch ME
-        fprintf('\n### Error in file: %s###\n',file_name);
-        fprintf(FID,'\n### Error in file: %s###\n',file_name);
-    end 
+    %catch ME
+    %    fprintf('\n### Error in file: %s###\n',file_name);
+        %fprintf(FID,'\n### Error in file: %s###\n',file_name);
+    %end 
     
 end
 

@@ -66,8 +66,8 @@ GT = load_ground_truth(dir_img,dir_csv,dir_seg,dir_mask_orig,count_images);
 
 nFiles = length(count_images);
 stats = zeros(nFiles,8);
-for i=1:nFiles
-
+for i=:nFiles
+    
     currGT = GT(i); % current file ground truth data
     file_name = GT(i).img_file;
     

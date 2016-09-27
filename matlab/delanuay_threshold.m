@@ -1,4 +1,4 @@
-function [cleanR, cleanC, clean_points, removedR, removedC] = delanuay_threshold(img,pts,MIN_DIST)
+function [cleanR, cleanC, clean_points, removedR, removedC] = delanuay_threshold(img,pts,MIN_DIST,mask)
 
 %
 % Cleans points that are closes than MIN_DIST Uses Delanuay + BFS for efficient computation.
@@ -87,7 +87,7 @@ for n=1:nEdges
     nClusters = nClusters+1;  
 end
 
-% these are the points that should be removes to clean the GT point set
+% these are the points that should be removed to clean the GT point set
 removePts = setdiff(graphPts,clusterPts); % these are indices to R and C
 allPts = 1:length(R); %indices to all Rs and Cs
 cleanPts = setdiff(allPts,removePts); %indices in R anc C wo/ the repeated points
