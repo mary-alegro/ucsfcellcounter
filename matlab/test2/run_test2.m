@@ -14,14 +14,14 @@ function run_test2
 % using distance information.
 %
 
-root_dir = '/Volumes/SUSHI_HD/SUSHI/CellCounter/';
-%root_dir = '/home/maryana/storage/Posdoc/Microscopy/images/'
+%root_dir = '/Volumes/SUSHI_HD/SUSHI/CellCounter/';
+root_dir = '/home/maryana/storage/Posdoc/Microscopy/images/';
 dir_img = strcat(root_dir,'toprocess/images/');
 dir_csv = strcat(root_dir,'toprocess/csv/');
 dir_mask_orig = strcat(root_dir,'toprocess/masks/');
 dir_seg = strcat(root_dir,'toprocess/seg/');
 
-test2_dir = strcat(root_dir,'toprocess/tests/test2/result_0.15/');
+test2_dir = strcat(root_dir,'toprocess/tests_paper/test2/result_0.15/');
 drn_dir = strcat(root_dir,'toprocess/masks/');
 
 count_images(1) = {'11477.13_104_drn_final.tif'};
@@ -141,7 +141,7 @@ for f=1:nFiles
     
     fprintf('------ **** File %s (%d of %d) **** -----\n',file_name,i,nFiles);
     try
-        [T, nTP, nFP, nFN, P, R, F1] = compute_stats_delanuay(img,cells_drn,currGT);
+        [T, nTP, nFP, nFN, P, R, F1] = compute_stats_delanuay(img,cells_drn,currGT,[]);
         close all;
 
         stats(i,1) = T;
