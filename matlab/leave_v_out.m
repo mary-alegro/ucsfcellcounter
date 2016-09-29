@@ -40,7 +40,7 @@ for b=1:nElem:nFiles %iterate each block
         train_masks = list_masks(train_idx); 
 
         %dictionary learning
-        %train_dictionary(train_imgs,train_masks);
+        train_dictionary(train_imgs,train_masks);
 
         %segmentation by sparse coding
         test_dictionary(test_imgs,test_masks,seg_dir,orig_mask_dir);
