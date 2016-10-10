@@ -38,8 +38,8 @@ for i=1:nFiles
 
     idx = setdiff(idx_all,i);
     GT_train = GT(idx);
-    %samples = train_classify(GT_train);
-    samples=load('samples.mat');
+    samples = train_classify(GT_train);
+    %samples=load('samples.mat');
     samples = samples.samples;
     
     %run classification

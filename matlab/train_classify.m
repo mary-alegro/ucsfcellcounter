@@ -1,5 +1,12 @@
 function samples = train_classify(GD)
 
+%
+% Trains the cell classification (in RED, GREEN and YELLOW) step 
+% Grab pixel samples from the fluorescence images using GT coordinates as a
+% guide. Converts then to LAB. 
+%
+%
+
 wsize = 5;
 
 nFiles = length(GD);
