@@ -76,7 +76,7 @@ FP = computeFP(gt_set,labels,idx_centers,nL); % esta na masca e nao esta no GT
 %
 % Compute False Positive Rate
 %
-FPR = computeFPR(FP_mask,drn);
+FPR = computeFPR(mask,drn);
 
 
 %%% show image
@@ -100,11 +100,6 @@ end
 
 nTP = length(TP); 
 nFN = length(FN);
-if nTP > nL
-    n = abs(nTP-nL);
-    nTP = nL;
-    nFN = nFN + n;
-end
 %nFP = length(FP);
 nFP = nL - nTP;
 fprintf('TP: %d ',nTP);
@@ -117,7 +112,7 @@ Rec = nTP/(nTP + nFN);
 F1 = (2*P*Rec)/(P+Rec);
 
 fprintf('*** Total: %d     TP rate: %f    FP rate: %f    FN rate: %f ***\n',Total, nTP/Total, nFP/Total, nFN/Total);
-fprintf('*** PRECISION: %f    RECALL(TPR): %f    FPR: %f    F1: %f ***\n',P,Rec,FPR,F1);
+fprintf('*** PRECISION: %f    RECALL: %f    F1: %f ***\n',P,Rec,F1);
 end
 
 
@@ -192,7 +187,7 @@ function FPR = computeFPR(FP_mask,drn)
     idxTN = find(drn == 255);
     nTN = length(idxTN);
   
-    FPR = nFP/nTN;
+    FPR = nFP/(nFP+nTN);
 end
 
 function tp_mask = build_FP_mask(tp_set,mask)

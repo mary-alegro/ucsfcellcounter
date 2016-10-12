@@ -1,4 +1,4 @@
-function stats = run_run_stats
+function stats = run_run_stats(fold)
 
 root_dir = '/Volumes/SUSHI_HD/SUSHI/CellCounter/';
 %root_dir = '/home/maryana/storage/Posdoc/Microscopy/images/'
@@ -6,6 +6,7 @@ dir_img = strcat(root_dir,'toprocess/images/');
 dir_csv = strcat(root_dir,'toprocess/csv/');
 dir_mask_orig = strcat(root_dir,'toprocess/masks/');
 dir_seg = strcat(root_dir,'toprocess/seg/');
+drn_dir = strcat(root_dir,'toprocess/masks/');
 
 count_images(1) = {'11477.13_104_drn_final.tif'};
 count_images(2) = {'11477.13_112_drn_final.tif'};
@@ -58,6 +59,10 @@ count_images(48) = {'p2540_90_drn-f.tif'};
 count_images(49) = {'p2540_98_drn-f.tif'};
 
 GT = load_ground_truth(dir_img,dir_csv,dir_seg,dir_mask_orig,count_images);
-stats = run_stats(GT);
+%GT = load('GT.mat');
+%GT = GT.GT;
+stats = run_stats(GT,drn_dir);
 
-save('counter_segstats.mat','stats');
+stats_name = strcat(num2str(fold),'_counter_segstats.mat');
+
+save(stats_name,'stats');

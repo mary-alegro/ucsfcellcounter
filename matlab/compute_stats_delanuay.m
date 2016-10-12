@@ -96,7 +96,7 @@ end
 
 %nFN = Total - nTP;
 %nFP = length(FP);
-nFP = Total_s - (nTP+nFN);
+nFP = Total_s - nTP;
 fprintf('TP: %d ',nTP);
 fprintf('FP: %d ',nFP);
 fprintf('FN: %d\n',nFN);

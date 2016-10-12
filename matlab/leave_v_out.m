@@ -3,7 +3,8 @@ function leave_v_out(img_dir,seg_dir,csv_dir,orig_mask_dir,img_list)
 list_imgs = create_file_list(img_list,img_dir);
 list_masks = create_file_list(img_list,orig_mask_dir);
 
-nDiv = 7;
+%nDiv = 7;
+nDiv = 49;
 nFiles = length(list_imgs);
 nMasks = length(list_masks);
 
@@ -25,9 +26,9 @@ list_imgs = list_imgs(ridx);
 list_masks = list_masks(ridx);
 img_list = img_list(ridx);
 
-parobj = parpool('local'); 
+%parobj = parpool('local'); 
 
-GT = load_ground_truth(img_dir,csv_dir,seg_dir,orig_mask_dir,img_list);
+%GT = load_ground_truth(img_dir,csv_dir,seg_dir,orig_mask_dir,img_list);
 nError = 0;
 for b=1:nElem:nFiles %iterate each block
     
@@ -47,8 +48,8 @@ for b=1:nElem:nFiles %iterate each block
         train_dictionary(train_imgs,train_masks);
         
         %learn classification samples (reg, green, yellow)
-        GT_train = GT(train_idx);
-        train_cell_class(GT_train);
+        %GT_train = GT(train_idx);
+        %train_cell_class(GT_train);
         
         %run segmentation and classification
         test_dictionary(test_imgs,test_masks,seg_dir,orig_mask_dir);

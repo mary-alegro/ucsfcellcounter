@@ -56,22 +56,22 @@ for f=1:nFiles
           close all;
 
 
-%          %classification into RED,GREEN or YELLOW
-%          seg2_name = strcat(seg_dir,'seg2_',name);
-%          mask2 = imread(seg2_name);
-%          %mask3 = posproc_chroma(img,mask2);
-           samples=load('cell_samples.mat');
-           samples = samples.samples;
-           [mask_class mask_class1 mask_class2 mask_class3] = posproc_classify(img,mask,mask_orig,samples);
-           seg3_name = strcat(seg_dir,'seg3_',name);
-           seg3_name_c1 = strcat(seg_dir,'seg3_c1_',name);
-           seg3_name_c2 = strcat(seg_dir,'seg3_c2_',name);
-           seg3_name_c3 = strcat(seg_dir,'seg3_c3_',name);
-           imwrite(mask_class,seg3_name,'TIFF');
-           imwrite(mask_class1,seg3_name_c1,'TIFF');
-           imwrite(mask_class2,seg3_name_c2,'TIFF');
-           imwrite(mask_class3,seg3_name_c3,'TIFF');
-%          close all;
+% %          %classification into RED,GREEN or YELLOW
+% %          seg2_name = strcat(seg_dir,'seg2_',name);
+% %          mask2 = imread(seg2_name);
+% %          %mask3 = posproc_chroma(img,mask2);
+%            samples=load('cell_samples.mat');
+%            samples = samples.samples;
+%            [mask_class mask_class1 mask_class2 mask_class3] = posproc_classify(img,mask,mask_orig,samples);
+%            seg3_name = strcat(seg_dir,'seg3_',name);
+%            seg3_name_c1 = strcat(seg_dir,'seg3_c1_',name);
+%            seg3_name_c2 = strcat(seg_dir,'seg3_c2_',name);
+%            seg3_name_c3 = strcat(seg_dir,'seg3_c3_',name);
+%            imwrite(mask_class,seg3_name,'TIFF');
+%            imwrite(mask_class1,seg3_name_c1,'TIFF');
+%            imwrite(mask_class2,seg3_name_c2,'TIFF');
+%            imwrite(mask_class3,seg3_name_c3,'TIFF');
+% %          close all;
     catch ME
         nError = nError + 1;
         msg = getReport(ME);

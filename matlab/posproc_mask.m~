@@ -24,8 +24,9 @@ function mask_final = posproc_mask(img,mask,mask_orig)
 % 
 % mask(b_dE < 0.2) = 0;
 % 
-se = strel('disk',2);
-mask2 = imdilate(mask,se);
+ se = strel('disk',2);
+ mask2 = imdilate(mask,se);
+mask2 = mask;
 dims = [2 3 4];
 for d=dims
    se2 = strel('disk',d);

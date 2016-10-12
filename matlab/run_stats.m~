@@ -7,7 +7,7 @@ function stats = run_stats(GT,drn_dir)
 
 nFiles = length(GT);
 
-stats = zeros(nFiles,9);
+stats = zeros(nFiles,8);
 nError = 0;
 
 FID = fopen('counter_segstats.txt','w');
@@ -24,23 +24,15 @@ for i=1:nFiles
     
     img_name = strcat(GT(i).img_dir,file_name); %original image
     mask_name = strcat(GT(i).seg_dir,'seg2_',file_name);
-    drn_name = strcat(drn_dir,file_name);
     
     img = imread(img_name);
     mask = imread(mask_name);
-    drn = imread(drn_name);
-    [rd cd Nd] = size(drn);
-    if Nd > 1
-        drn = drn(:,:,1);
-    end
-    
     
     fprintf('------ **** File %s (%d of %d) **** -----\n',file_name,i,nFiles);
     fprintf(FID,'\n**** File %s (%d of %d) ****\n',file_name,i,nFiles);
-    
     try
         %[T,TP, FP, FN, P, R, F1,] = compute_stats(img,mask,currGT);
-        [T,nTP, nFP, nFN, P, R, F1, FPR] = compute_stats(img,mask,drn,currGT);
+        [T,nTP, nFP, nFN, P, R, F1,] = compute_stats(img,mask,dricurrGT);
         close all;
         
 %         nTP = length(TP);
@@ -54,8 +46,7 @@ for i=1:nFiles
         stats(i,5) = P;
         stats(i,6) = R;
         stats(i,7) = F1;
-        stats(i,8) = FPR;
-        stats(i,9) = i;
+        stats(i,8) = i;
         
         fprintf(FID,'Total: %d TP: %d FP: %d FN: %d Prec.: %f Rec: %f F1: %f \n',T,nTP,nFP,nFN,P,R,F1);
         fprintf(FID,'TP rate: %f FP rate: %d FN rate: %f\n',nTP/T, nFP/T, nFN/T);
@@ -77,4 +68,15 @@ fprintf(FID,'END\n');
 fclose(FID);
 
 end
+
+% %
+% % ex: ext = 'jpg'
+% %
+% function new_name = changeExt(name,ext)
+% 
+%     idx = strfind(name,'.');
+%     idx = idx(end);
+%     
+%     new_name = strcat(name(1:idx),ext);
+% end
     
