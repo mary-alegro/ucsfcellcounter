@@ -1,5 +1,5 @@
 %function [Total, TP, FP, FN, P, Rec, F1] = compute_stats(img_orig,mask_seg,GT)
-function [Total, nTP, nFP, nFN, P, Rec, F1, FPR] = compute_stats(img_orig,mask_seg,drn,GT)
+function [Total, nTP, nFP, nFN, nTN, P, Rec, F1, FPR] = compute_stats(img_orig,mask_seg,drn,GT)
 
 SHOW_IMG = 1;
 [r c N] = size(img_orig);
@@ -61,7 +61,7 @@ TP = computeTP(gt_set,mask2); %esta na mascara e no GT
 %
 % Build TP mask
 %
-FP_mask = build_FP_mask(TP,mask2);
+%FP_mask = build_FP_mask(TP,mask2);
 
 %
 % Compute all false negative
@@ -72,11 +72,6 @@ FN = computeFN(gt_set,mask2); %nao esta na mascara e esta no GT
 % Compute all false positive
 %
 FP = computeFP(gt_set,labels,idx_centers,nL); % esta na masca e nao esta no GT
-
-%
-% Compute False Positive Rate
-%
-FPR = computeFPR(FP_mask,drn);
 
 
 %%% show image
@@ -107,16 +102,24 @@ if nTP > nL
 end
 %nFP = length(FP);
 nFP = nL - nTP;
+
+%
+% Compute no. True Negatives and False Positive Rate
+%
+[nTN, FPR] = computeFPR(nFP,drn);
+
+
 fprintf('TP: %d ',nTP);
 fprintf('FP: %d ',nFP);
 fprintf('FN: %d\n',nFN);
+fprintf('TN: %d\n',nTN);
 
 % compute precision and recall scores
 P = nTP/(nTP + nFP);
 Rec = nTP/(nTP + nFN);
 F1 = (2*P*Rec)/(P+Rec);
 
-fprintf('*** Total: %d     TP rate: %f    FP rate: %f    FN rate: %f ***\n',Total, nTP/Total, nFP/Total, nFN/Total);
+%fprintf('*** Total: %d     TP rate: %f    FP rate: %f    FN rate: %f ***\n',Total, nTP/Total, nFP/Total, nFN/Total);
 fprintf('*** PRECISION: %f    RECALL(TPR): %f    FPR: %f    F1: %f ***\n',P,Rec,FPR,F1);
 end
 
@@ -186,9 +189,9 @@ function FN = computeFN(gt_set, mask)
 
 end
 
-function FPR = computeFPR(FP_mask,drn)
-    idxFP = find(FP_mask == 1);
-    nFP = length(idxFP);
+function [nTN,FPR] = computeFPR(nFP,drn)
+    %idxFP = find(FP_mask == 1);
+    %nFP = length(FP);
     idxTN = find(drn == 255);
     nTN = length(idxTN);
   

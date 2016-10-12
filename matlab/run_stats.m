@@ -7,7 +7,7 @@ function stats = run_stats(GT,drn_dir)
 
 nFiles = length(GT);
 
-stats = zeros(nFiles,9);
+stats = zeros(nFiles,10);
 nError = 0;
 
 FID = fopen('counter_segstats.txt','w');
@@ -40,7 +40,7 @@ for i=1:nFiles
     
     try
         %[T,TP, FP, FN, P, R, F1,] = compute_stats(img,mask,currGT);
-        [T,nTP, nFP, nFN, P, R, F1, FPR] = compute_stats(img,mask,drn,currGT);
+        [T,nTP, nFP, nFN, nTN, P, R, F1, FPR] = compute_stats(img,mask,drn,currGT);
         close all;
         
 %         nTP = length(TP);
@@ -51,11 +51,12 @@ for i=1:nFiles
         stats(i,2) = nTP;
         stats(i,3) = nFP;
         stats(i,4) = nFN;
-        stats(i,5) = P;
-        stats(i,6) = R;
-        stats(i,7) = F1;
-        stats(i,8) = FPR;
-        stats(i,9) = i;
+        stats(i,5) = nTN;
+        stats(i,6) = P;
+        stats(i,7) = R;
+        stats(i,8) = F1;
+        stats(i,9) = FPR;
+        stats(i,10) = i;
         
         fprintf(FID,'Total: %d TP: %d FP: %d FN: %d Prec.: %f Rec: %f F1: %f \n',T,nTP,nFP,nFN,P,R,F1);
         fprintf(FID,'TP rate: %f FP rate: %d FN rate: %f\n',nTP/T, nFP/T, nFN/T);
