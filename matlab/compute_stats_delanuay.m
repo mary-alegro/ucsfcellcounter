@@ -1,4 +1,4 @@
-function [Total, nTP, nFP, nFN, P, Rec, F1] = compute_stats_delanuay(img_orig,seg_set,GT,mask)
+function [Total, nTP, nFP, nFN, P, Rec, F1] = compute_stats_delanuay(img_orig,seg_set,drn,GT,mask)
 
 %
 % Computer segmentation statistics using Delanuay to find the distance
@@ -131,6 +131,15 @@ for p = 1:nGT
     end
 end
 
+end
+
+function [nTN,FPR] = computeFPR(nFP,drn)
+    %idxFP = find(FP_mask == 1);
+    %nFP = length(FP);
+    idxTN = find(drn == 255);
+    nTN = length(idxTN);
+  
+    FPR = nFP/nTN;
 end
 
 
