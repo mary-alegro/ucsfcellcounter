@@ -1,8 +1,8 @@
 
 nFold = 10;
 
-root_dir = '/Volumes/SUSHI_HD/SUSHI/CellCounter/';
-%root_dir = '/home/maryana/storage/Posdoc/Microscopy/images/'
+%root_dir = '/Volumes/SUSHI_HD/SUSHI/CellCounter/';
+root_dir = '/home/maryana/storage/Posdoc/Microscopy/images/';
 dir_img = strcat(root_dir,'toprocess/images/');
 dir_csv = strcat(root_dir,'toprocess/csv/');
 dir_mask_orig = strcat(root_dir,'toprocess/masks/');
@@ -63,4 +63,3 @@ for f=1:nFold
     leave_v_out(dir_img,dir_seg,dir_csv,dir_mask_orig,count_images);
     run_run_stats(f);
 end
-

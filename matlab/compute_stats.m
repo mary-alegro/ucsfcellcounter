@@ -111,7 +111,7 @@ nFP = nL - nTP;
 
 fprintf('TP: %d ',nTP);
 fprintf('FP: %d ',nFP);
-fprintf('FN: %d\n',nFN);
+fprintf('FN: %d ',nFN);
 fprintf('TN: %d\n',nTN);
 
 % compute precision and recall scores

@@ -1,6 +1,154 @@
 
 **** File 11477.13_104_drn_final.tif (1 of 49) ****
-Total: 216 TP: 186 FP: 20 FN: 30 Prec.: 0.902913 Rec: 0.861111 F1: 0.881517 
-TP rate: 0.861111 FP rate: 9.259259e-02 FN rate: 0.138889
+Total: 216 TP: 182 FP: 19 FN: 34 Prec.: 0.905473 Rec: 0.842593 F1: 0.872902 
+TP rate: 0.842593 FP rate: 8.796296e-02 FN rate: 0.157407
 
 **** File 11477.13_112_drn_final.tif (2 of 49) ****
+Total: 4 TP: 4 FP: 15 FN: 0 Prec.: 0.210526 Rec: 1.000000 F1: 0.347826 
+TP rate: 1.000000 FP rate: 3.750000e+00 FN rate: 0.000000
+
+**** File 11477.13_96_drn.tif (5 of 49) ****
+Total: 51 TP: 19 FP: 0 FN: 32 Prec.: 1.000000 Rec: 0.372549 F1: 0.542857 
+TP rate: 0.372549 FP rate: 0 FN rate: 0.627451
+
+**** File 3598.14_74_Merged_DRN.tif (6 of 49) ****
+Total: 42 TP: 30 FP: 23 FN: 12 Prec.: 0.566038 Rec: 0.714286 F1: 0.631579 
+TP rate: 0.714286 FP rate: 5.476190e-01 FN rate: 0.285714
+
+**** File 3598.14_82_Merged_DRN.tif (7 of 49) ****
+Total: 77 TP: 71 FP: 54 FN: 6 Prec.: 0.568000 Rec: 0.922078 F1: 0.702970 
+TP rate: 0.922078 FP rate: 7.012987e-01 FN rate: 0.077922
+
+**** File 3598.14_90_DRN.tif (8 of 49) ****
+Total: 29 TP: 24 FP: 17 FN: 5 Prec.: 0.585366 Rec: 0.827586 F1: 0.685714 
+TP rate: 0.827586 FP rate: 5.862069e-01 FN rate: 0.172414
+
+**** File 4453.13_102_drn.tif (9 of 49) ****
+Total: 55 TP: 51 FP: 258 FN: 4 Prec.: 0.165049 Rec: 0.927273 F1: 0.280220 
+TP rate: 0.927273 FP rate: 4.690909e+00 FN rate: 0.072727
+
+**** File 4453.13_86_drn.tif (10 of 49) ****
+Total: 10 TP: 10 FP: 10 FN: 0 Prec.: 0.500000 Rec: 1.000000 F1: 0.666667 
+TP rate: 1.000000 FP rate: 1 FN rate: 0.000000
+
+**** File 6785.13_72_drn.tif (12 of 49) ****
+Total: 13 TP: 12 FP: 31 FN: 1 Prec.: 0.279070 Rec: 0.923077 F1: 0.428571 
+TP rate: 0.923077 FP rate: 2.384615e+00 FN rate: 0.076923
+
+**** File 6785.13_80_drn.tif (13 of 49) ****
+Total: 9 TP: 9 FP: 53 FN: 0 Prec.: 0.145161 Rec: 1.000000 F1: 0.253521 
+TP rate: 1.000000 FP rate: 5.888889e+00 FN rate: 0.000000
+
+**** File 6785.13_88_drn.tif (14 of 49) ****
+Total: 66 TP: 65 FP: 77 FN: 1 Prec.: 0.457746 Rec: 0.984848 F1: 0.625000 
+TP rate: 0.984848 FP rate: 1.166667e+00 FN rate: 0.015152
+
+**** File 6931.12_72_drn-f.tif (15 of 49) ****
+Total: 40 TP: 32 FP: 40 FN: 8 Prec.: 0.444444 Rec: 0.800000 F1: 0.571429 
+TP rate: 0.800000 FP rate: 1 FN rate: 0.200000
+
+**** File 6931.12_80_drn-f.tif (16 of 49) ****
+Total: 17 TP: 13 FP: 9 FN: 4 Prec.: 0.590909 Rec: 0.764706 F1: 0.666667 
+TP rate: 0.764706 FP rate: 5.294118e-01 FN rate: 0.235294
+
+**** File 6931.12_88_drn-f.tif (17 of 49) ****
+Total: 3 TP: 2 FP: 852 FN: 1 Prec.: 0.002342 Rec: 0.666667 F1: 0.004667 
+TP rate: 0.666667 FP rate: 284 FN rate: 0.333333
+
+**** File 807.13_104_drn_f.tif (22 of 49) ****
+Total: 12 TP: 9 FP: 16 FN: 3 Prec.: 0.360000 Rec: 0.750000 F1: 0.486486 
+TP rate: 0.750000 FP rate: 1.333333e+00 FN rate: 0.250000
+
+**** File 807.13_80_drn_final.tif (23 of 49) ****
+Total: 3 TP: 2 FP: 4 FN: 1 Prec.: 0.333333 Rec: 0.666667 F1: 0.444444 
+TP rate: 0.666667 FP rate: 1.333333e+00 FN rate: 0.333333
+
+**** File 807.13_88_drn.tif (24 of 49) ****
+Total: 11 TP: 8 FP: 2 FN: 3 Prec.: 0.800000 Rec: 0.727273 F1: 0.761905 
+TP rate: 0.727273 FP rate: 1.818182e-01 FN rate: 0.272727
+
+**** File 807.13_96_drn-f.tif (25 of 49) ****
+Total: 14 TP: 10 FP: 1 FN: 4 Prec.: 0.909091 Rec: 0.714286 F1: 0.800000 
+TP rate: 0.714286 FP rate: 7.142857e-02 FN rate: 0.285714
+
+**** File 8886.13_drn_100_final.tif (26 of 49) ****
+Total: 59 TP: 25 FP: 6 FN: 34 Prec.: 0.806452 Rec: 0.423729 F1: 0.555556 
+TP rate: 0.423729 FP rate: 1.016949e-01 FN rate: 0.576271
+
+**** File 8886.13_drn_108.tif (27 of 49) ****
+Total: 8 TP: 7 FP: 13 FN: 1 Prec.: 0.350000 Rec: 0.875000 F1: 0.500000 
+TP rate: 0.875000 FP rate: 1.625000e+00 FN rate: 0.125000
+
+**** File 8886.13_drn_92.tif (28 of 49) ****
+Total: 7 TP: 6 FP: 111 FN: 1 Prec.: 0.051282 Rec: 0.857143 F1: 0.096774 
+TP rate: 0.857143 FP rate: 1.585714e+01 FN rate: 0.142857
+
+**** File 8886.13_drn_final_84.tif (29 of 49) ****
+Total: 5 TP: 4 FP: 17 FN: 1 Prec.: 0.190476 Rec: 0.800000 F1: 0.307692 
+TP rate: 0.800000 FP rate: 3.400000e+00 FN rate: 0.200000
+
+**** File 9777.12_138_drn-f.tif (32 of 49) ****
+Total: 4 TP: 3 FP: 70 FN: 1 Prec.: 0.041096 Rec: 0.750000 F1: 0.077922 
+TP rate: 0.750000 FP rate: 1.750000e+01 FN rate: 0.250000
+
+**** File 9777.12_146_drn-f.tif (33 of 49) ****
+Total: 8 TP: 2 FP: 34 FN: 6 Prec.: 0.055556 Rec: 0.250000 F1: 0.090909 
+TP rate: 0.250000 FP rate: 4.250000e+00 FN rate: 0.750000
+
+**** File 9777.12_154_drn-f.tif (34 of 49) ****
+Total: 22 TP: 17 FP: 33 FN: 5 Prec.: 0.340000 Rec: 0.772727 F1: 0.472222 
+TP rate: 0.772727 FP rate: 1.500000e+00 FN rate: 0.227273
+
+**** File 9777.12_162_drn-f.tif (35 of 49) ****
+Total: 15 TP: 14 FP: 343 FN: 1 Prec.: 0.039216 Rec: 0.933333 F1: 0.075269 
+TP rate: 0.933333 FP rate: 2.286667e+01 FN rate: 0.066667
+
+**** File 9890.13_56_drn_final.tif (36 of 49) ****
+Total: 2 TP: 1 FP: 1 FN: 1 Prec.: 0.500000 Rec: 0.500000 F1: 0.500000 
+TP rate: 0.500000 FP rate: 5.000000e-01 FN rate: 0.500000
+
+**** File 9890.13_64_drn_2_final.tif (37 of 49) ****
+Total: 4 TP: 4 FP: 13 FN: 0 Prec.: 0.235294 Rec: 1.000000 F1: 0.380952 
+TP rate: 1.000000 FP rate: 3.250000e+00 FN rate: 0.000000
+
+**** File 9890.13_72_drn_final.tif (38 of 49) ****
+Total: 5 TP: 5 FP: 155 FN: 0 Prec.: 0.031250 Rec: 1.000000 F1: 0.060606 
+TP rate: 1.000000 FP rate: 31 FN rate: 0.000000
+
+**** File 9890.13_80_drn_f.tif (39 of 49) ****
+Total: 3 TP: 3 FP: 58 FN: 0 Prec.: 0.049180 Rec: 1.000000 F1: 0.093750 
+TP rate: 1.000000 FP rate: 1.933333e+01 FN rate: 0.000000
+
+**** File 9890.13_88_drn_f.tif (40 of 49) ****
+Total: 22 TP: 22 FP: 989 FN: 0 Prec.: 0.021761 Rec: 1.000000 F1: 0.042594 
+TP rate: 1.000000 FP rate: 4.495455e+01 FN rate: 0.000000
+
+**** File p2508_84_drn-f.tif (43 of 49) ****
+Total: 14 TP: 13 FP: 98 FN: 1 Prec.: 0.117117 Rec: 0.928571 F1: 0.208000 
+TP rate: 0.928571 FP rate: 7 FN rate: 0.071429
+
+**** File p2508_92_drn-f.tif (44 of 49) ****
+Total: 45 TP: 40 FP: 302 FN: 5 Prec.: 0.116959 Rec: 0.888889 F1: 0.206718 
+TP rate: 0.888889 FP rate: 6.711111e+00 FN rate: 0.111111
+
+**** File p2540_106_drn-f.tif (45 of 49) ****
+Total: 76 TP: 74 FP: 299 FN: 2 Prec.: 0.198391 Rec: 0.973684 F1: 0.329621 
+TP rate: 0.973684 FP rate: 3.934211e+00 FN rate: 0.026316
+
+**** File p2540_74_drn.tif (46 of 49) ****
+Total: 11 TP: 11 FP: 8 FN: 0 Prec.: 0.578947 Rec: 1.000000 F1: 0.733333 
+TP rate: 1.000000 FP rate: 7.272727e-01 FN rate: 0.000000
+
+**** File p2540_82_drn.tif (47 of 49) ****
+Total: 26 TP: 8 FP: 7 FN: 18 Prec.: 0.533333 Rec: 0.307692 F1: 0.390244 
+TP rate: 0.307692 FP rate: 2.692308e-01 FN rate: 0.692308
+
+**** File p2540_90_drn-f.tif (48 of 49) ****
+Total: 52 TP: 48 FP: 172 FN: 4 Prec.: 0.218182 Rec: 0.923077 F1: 0.352941 
+TP rate: 0.923077 FP rate: 3.307692e+00 FN rate: 0.076923
+
+**** File p2540_98_drn-f.tif (49 of 49) ****
+Total: 42 TP: 29 FP: 31 FN: 13 Prec.: 0.483333 Rec: 0.690476 F1: 0.568627 
+TP rate: 0.690476 FP rate: 7.380952e-01 FN rate: 0.309524
+Num. errors: 0.
+END

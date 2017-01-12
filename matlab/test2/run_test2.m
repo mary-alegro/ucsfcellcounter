@@ -102,7 +102,7 @@ fclose(FID);
 
 %
 nFiles = length(idx_in_GT);
-stats = zeros(nFiles,8);
+stats = zeros(nFiles,10);
 for f=1:nFiles
     i = idx_in_GT(f);
     currGT = GT(i); % current file ground truth data
@@ -141,17 +141,19 @@ for f=1:nFiles
     
     fprintf('------ **** File %s (%d of %d) **** -----\n',file_name,i,nFiles);
     try
-        [T, nTP, nFP, nFN, P, R, F1] = compute_stats_delanuay(img,cells_drn,currGT,[]);
+        [T,nTP, nFP, nFN, nTN, P, R, F1, FPR] = compute_stats_delanuay(img,cells_drn,drn,currGT,[]);
         close all;
-
+        
         stats(i,1) = T;
         stats(i,2) = nTP;
         stats(i,3) = nFP;
         stats(i,4) = nFN;
-        stats(i,5) = P;
-        stats(i,6) = R;
-        stats(i,7) = F1;
-        stats(i,8) = i;
+        stats(i,5) = nTN;
+        stats(i,6) = P;
+        stats(i,7) = R;
+        stats(i,8) = F1;
+        stats(i,9) = FPR;
+        stats(i,10) = i;
   
     catch ME
         fprintf('\n### Error in file: %s###\n',file_name);

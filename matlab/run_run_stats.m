@@ -1,7 +1,11 @@
 function stats = run_run_stats(fold)
 
-root_dir = '/Volumes/SUSHI_HD/SUSHI/CellCounter/';
-%root_dir = '/home/maryana/storage/Posdoc/Microscopy/images/'
+if ~exist('fold','var') 
+    fold = 0;
+end
+
+%root_dir = '/Volumes/SUSHI_HD/SUSHI/CellCounter/';
+root_dir = '/home/maryana/storage/Posdoc/Microscopy/images/';
 dir_img = strcat(root_dir,'toprocess/images/');
 dir_csv = strcat(root_dir,'toprocess/csv/');
 dir_mask_orig = strcat(root_dir,'toprocess/masks/');

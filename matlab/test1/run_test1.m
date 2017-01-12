@@ -3,7 +3,7 @@
 %in "Automatic cell counting with ImageJ"
 
 %root_dir = '/Volumes/SUSHI_HD/SUSHI/CellCounter/';
-root_dir = '/home/maryana/storage/Posdoc/Microscopy/images/'
+root_dir = '/home/maryana/storage/Posdoc/Microscopy/images/';
 dir_img = strcat(root_dir,'toprocess/images/');
 dir_csv = strcat(root_dir,'toprocess/csv/');
 dir_mask_orig = strcat(root_dir,'toprocess/masks/');
@@ -65,7 +65,7 @@ count_images(49) = {'p2540_98_drn-f.tif'};
 GT = load_ground_truth(dir_img,dir_csv,dir_seg,dir_mask_orig,count_images);
 
 nFiles = length(count_images);
-stats = zeros(nFiles,8);
+stats = zeros(nFiles,10);
 for i=1:nFiles
 
     
@@ -98,17 +98,19 @@ for i=1:nFiles
     fprintf('------ **** File %s (%d of %d) **** -----\n',file_name,i,nFiles);
     %try
         %[T,TP, FP, FN, P, R, F1,] = compute_stats(img,mask,currGT);
-        [T, nTP, nFP, nFN, P, R, F1] = compute_stats_delanuay(img,cells_drn,currGT,mask);
+        [T,nTP, nFP, nFN, nTN, P, R, F1, FPR] = compute_stats_delanuay(img,cells_drn,drn,currGT,mask);
         close all;
         
         stats(i,1) = T;
         stats(i,2) = nTP;
         stats(i,3) = nFP;
         stats(i,4) = nFN;
-        stats(i,5) = P;
-        stats(i,6) = R;
-        stats(i,7) = F1;
-        stats(i,8) = i;
+        stats(i,5) = nTN;
+        stats(i,6) = P;
+        stats(i,7) = R;
+        stats(i,8) = F1;
+        stats(i,9) = FPR;
+        stats(i,10) = i;
   
     %catch ME
     %    fprintf('\n### Error in file: %s###\n',file_name);

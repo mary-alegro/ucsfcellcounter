@@ -1,4 +1,4 @@
-function [Total, nTP, nFP, nFN, P, Rec, F1] = compute_stats_delanuay(img_orig,seg_set,drn,GT,mask)
+function [Total, nTP, nFP, nFN, nTN, P, Rec, F1, FPR] = compute_stats_delanuay(img_orig,seg_set,drn,GT,mask)
 
 %
 % Computer segmentation statistics using Delanuay to find the distance
@@ -97,17 +97,21 @@ end
 %nFN = Total - nTP;
 %nFP = length(FP);
 nFP = Total_s - nTP;
+[nTN,FPR] = computeFPR(nFP,drn);
+
+
 fprintf('TP: %d ',nTP);
 fprintf('FP: %d ',nFP);
-fprintf('FN: %d\n',nFN);
+fprintf('FN: %d ',nFN);
+fprintf('TN: %d\n',nTN);
 
 % compute precision and recall scores
 P = nTP/(nTP + nFP);
 Rec = nTP/(nTP + nFN);
 F1 = (2*P*Rec)/(P+Rec);
 
-fprintf('*** Total: %d     TP rate: %f    FP rate: %f    FN rate: %f ***\n',Total, nTP/Total, nFP/Total, nFN/Total);
-fprintf('*** PRECISION: %f    RECALL: %f    F1: %f ***\n',P,Rec,F1);
+%fprintf('*** Total: %d     TP rate: %f    FP rate: %f    FN rate: %f ***\n',Total, nTP/Total, nFP/Total, nFN/Total);
+fprintf('*** PRECISION: %f    RECALL(TPR): %f    FPR: %f    F1: %f ***\n',P,Rec,FPR,F1);
 end
 
 
