@@ -1,8 +1,9 @@
-seg_stats = '/Users/maryana/workspace/CellCounter/github/ucsfcellcounter/matlab/counter_segstats.mat';
-test1_stats = '/Users/maryana/workspace/CellCounter/github/ucsfcellcounter/matlab/test1/stats.mat';
-test2_stats = '/Users/maryana/workspace/CellCounter/github/ucsfcellcounter/matlab/test2/stats.mat';
-test3_stats = '/Users/maryana/workspace/CellCounter/github/ucsfcellcounter/matlab/test3/stats.mat';
-test4_stats = '/Users/maryana/workspace/CellCounter/github/ucsfcellcounter/matlab/test4/stats.mat';
+root_dir = '/Users/maryana/Projects/cellcounter/';
+seg_stats = strcat(root_dir,'ucsfcellcounter/matlab/counter_segstats.mat');
+test1_stats = strcat(root_dir,'ucsfcellcounter/matlab/test1/stats.mat');
+test2_stats = strcat(root_dir,'ucsfcellcounter/matlab/test2/stats.mat');
+test3_stats = strcat(root_dir,'ucsfcellcounter/matlab/test3/stats.mat');
+test4_stats = strcat(root_dir,'ucsfcellcounter/matlab/test4/stats.mat');
 
 toremove = [3,4,11,18,19,20,21,30,31,41,42]; %remove rows without data
 
@@ -34,6 +35,25 @@ t2 = sum(test2);
 t3 = sum(test3);
 t4 = sum(test4);
 
+%s: our method
+%t1: "automatic cell counting with imagej"
+%t2: CellProfiler
+%t3: Dani et al.
+%t4: CellC
+
+%plot boxplots
+TPs = cat(2,stats(:,2),test1(:,2),test2(:,2),test3(:,2),test4(:,2));
+FPs = cat(2,stats(:,3),test1(:,3),test2(:,3),test3(:,3),test4(:,3));
+FNs = cat(2,stats(:,4),test1(:,4),test2(:,4),test3(:,4),test4(:,4));
+
+boxplot(TPs,'labels',[{'DL'},{'AC'},{'CP'},{'DU'},{'CC'}])
+figure,
+boxplot(FPs,'labels',[{'DL'},{'AC'},{'CP'},{'DU'},{'CC'}])
+figure,
+boxplot(FNs,'labels',[{'DL'},{'AC'},{'CP'},{'DU'},{'CC'}])
+
+
+%compute stats
 TPs = cat(1,s(2),t1(2),t2(2),t3(2),t4(2));
 FPs = cat(1,s(3),t1(3),t2(3),t3(3),t4(3));
 FNs = cat(1,s(4),t1(4),t2(4),t3(4),t4(4));
@@ -46,6 +66,8 @@ tp = TPs./gtTots;
 fn = FNs./gtTots;
 F1 = ((P.*R)/(P+R)).*2;
 
+
+%precision-recal e ROC plots
 plot(R(1),P(1),'r.','MarkerSize',30); hold on,
 plot(R(2),P(2),'b.','MarkerSize',30);
 plot(R(3),P(3),'g.','MarkerSize',30);

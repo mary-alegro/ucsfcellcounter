@@ -10,7 +10,7 @@ nFiles = length(GT);
 idx_all = 1:nFiles;
 
 stats = [];
-for i=1:nFiles
+for i=38:nFiles
     
     %skip files that don't have ground truth data, they can't be
     %validated
@@ -40,11 +40,11 @@ for i=1:nFiles
     GT_train = GT(idx);
     samples = train_classify(GT_train);
     %samples=load('samples.mat');
-    samples = samples.samples;
+    %samples = samples.samples;
     
     %run classification
-    %[mask_class mask_class1 mask_class2 mask_class3] = posproc_classify(img,mask,mask_orig,samples);
-    %imwrite(mask_class,out_name);
+    [mask_class mask_class1 mask_class2 mask_class3] = posproc_classify(img,mask,mask_orig,samples);
+    imwrite(mask_class,out_name);
     
     if SHOW == 1
         display = 1;
@@ -83,6 +83,7 @@ for i=1:nFiles
             plot(c_WC,r_WC,'ro','MarkerSize', 10);
         end
     end
+    close all;
     
     pRight = RC/total;
     pWrong = WC/total;
