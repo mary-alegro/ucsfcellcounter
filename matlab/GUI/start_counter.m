@@ -143,14 +143,6 @@ function pushbutton4_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 
-% --- Executes on button press in buttonOK.
-function buttonOK_Callback(hObject, eventdata, handles)
-% hObject    handle to buttonOK (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-img = imread('/Volumes/SUSHI_HD/SUSHI/CellCounter/toprocess/images/807.13_80_drn_final.tif');
-gui_cellcounter(img);
-
 
 % --- Executes on button press in buttonOpenMask.
 function buttonOpenMark_Callback(hObject, eventdata, handles)
@@ -195,6 +187,7 @@ I = checkerboard;
 J = imrotate(I,30);
 fixedPoints = [11 11; 41 71];
 movingPoints = [14 44; 70 81];
+
 gui_counter(hFig,J,I,movingPoints,fixedPoints);
 
 

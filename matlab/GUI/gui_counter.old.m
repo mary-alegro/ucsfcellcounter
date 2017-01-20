@@ -1,4 +1,122 @@
 function varargout = gui_counter(hFig,varargin)
+%CPSELECT Control point selection tool. 
+%   CPSELECT is a graphical user interface that enables you to select
+%   control points from two related images.
+%
+%   CPSELECT(MOVING,FIXED) returns control points in CPSTRUCT. MOVING is the
+%   image that needs to be warped to bring it into the coordinate system of the
+%   FIXED image. MOVING and FIXED can be either variables that contain grayscale,
+%   truecolor, or binary images or strings that identify files containing these
+%   same types of images.
+%
+%   CPSELECT(MOVING,FIXED,CPSTRUCT_IN) starts CPSELECT with an initial set of
+%   control points that are stored in CPSTRUCT_IN. This syntax allows you to
+%   restart CPSELECT with the state of control points previously saved in
+%   CPSTRUCT_IN.
+%
+%   CPSELECT(MOVING,FIXED,MOVINGPOINTS,FIXEDPOINTS) starts CPSELECT with a set of
+%   initial pairs of control points. MOVINGPOINTS and FIXEDPOINTS are M-by-2
+%   matrices that store the MOVING and FIXED coordinates respectively.
+%
+%   H = CPSELECT(MOVING,FIXED,...) returns a handle H to the tool. CLOSE(H)
+%   closes the tool.
+%
+%   CPSELECT(...,PARAM1,VAL1,PARAM2,VAL2,...) starts CPSELECT, specifying
+%   parameters and corresponding values that control various aspects of the
+%   tool. Parameter names can be abbreviated, and case does not matter.
+%
+%   Parameters include:
+%
+%   'Wait'             Logical scalar that controls whether CPSELECT
+%                      waits for the user to finish the task of selecting
+%                      points. If set to FALSE (the default) you can
+%                      run CPSELECT at the same time as you run other 
+%                      programs in MATLAB. If set to TRUE, you must
+%                      finish the task of selecting points before doing
+%                      anything else in MATLAB. 
+%
+%                      The value affects the output arguments:
+%                        
+%                         H = CPSELECT(...,'Wait',false) returns a handle 
+%                         H to the tool. CLOSE(H) closes the tool.
+%
+%                         [MOVING_OUT,FIXED_OUT] = CPSELECT(...,'Wait',true)
+%                         returns the selected pairs of points. MOVING_OUT 
+%                         and FIXED_OUT are P-by-2 matrices that store the 
+%                         MOVING and FIXED coordinates respectively.
+%
+%   Class Support
+%   -------------
+%   The images can be truecolor, grayscale, or binary. A truecolor image can be
+%   uint8, uint16, single, or double. A grayscale image can be uint8, uint16,
+%   int16, single, or double. A binary image is of class logical.
+%
+%   Example 1
+%   ---------
+%   Start tool with saved images.
+%
+%       cpselect('westconcordaerial.png','westconcordorthophoto.png')
+%
+%   Example 2
+%   ---------
+%   Start tool with workspace images and points.
+%
+%       I = checkerboard;
+%       J = imrotate(I,30);
+%       fixedPoints = [11 11; 41 71];
+%       movingPoints = [14 44; 70 81];
+%       cpselect(J,I,movingPoints,fixedPoints);
+%
+%   Example 3
+%   ---------  
+%   Register an aerial photo to an orthophoto.
+%  
+%       aerial = imread('westconcordaerial.png');
+%       figure, imshow(aerial)
+%       ortho = imread('westconcordorthophoto.png');
+%       figure, imshow(ortho)
+%       load westconcordpoints % load some points that were already picked     
+%
+%       % Ask CPSELECT to wait for you to pick some more points
+%       [aerial_points,ortho_points] = ...
+%          cpselect(aerial,'westconcordorthophoto.png',...
+%                     movingPoints,fixedPoints,...
+%                     'Wait',true);
+%
+%       t_concord = fitgeotrans(aerial_points,ortho_points,'projective');
+%       Rortho = imref2d(size(ortho));
+%       aerial_registered = imwarp(aerial,t_concord,'OutputView',Rortho);
+%       figure, imshowpair(aerial_registered,ortho,'blend')                         
+%
+%   See also CPCORR, CPSTRUCT2PAIRS, FITGEOTRANS, IMWARP, IMTOOL.
+
+%   Copyright 2005-2014 The MathWorks, Inc.
+
+%   Input-output specs
+%   ------------------ 
+%   MOVING,FIXED:   filenames each containing a grayscale or truecolor image
+%
+%                OR 
+%
+%                real, full matrix
+%                can be intensity or truecolor
+%                uint8, uint16, double, or logical
+%
+%        Note: MOVING can be a filename while FIXED is a variable or vice versa.
+%
+%   CPSTRUCT:    structure containing control point pairs with fields:
+%                   inputPoints
+%                   basePoints
+%                   inputBasePairs
+%                   ids
+%                   inputIdPairs
+%                   baseIdPairs
+%                   isInputPredicted
+%                   isBasePredicted
+%
+%   MOVINGPOINTS, FIXEDPOINTS: M-by-2 matrices with control point coordinates.
+%                          real, full, finite
+
 
 if ~images.internal.isFigureAvailable()
   error(message('images:cpselect:cpselectNotAvailableOnThisPlatform'));
@@ -492,10 +610,10 @@ end
     cpstruct2Export = getCpstruct2Export();
     [movingPoints,fixedPoints] = cpstruct2pairs(cpstruct2Export);
 
-%     if isempty(movingPoints)
-%         warndlg(getString(message('images:cpselectUIString:pairsWarnDlg')));
-%         return
-%     end
+    if isempty(movingPoints)
+        warndlg(getString(message('images:cpselectUIString:pairsWarnDlg')));
+        return
+    end
     
     checkboxlabels = {getString(message('images:cpselectUIString:movingPointsOfValidPairs')),...
                       getString(message('images:cpselectUIString:fixedPointsOfValidPairs')),...

@@ -1,121 +1,10 @@
-function varargout = gui_counter(varargin)
-%CPSELECT Control point selection tool. 
-%   CPSELECT is a graphical user interface that enables you to select
-%   control points from two related images.
-%
-%   CPSELECT(MOVING,FIXED) returns control points in CPSTRUCT. MOVING is the
-%   image that needs to be warped to bring it into the coordinate system of the
-%   FIXED image. MOVING and FIXED can be either variables that contain grayscale,
-%   truecolor, or binary images or strings that identify files containing these
-%   same types of images.
-%
-%   CPSELECT(MOVING,FIXED,CPSTRUCT_IN) starts CPSELECT with an initial set of
-%   control points that are stored in CPSTRUCT_IN. This syntax allows you to
-%   restart CPSELECT with the state of control points previously saved in
-%   CPSTRUCT_IN.
-%
-%   CPSELECT(MOVING,FIXED,MOVINGPOINTS,FIXEDPOINTS) starts CPSELECT with a set of
-%   initial pairs of control points. MOVINGPOINTS and FIXEDPOINTS are M-by-2
-%   matrices that store the MOVING and FIXED coordinates respectively.
-%
-%   H = CPSELECT(MOVING,FIXED,...) returns a handle H to the tool. CLOSE(H)
-%   closes the tool.
-%
-%   CPSELECT(...,PARAM1,VAL1,PARAM2,VAL2,...) starts CPSELECT, specifying
-%   parameters and corresponding values that control various aspects of the
-%   tool. Parameter names can be abbreviated, and case does not matter.
-%
-%   Parameters include:
-%
-%   'Wait'             Logical scalar that controls whether CPSELECT
-%                      waits for the user to finish the task of selecting
-%                      points. If set to FALSE (the default) you can
-%                      run CPSELECT at the same time as you run other 
-%                      programs in MATLAB. If set to TRUE, you must
-%                      finish the task of selecting points before doing
-%                      anything else in MATLAB. 
-%
-%                      The value affects the output arguments:
-%                        
-%                         H = CPSELECT(...,'Wait',false) returns a handle 
-%                         H to the tool. CLOSE(H) closes the tool.
-%
-%                         [MOVING_OUT,FIXED_OUT] = CPSELECT(...,'Wait',true)
-%                         returns the selected pairs of points. MOVING_OUT 
-%                         and FIXED_OUT are P-by-2 matrices that store the 
-%                         MOVING and FIXED coordinates respectively.
-%
-%   Class Support
-%   -------------
-%   The images can be truecolor, grayscale, or binary. A truecolor image can be
-%   uint8, uint16, single, or double. A grayscale image can be uint8, uint16,
-%   int16, single, or double. A binary image is of class logical.
-%
-%   Example 1
-%   ---------
-%   Start tool with saved images.
-%
-%       cpselect('westconcordaerial.png','westconcordorthophoto.png')
-%
-%   Example 2
-%   ---------
-%   Start tool with workspace images and points.
-%
-%       I = checkerboard;
-%       J = imrotate(I,30);
-%       fixedPoints = [11 11; 41 71];
-%       movingPoints = [14 44; 70 81];
-%       cpselect(J,I,movingPoints,fixedPoints);
-%
-%   Example 3
-%   ---------  
-%   Register an aerial photo to an orthophoto.
-%  
-%       aerial = imread('westconcordaerial.png');
-%       figure, imshow(aerial)
-%       ortho = imread('westconcordorthophoto.png');
-%       figure, imshow(ortho)
-%       load westconcordpoints % load some points that were already picked     
-%
-%       % Ask CPSELECT to wait for you to pick some more points
-%       [aerial_points,ortho_points] = ...
-%          cpselect(aerial,'westconcordorthophoto.png',...
-%                     movingPoints,fixedPoints,...
-%                     'Wait',true);
-%
-%       t_concord = fitgeotrans(aerial_points,ortho_points,'projective');
-%       Rortho = imref2d(size(ortho));
-%       aerial_registered = imwarp(aerial,t_concord,'OutputView',Rortho);
-%       figure, imshowpair(aerial_registered,ortho,'blend')                         
-%
-%   See also CPCORR, CPSTRUCT2PAIRS, FITGEOTRANS, IMWARP, IMTOOL.
+classdef GUICounter
 
-%   Copyright 2005-2014 The MathWorks, Inc.
-
-%   Input-output specs
-%   ------------------ 
-%   MOVING,FIXED:   filenames each containing a grayscale or truecolor image
-%
-%                OR 
-%
-%                real, full matrix
-%                can be intensity or truecolor
-%                uint8, uint16, double, or logical
-%
-%        Note: MOVING can be a filename while FIXED is a variable or vice versa.
-%
-%   CPSTRUCT:    structure containing control point pairs with fields:
-%                   inputPoints
-%                   basePoints
-%                   inputBasePairs
-%                   ids
-%                   inputIdPairs
-%                   baseIdPairs
-%                   isInputPredicted
-%                   isBasePredicted
-%
-%   MOVINGPOINTS, FIXEDPOINTS: M-by-2 matrices with control point coordinates.
-%                          real, full, finite
+    properties
+    end
+    
+methods    
+function varargout = gui_counter(hFig,varargin)
 
 if ~images.internal.isFigureAvailable()
   error(message('images:cpselect:cpselectNotAvailableOnThisPlatform'));
@@ -141,15 +30,15 @@ toolNumber = toolIdStream.nextId();
 toolName = getString(message('images:cpselectUIString:toolName',toolNumber));
 
 %Create invisible figure
-hFig = figure('Toolbar','none',...
-              'Menubar','none',...
-              'HandleVisibility','callback',...
-              'IntegerHandle','off',...
-              'NumberTitle','off',...
-              'Tag','cpselect',...
-              'Name',toolName,...
-              'Visible','off',...       % turn visibility off to prevent flash
-              'DeleteFcn',@deleteTool);
+% hFig = figure('Toolbar','none',...
+%               'Menubar','none',...
+%               'HandleVisibility','callback',...
+%               'IntegerHandle','off',...
+%               'NumberTitle','off',...
+%               'Tag','cpselect',...
+%               'Name',toolName,...
+%               'Visible','off',...       % turn visibility off to prevent flash
+%               'DeleteFcn',@deleteTool);
 
 %matlab.ui.internal.PositionUtils.setDevicePixelPosition(getInitialPosition());
           
@@ -182,60 +71,17 @@ hMagPanel = lockRatioMagPanelCounter(hFig,hImInput,inputDetailLabel);
 %set([hImInput hImBase hImOvInput hImOvBase],'HitTest','on')
 set([hImInput hImOvInput],'HitTest','on')
 
-% Main flow container
-hMain = uiflowcontainer('v0',...
-                        'Parent',hFig,...
-                        'FlowDirection','lefttoright',...
-                        'Margin',1);
+% % Main flow container
+% hMain = uiflowcontainer('v0',...
+%                         'Parent',hFig,...
+%                         'FlowDirection','lefttoright',...
+%                         'Margin',1);
 
-                                      
-%%%%%%
-% <Create Left Panel>
-%%%%%%
-hFlowLeft = uiflowcontainer('v0','Parent',hMain,'FlowDirection','topdown','Margin',1);
 
-hGridSeg = uigridcontainer('Parent',hFlowLeft,'Units','norm','GridSize',[2,1]);
-%uicontrol('string','Run Segmentation','parent',hGridSeg);
-
-hGridFilter = uigridcontainer('Parent',hGridSeg,'Units','norm','GridSize',[4,2]);
-uicontrol('style','text','string','Filter FP:','parent',hGridFilter);
-uicontrol('style','text','string','    ','parent',hGridFilter);
-uicontrol('style','text','string','Min:','parent',hGridFilter);
-uicontrol('Style','edit','parent',hGridFilter);
-uicontrol('style','text','string','Max:','parent',hGridFilter);
-uicontrol('Style','edit','parent',hGridFilter);
-uicontrol('string','Filter','parent',hGridFilter);
-%set(hGridFilter,'HeightLimits',[50 50]); % pin height
-set(hGridSeg,'HeightLimits',[200 200]); % pin height
-
-hGridClass = uigridcontainer('Parent',hFlowLeft,'Units','norm','GridSize',[1,1]);
-uicontrol('string','Run Classification','parent',hGridClass,'callback',@callback_run_classific);
-set(hGridClass,'HeightLimits',[50 50]); % pin height
-set(hFlowLeft,'WidthLimits',[200 200]); % pin height
-
-hFlowCount = uiflowcontainer('v0','Parent',hFlowLeft,'FlowDirection','topdown','Margin',1);
-hFlowR = uiflowcontainer('v0','Parent',hFlowCount,'FlowDirection','lefttoright','Margin',1);
-uicontrol('Style','text','string','Red:','parent',hFlowR);
-uicontrol('Style','edit','parent',hFlowR);
-hFlowG = uiflowcontainer('v0','Parent',hFlowCount,'FlowDirection','lefttoright','Margin',1);
-uicontrol('Style','text','string','Green:','parent',hFlowG);
-uicontrol('Style','edit','parent',hFlowG);
-hFlowB = uiflowcontainer('v0','Parent',hFlowCount,'FlowDirection','lefttoright','Margin',1);
-uicontrol('Style','text','string','Blue:','parent',hFlowB);
-uicontrol('Style','edit','parent',hFlowB);
-hFlowT = uiflowcontainer('v0','Parent',hFlowCount,'FlowDirection','lefttoright','Margin',1);
-uicontrol('Style','text','string','Total:','parent',hFlowT);
-uicontrol('Style','edit','parent',hFlowT);
-set(hFlowCount,'HeightLimits',[100 100]); % pin height
-
-%%%%
-% </>
-%%%%
-                    
-                                    
+                                                     
 % Overall image flow panel
 hflow = uiflowcontainer('v0',...
-                        'Parent',hMain,...
+                        'Parent',hFig,...
                         'FlowDirection','topdown',...
                         'Margin',1);
 
@@ -558,15 +404,25 @@ end
     s = [];
     s.Parent = filemenu;
 
-    if ~args.Wait
-      % only add Export menu item if 'Wait',false
-      s.Label = getString(message('images:cpselectUIString:exportPointsMenubarLabel'));
-      s.Accelerator = 'E';
-      s.Callback = @exportPoints;
-      s.Tag = 'export points menu';
-      uimenu(s);
-    end
+%     if ~args.Wait
+%       % only add Export menu item if 'Wait',false
+%       s.Label = getString(message('images:cpselectUIString:exportPointsMenubarLabel'));
+%       s.Accelerator = 'E';
+%       s.Callback = @exportPoints;
+%       s.Tag = 'export points menu';
+%       uimenu(s);
+%     end
+    
+    
 
+    % Export file
+    s.Label = '&Export counting...';
+    s.Accelerator = 'E';
+    s.Callback = @exportPoints;
+    s.Tag = 'export points menu';
+    uimenu(s);
+
+    
     s.Label = getString(message('images:cpselectUIString:closeMenubarLabel'));
     s.Accelerator = 'W';
     s.Callback = @closeCpselect;
@@ -970,4 +826,24 @@ function initPos = getInitialPosition
     
     initPos = round([x y w h]);
     
+end
+
+%%%%
+% Handmade callbacks
+%%%%
+
+function callback_run_class(src,eventdata)
+
+newp = [14 44; 70 81];
+cpstruct = loadAndValidatePoints(newp,newp)
+cpAPI = cpManagerCounter(cpstruct,hImInput,hImOvInput,editMenuItems,pointItems);
+drawnow
+
+handles=guidata(src);
+fprintf('Run classification\n');
+guidata(src,handles)
+end
+
+
+end
 end
