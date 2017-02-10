@@ -4,14 +4,7 @@ if ~images.internal.isFigureAvailable()
   error(message('images:cpselect:cpselectNotAvailableOnThisPlatform'));
 end
 
-cell_points = evalin('base','cell_points');
-% cells(1).id = 1;
-% assignin('base', 'cell_points', cells);
-
 [input, base, cpstruct, args] = ParseInputs(varargin{:});
-
-
-
 
 if args.Wait && nargout~=2
   error(message('images:cpselect:Expected2OutputArgs'))
@@ -20,7 +13,6 @@ end
 if ~args.Wait && (nargout > 1)
    error(message('images:cpselect:TooManyOutputArgs')); 
 end
-
 
 % get names to label images
 inputImageName = getImageName(varargin{1},inputname(1));

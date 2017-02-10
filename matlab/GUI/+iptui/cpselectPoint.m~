@@ -45,11 +45,14 @@ classdef cpselectPoint < impoint
       %---------------------
       function setClassId(obj,id)
         obj.classId = id;
+        idString = mat2str(id);
+        obj.setString(idString);
+
       end
 
       %---------------------------
-      function id = getClassId(obj)
-        id = obj.classId;
+      function id = getPairId(obj)
+        id = obj.pairId;
       end
  
       %-------------------------------

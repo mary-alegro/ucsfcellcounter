@@ -25,6 +25,8 @@ function varargout = start_counter(varargin)
 % Last Modified by GUIDE v2.5 12-Jan-2017 15:36:22
 
 % Begin initialization code - DO NOT EDIT
+
+
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
                    'gui_Singleton',  gui_Singleton, ...
@@ -51,6 +53,7 @@ function start_counter_OpeningFcn(hObject, eventdata, handles, varargin)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to start_counter (see VARARGIN)
+
 
 % Choose default command line output for start_counter
 handles.output = hObject;
@@ -187,6 +190,10 @@ I = checkerboard;
 J = imrotate(I,30);
 fixedPoints = [11 11; 41 71];
 movingPoints = [14 44; 70 81];
+
+cell_points = struct('points',{},'ids',{},'classes',{});
+assignin('base', 'cell_points', cell_points);
+
 
 gui_counter(hFig,J,I,movingPoints,fixedPoints);
 

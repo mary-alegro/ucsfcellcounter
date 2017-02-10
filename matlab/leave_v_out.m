@@ -12,12 +12,12 @@ nMasks = length(list_masks);
 %orig_mask_dir = '/home/maryana/storage/Posdoc/Microscopy/images/toprocess/masks';
 
 
-
 if nFiles ~= nMasks
     error('Leave-v-out: Number of images and number of masks must agree.');
 end
 
 ridx = randperm(nFiles);
+%ridx = 1:nFiles;
 nElem = nFiles/nDiv;
 nBlocks = nFiles/nElem;
 idx = 1:nFiles;
@@ -30,13 +30,14 @@ img_list = img_list(ridx);
 
 %GT = load_ground_truth(img_dir,csv_dir,seg_dir,orig_mask_dir,img_list);
 nError = 0;
+runtime = [];
 for b=1:nElem:nFiles %iterate each block
     
     try
         test_idx = b:b+nElem-1; 
         train_idx = setdiff(idx,test_idx);
 
-        %test_idx = 11;
+        %test_idx = 20;
         
         test_imgs = list_imgs(test_idx);
         test_masks = list_masks(test_idx);
@@ -52,7 +53,11 @@ for b=1:nElem:nFiles %iterate each block
         %train_cell_class(GT_train);
         
         %run segmentation and classification
-        test_dictionary(test_imgs,test_masks,seg_dir,orig_mask_dir);
+        [timeDL, timeP] = test_dictionary(test_imgs,test_masks,seg_dir,orig_mask_dir);
+        T.files = test_imgs;
+        T.timeDL = timeDL;
+        T.timeP = timeP;
+        runtime = cat(1,runtime,T);
     catch ME
         nError = nError + 1;
         msg = getReport(ME);
@@ -61,6 +66,7 @@ for b=1:nElem:nFiles %iterate each block
     
 end
 fprintf('there were %d errors.\n',nError);
+save('run_times.mat','runtime');
 
 delete(parobj);
 
