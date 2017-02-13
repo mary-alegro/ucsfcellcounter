@@ -74,34 +74,34 @@ for f=1:nFiles
           dE(dE <= t) = 0;
           mask2(dE == 0) = 0;
           
-          dE = delta_lab2(img_g,8.5,0.01,0.01);
-          dE(mask2 < 1) = 0;
-          pix = dE(dE > 0);
-          t =  prctile(pix,50); %Q1
-          dE(dE <= t) = 0;
-          mask2(dE == 0) = 0;
-             
-          [labels, nL] = bwlabel(mask2);
-          props = regionprops(labels,'Area','Eccentricity','ConvexArea','Solidity');
-          %remove small fragments
-          area = [props.Area];
-          skew = skewness(area);
-          if(abs(0-skew) > 1)
-              qa = prctile(area,15);
-              l = find(area <= qa);
-              idx = find(ismember(labels,l));
-              mask2(idx) = 0; 
-          end
-          %ecc = [props.Eccentricity];
-          %remove convex objects
-          sol = [props.Solidity];
-          skew = skewness(sol);
-          if(abs(0-skew) > 1)
-              qs = prctile(sol,10);
-              l = find(sol <= qs);
-              idx = find(ismember(labels,l));
-              mask2(idx) = 0;
-          end
+%            dE = delta_lab2(img_g,8.5,0.01,0.01);
+%            dE(mask2 < 1) = 0;
+%            pix = dE(dE > 0);
+%            t =  prctile(pix,25); %Q1
+%            dE(dE <= t) = 0;
+%            mask2(dE == 0) = 0;
+%              
+%           [labels, nL] = bwlabel(mask2);
+%           props = regionprops(labels,'Area','Eccentricity','ConvexArea','Solidity');
+%           %remove small fragments
+%           area = [props.Area];
+%           skew = skewness(area);
+%           if(abs(0-skew) > 1)
+%               qa = prctile(area,5);
+%               l = find(area <= qa);
+%               idx = find(ismember(labels,l));
+%               mask2(idx) = 0; 
+%           end
+%           %ecc = [props.Eccentricity];
+%           %remove convex objects
+%           sol = [props.Solidity];
+%           skew = skewness(sol);
+%           if(abs(0-skew) > 1)
+%               qs = prctile(sol,10);
+%               l = find(sol <= qs);
+%               idx = find(ismember(labels,l));
+%               mask2(idx) = 0;
+%           end
           time2 = toc;
           timeP(f) = time2;
     

@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 %root_dir = '/Users/maryana/workspace/CellCounter/github/ucsfcellcounter/matlab/';
 root_dir = '/home/maryana/Projects/workspace/CellCounter/github/ucsfcellcounter/matlab/';
@@ -8,14 +8,14 @@ test1_stats = [root_dir 'test1/stats.mat'];
 test2_stats = [root_dir 'test2/stats.mat'];
 test3_stats = [root_dir, 'test3/stats.mat'];
 test4_stats = [root_dir 'test4/stats.mat'];
-=======
-root_dir = '/Users/maryana/Projects/cellcounter/';
-seg_stats = strcat(root_dir,'ucsfcellcounter/matlab/counter_segstats.mat');
-test1_stats = strcat(root_dir,'ucsfcellcounter/matlab/test1/stats.mat');
-test2_stats = strcat(root_dir,'ucsfcellcounter/matlab/test2/stats.mat');
-test3_stats = strcat(root_dir,'ucsfcellcounter/matlab/test3/stats.mat');
-test4_stats = strcat(root_dir,'ucsfcellcounter/matlab/test4/stats.mat');
->>>>>>> c2e09579e6d8b4c19b9eb0853ddda6d4d190965a
+
+% root_dir = '/Users/maryana/Projects/cellcounter/';
+% seg_stats = strcat(root_dir,'ucsfcellcounter/matlab/counter_segstats.mat');
+% test1_stats = strcat(root_dir,'ucsfcellcounter/matlab/test1/stats.mat');
+% test2_stats = strcat(root_dir,'ucsfcellcounter/matlab/test2/stats.mat');
+% test3_stats = strcat(root_dir,'ucsfcellcounter/matlab/test3/stats.mat');
+% test4_stats = strcat(root_dir,'ucsfcellcounter/matlab/test4/stats.mat');
+
 
 toremove = [3,4,11,18,19,20,21,30,31,41,42]; %remove rows without data
 
@@ -80,7 +80,7 @@ tp = TPs./gtTots;
 fn = FNs./gtTots;
 F1 = ((P.*R)/(P+R)).*2;
 
-<<<<<<< HEAD
+
 %boxplot
 TP_box = cat(2,stats(:,2),test1(:,2),test2(:,2),test3(:,2),test4(:,2));
 FP_box = cat(2,stats(:,3),test1(:,3),test2(:,3),test3(:,3),test4(:,3));
@@ -152,7 +152,6 @@ fprintf('\\label{table:results}\n');
 fprintf('\\end{table}\n');
 
 
-=======
 
 %precision-recal e ROC plots
 plot(R(1),P(1),'r.','MarkerSize',30); hold on,
@@ -201,4 +200,4 @@ fprintf('Test4:       Precision=%0.2f    Recall=%0.2f    TP=%0.2f    FN=%0.2f   
 % tp = s(2)/s(1);
 % fn = s(4)/s(1);
 % fprintf('P=%f    R=%f    TP=%f    FN=%f\n',p,r,tp,fn);
->>>>>>> c2e09579e6d8b4c19b9eb0853ddda6d4d190965a
+
